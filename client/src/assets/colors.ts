@@ -4,7 +4,7 @@
 const COLORS = {
   // From Official hack website
   // https://github.com/hack4impact/chapter-website-template/blob/main/public/style.css
-  primaryBlue: '#0069ca',
+  primaryBlue: '#0175C0',
   secondarySeafoam: '#80d2c8',
   gray: '#657788',
   primaryDark: '#172a3a', // Dark Blue
