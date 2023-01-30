@@ -32,6 +32,7 @@ function App() {
           <PersistGate loading={null} persistor={persistor}>
             <ThemeProvider theme={theme}>
               <CssBaseline>
+                <Header />
                 <AlertPopup />
                 <Routes>
                   <Route path="/header" element={<Header />} />

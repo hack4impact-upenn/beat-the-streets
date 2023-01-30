@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import { Box } from '@mui/system';
 
 import COLORS from '../assets/colors';
-import Logo from '../assets/beat-the-streets-logo.png';
+import MainLogoWhite from '../assets/images/MainLogoWhite.png';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export default function Header() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
-        position="static"
+        position="fixed"
         sx={{
           backgroundColor: COLORS.primaryBlue,
           paddingX: '16px',
@@ -28,7 +28,12 @@ export default function Header() {
           justifyContent: 'space-between',
         }}
       >
-        <img alt="beat the streets logo" src={Logo} width={95} height={44} />
+        <img
+          alt="beat the streets logo"
+          src={MainLogoWhite}
+          width={95}
+          height={44}
+        />
         <Button
           sx={{ color: 'white', borderColor: 'white' }}
           variant="outlined"

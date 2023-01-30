@@ -12,7 +12,8 @@ import { loginUser } from './api';
 import AlertDialog from '../components/AlertDialog';
 import PrimaryButton from '../components/buttons/PrimaryButton';
 import ScreenGrid from '../components/ScreenGrid';
-import BeatTheStreetsMain from '../assets/images/BeatTheStreetsMain.png';
+import MainLogoBlack from '../assets/images/MainLogoBlack.png';
+import Header from '../components/Header';
 
 /**
  * A page allowing users to input their email and password to login. The default
@@ -139,7 +140,7 @@ function LoginPage() {
       <FormGrid>
         <FormCol>
           <Grid item container justifyContent="center">
-            <img src={BeatTheStreetsMain} alt="main header" />
+            <img src={MainLogoBlack} alt="main header" />
           </Grid>
           <Grid item width="1">
             <TextField
