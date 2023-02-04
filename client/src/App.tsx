@@ -22,6 +22,7 @@ import EmailResetPasswordPage from './Authentication/EmailResetPasswordPage';
 import ResetPasswordPage from './Authentication/ResetPasswordPage';
 import AlertPopup from './components/AlertPopup';
 import InviteRegisterPage from './Authentication/InviteRegisterPage';
+import GraphPage from './GraphPage';
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
                       path="/reset-password/:token"
                       element={<ResetPasswordPage />}
                     />
+                    <Route path="/graphs" element={<GraphPage />} />
                   </Route>
                   <Route
                     path="/invite/:token"
