@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Link, Typography, Grid } from '@mui/material';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
+import Button from '@mui/material/Button';
 import { useAppDispatch } from '../util/redux/hooks';
 import { login as loginRedux } from '../util/redux/userSlice';
 import FormGrid from '../components/form/FormGrid';
@@ -11,6 +12,8 @@ import { loginUser } from './api';
 import AlertDialog from '../components/AlertDialog';
 import PrimaryButton from '../components/buttons/PrimaryButton';
 import ScreenGrid from '../components/ScreenGrid';
+import MainLogoBlack from '../assets/images/MainLogoBlack.png';
+import Header from '../components/Header';
 
 /**
  * A page allowing users to input their email and password to login. The default
@@ -128,14 +131,16 @@ function LoginPage() {
     }
   }
 
+  async function handleSignup() {
+    navigate('/register');
+  }
+
   return (
     <ScreenGrid>
       <FormGrid>
         <FormCol>
           <Grid item container justifyContent="center">
-            <Typography variant="h2" textAlign="center">
-              Welcome to Boilerplate
-            </Typography>
+            <img src={MainLogoBlack} alt="main header" />
           </Grid>
           <Grid item width="1">
             <TextField
@@ -144,7 +149,7 @@ function LoginPage() {
               helperText={errorMessage.email}
               type="email"
               required
-              label="Email"
+              label="Username"
               value={values.email}
               onChange={(e) => setValue('email', e.target.value)}
             />
@@ -161,28 +166,30 @@ function LoginPage() {
               onChange={(e) => setValue('password', e.target.value)}
             />
           </Grid>
-          <Grid item container justifyContent="center">
-            <PrimaryButton
-              fullWidth
-              type="submit"
-              variant="contained"
-              onClick={() => handleSubmit()}
-            >
-              Login
-            </PrimaryButton>
-          </Grid>
           <FormRow>
             <Grid item>
               <Link component={RouterLink} to="/email-reset">
                 Forgot password?
               </Link>
             </Grid>
-            <Grid item>
-              <Link component={RouterLink} to="/register">
-                Sign up
-              </Link>
-            </Grid>
           </FormRow>
+          <Grid item container justifyContent="center">
+            <PrimaryButton
+              type="submit"
+              variant="contained"
+              onClick={() => handleSubmit()}
+            >
+              Login
+            </PrimaryButton>
+            <Button
+              type="submit"
+              variant="outlined"
+              onClick={() => handleSignup()}
+              style={{ marginLeft: '10%', padding: '0.7rem 2rem' }}
+            >
+              Sign Up
+            </Button>
+          </Grid>
         </FormCol>
       </FormGrid>
       {/* The alert that pops up */}

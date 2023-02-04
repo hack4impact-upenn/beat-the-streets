@@ -22,7 +22,9 @@ import EmailResetPasswordPage from './Authentication/EmailResetPasswordPage';
 import ResetPasswordPage from './Authentication/ResetPasswordPage';
 import AlertPopup from './components/AlertPopup';
 import InviteRegisterPage from './Authentication/InviteRegisterPage';
+
 import GraphPage from './GraphPage';
+import Header from './components/Header';
 
 function App() {
   return (
@@ -32,8 +34,10 @@ function App() {
           <PersistGate loading={null} persistor={persistor}>
             <ThemeProvider theme={theme}>
               <CssBaseline>
+                <Header />
                 <AlertPopup />
                 <Routes>
+                  <Route path="/header" element={<Header />} />
                   {/* Routes accessed only if user is not authenticated */}
                   <Route element={<UnauthenticatedRoutesWrapper />}>
                     <Route path="/login" element={<LoginPage />} />
