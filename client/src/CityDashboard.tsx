@@ -14,7 +14,7 @@ const heights = [
  * The Graph Page of the user dashboard.
  * Displays all the graphs.
  */
-function GraphPage() {
+function CityDashboard() {
   useLayoutEffect(() => {
     document.body.style.backgroundColor = 'lightgray';
   });
@@ -47,4 +47,4 @@ function GraphPage() {
   );
 }
 
-export default GraphPage;
+export default CityDashboard;
