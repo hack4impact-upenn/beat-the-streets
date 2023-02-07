@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { TextField, Link, Typography, Grid } from '@mui/material';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
@@ -21,6 +21,10 @@ import Header from '../components/Header';
  */
 function LoginPage() {
   const navigate = useNavigate();
+
+  useLayoutEffect(() => {
+    document.body.style.backgroundColor = 'white';
+  });
 
   // Default values for state
   const defaultValues = {

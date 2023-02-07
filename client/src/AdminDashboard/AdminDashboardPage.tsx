@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { Typography, Grid } from '@mui/material';
 import ScreenGrid from '../components/ScreenGrid';
 import UserTable from './UserTable';
@@ -9,6 +9,9 @@ import InviteUserButton from '../components/buttons/InviteUserButton';
  * Admin to delete users from admin and promote users to admin.
  */
 function AdminDashboardPage() {
+  useLayoutEffect(() => {
+    document.body.style.backgroundColor = 'white';
+  });
   return (
     <ScreenGrid>
       <Grid item>
