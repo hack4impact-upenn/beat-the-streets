@@ -3,6 +3,7 @@
  */
 import { hash } from 'bcrypt';
 import { User } from '../models/user.model';
+import { ICity, City } from '../models/city.model';
 
 const passwordHashSaltRounds = 10;
 const removeSensitiveDataQuery = [
@@ -119,6 +120,25 @@ const getAllUsersFromDB = async () => {
   return userList;
 };
 
+
+const getAllCitiesFromDB = async () => {
+  const cityList = await City.find({}).exec();
+  return cityList;
+};
+
+
+async function getCityObj(cityId: string) {
+  const resultantCity = await City.findById(cityId);
+  // const resultantAnswer = fakeData;
+  const cityObj = {
+    _id: resultantCity?._id,
+    cityName: resultantCity?.cityName,
+    isAccredited: resultantCity?.isAccredited,
+    indicators: resultantCity?.indicators,
+  } as ICity;
+  return cityObj;
+}
+
 /**
  * A function that upgrades a certain user to an admin.
  * @param id The id of the user to upgrade.
@@ -152,4 +172,6 @@ export {
   getAllUsersFromDB,
   upgradeUserToAdmin,
   deleteUserById,
+  getAllCitiesFromDB,
+  getCityObj,
 };

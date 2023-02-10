@@ -10,6 +10,7 @@ import {
   deleteUser,
   inviteUser,
   verifyToken,
+  getIndicator,
 } from '../controllers/admin.controller';
 import { isAuthenticated } from '../controllers/auth.middleware';
 import { approve } from '../controllers/auth.controller';
@@ -64,5 +65,11 @@ router.post('/invite', isAuthenticated, isAdmin, inviteUser);
  * A GET route to verify the user invite is valid
  */
 router.get('/invite/:token', verifyToken);
+
+/**
+ * A GET route to get city data
+ */
+router.get('/indicator/:indicatorName', isAuthenticated, isAdmin, getIndicator);
+
 
 export default router;

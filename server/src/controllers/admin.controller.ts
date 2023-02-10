@@ -12,6 +12,8 @@ import {
   getUserByEmail,
   getAllUsersFromDB,
   deleteUserById,
+  getAllCitiesFromDB,
+  getCityObj,
 } from '../services/user.service';
 import {
   createInvite,
@@ -174,4 +176,49 @@ const inviteUser = async (
   }
 };
 
-export { getAllUsers, upgradePrivilege, deleteUser, verifyToken, inviteUser };
+/**
+ * Get all city indicator data from the database. Upon success, send the a list of all indicator data in the res body with 200 OK status code.
+ */
+const getIndicator = async (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction,
+) => {
+  const { indicatorName } = req.params;
+  if (!indicatorName) {
+    next(ApiError.missingFields(['status']));
+  }
+
+  const cities = await getAllCitiesFromDB();
+  
+  const myindicators =  new Map(); // indicator is a map of a map of numbers
+  
+  cities.forEach(function(city) {
+    const allIndicators = city.indicators;
+    for (let k of allIndicators.keys()) {
+      if (k ==  indicatorName) {
+        if (!(allIndicators.get(k) === undefined)) {
+          myindicators.set(city.cityName, allIndicators.get(k));
+        }
+      }
+    }
+  });
+
+  console.log(myindicators); // works till here
+
+  const finalValues = [];
+
+  for (let k of myindicators.keys()) {
+    const allYearValues = myindicators.get(k);
+    const lastYearVal = Array.from(allYearValues.values()).pop();
+    finalValues.push(lastYearVal);
+  }
+
+  try {
+    res.status(StatusCode.OK).send(finalValues);
+  } catch (err) {
+    next(ApiError.internal('Unable to fetch indicators.'));
+  }
+};
+
+export { getAllUsers, upgradePrivilege, deleteUser, verifyToken, inviteUser, getIndicator };
