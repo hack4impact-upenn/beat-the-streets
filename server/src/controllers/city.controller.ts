@@ -9,7 +9,7 @@ import StatusCode from '../util/statusCode';
 import {
   getAllCitiesFromDB,
   getCityFromDB,
-  getCityObj,
+  // getCityObj,
 } from '../services/city.service';
 
 /**
@@ -86,7 +86,7 @@ const getIndicator = async (
   cities.forEach(function (city) {
     const allIndicators = city.indicators;
     for (let k of allIndicators.keys()) {
-      if (k == indicatorName) {
+      if (k === indicatorName) {
         if (!(allIndicators.get(k) === undefined)) {
           myindicators.set(city.cityName, allIndicators.get(k));
         }
