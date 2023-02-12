@@ -1,4 +1,4 @@
-import { City } from '../models/city.model';
+import {ICity, City } from '../models/city.model';
 
 /**
  * @returns All the {@link City}s in the database
@@ -16,4 +16,18 @@ const getCityFromDB = async (name: string) => {
   return city;
 };
 
-export { getAllCitiesFromDB, getCityFromDB };
+
+
+async function getCityObj(cityId: string) {
+  const resultantCity = await City.findById(cityId);
+  // const resultantAnswer = fakeData;
+  const cityObj = {
+    _id: resultantCity?._id,
+    cityName: resultantCity?.cityName,
+    isAccredited: resultantCity?.isAccredited,
+    indicators: resultantCity?.indicators,
+  } as ICity;
+  return cityObj;
+}
+
+export { getAllCitiesFromDB, getCityObj, getCityFromDB };
