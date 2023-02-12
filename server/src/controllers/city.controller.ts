@@ -85,33 +85,39 @@ const getIndicator = async (
 
   cities.forEach(function (city) {
     const allIndicators = city.indicators;
-    for (let k of allIndicators.keys()) {
+    // for (let k of allIndicators.keys()) {
+    Array.from(allIndicators.keys()).forEach(function (k) {
+      // console.log(city.cityName, allIndicators.get(k), k);
       if (k === indicatorName) {
         if (!(allIndicators.get(k) === undefined)) {
           myindicators.set(city.cityName, allIndicators.get(k));
         }
       }
-    }
+    });
   });
 
-  console.log(myindicators); // works till here
+  const finalValues: number[] = [];
 
-  const finalValues = [];
-
-  for (let k of myindicators.keys()) {
-    const allYearValues = myindicators.get(k);
+  // for (let k of myindicators.keys()) {
+  Array.from(myindicators.keys()).forEach(function (j) {
+    const allYearValues = myindicators.get(j);
     // const lastYearVal = Array.from(allYearValues.values()).pop();
 
     let maxYear = 0;
-    for (let yr of Array.from(allYearValues.keys())) {
+    // for (let yr of Array.from(allYearValues.keys())) {
+    //   if ((yr as number) > maxYear) {
+    //     maxYear = yr as number;
+    //   }
+    // }
+    Array.from(allYearValues.keys()).forEach(function (yr) {
       if ((yr as number) > maxYear) {
         maxYear = yr as number;
       }
-    }
-    const lastYearVal = allYearValues.get(maxYear);
+    });
+    const lastYearVal = allYearValues.get(maxYear) as number;
 
     finalValues.push(lastYearVal);
-  }
+  });
 
   try {
     res.status(StatusCode.OK).send(finalValues);
