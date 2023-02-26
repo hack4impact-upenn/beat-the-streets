@@ -25,6 +25,7 @@ import InviteRegisterPage from './Authentication/InviteRegisterPage';
 
 import CityDashboard from './CityDashboard';
 import Header from './components/Header';
+import PieComponent from './components/PieComponent';
 
 function App() {
   return (
@@ -66,6 +67,9 @@ function App() {
                   </Route>
                   <Route element={<AdminRoutesWrapper />}>
                     <Route path="/users" element={<AdminDashboardPage />} />
+                  </Route>
+                  <Route element={<AdminRoutesWrapper />}>
+                    <Route path="/city-pie" element={<PieComponent />} />
                   </Route>
 
                   {/* Route which redirects to a different page depending on if the user is an authenticated or not by utilizing the DynamicRedirect component */}

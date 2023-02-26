@@ -4,6 +4,8 @@ import { Masonry } from '@mui/lab';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { Typography, Grid, Toolbar } from '@mui/material';
+import Header from './components/Header';
+import PieComponent from './components/PieComponent';
 
 const heights = [
   150, 80, 90, 70, 110, 150, 130, 200, 60, 90, 150, 80, 90, 200, 110, 150, 130,
@@ -25,7 +27,7 @@ function CityDashboard() {
       sx={{ flexGrow: 1, paddingTop: 4, paddingLeft: 4, width: { sm: '100%' } }}
     >
       <Toolbar />
-
+      {/* <PieComponent /> */}
       <Grid container spacing={4}>
         <Grid item xs={4}>
           <Paper elevation={1} sx={{ position: 'fixed', p: 3 }}>
@@ -35,6 +37,7 @@ function CityDashboard() {
         </Grid>
         <Grid item xs={8}>
           <Masonry columns={3} spacing={4}>
+            {/* <PieComponent /> */}
             {heights.map((height, ind) => (
               <Paper elevation={0} key={ind} sx={{ height, p: 3 }}>
                 <Typography>add graph here: #{ind + 1}</Typography>
