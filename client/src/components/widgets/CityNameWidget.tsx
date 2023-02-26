@@ -41,10 +41,16 @@ function CityNameWidget({ city }: DefaultWidgetProps) {
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mr: 1 }}>
           <Box>
             <Typography variant="h4">{city}</Typography>
-            <Typography variant="subtitle2" sx={{ color: COLORS.gray }}>
+            <Typography
+              variant="subtitle2"
+              sx={{ color: COLORS.gray, fontWeight: 'bold' }}
+            >
               {accredited && 'Accredited'}
             </Typography>
-            <Typography variant="subtitle2" sx={{ color: COLORS.gray, mb: 10 }}>
+            <Typography
+              variant="subtitle2"
+              sx={{ color: COLORS.gray, mb: 10, fontStyle: 'italic' }}
+            >
               {counties.join(', ')}
             </Typography>
           </Box>
