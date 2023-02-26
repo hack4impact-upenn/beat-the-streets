@@ -48,7 +48,7 @@ export const options = {
   },
   scales: {
     x: {
-      display: false,
+      display: true,
     },
     y: {
       display: false,
@@ -117,7 +117,7 @@ function RevenueWidget({ city, variant }: RevenueWidgetProps) {
         )}
       </Box>
 
-      <Box sx={{ transform: 'scale(1.1)' }}>
+      <Box sx={{ p: 3 }}>
         {chartData && <Line options={options} data={chartData} />}
       </Box>
     </Paper>
