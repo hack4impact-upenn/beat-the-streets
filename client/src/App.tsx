@@ -25,6 +25,9 @@ import InviteRegisterPage from './Authentication/InviteRegisterPage';
 
 import CityDashboard from './CityDashboard';
 import Header from './components/Header';
+import AdminStatsPage from './AdminStatsPage';
+
+// const cityName : string = "Philadelphia";
 
 function App() {
   return (
@@ -55,6 +58,11 @@ function App() {
                       element={<ResetPasswordPage />}
                     />
                     <Route path="/city-dashboard" element={<CityDashboard />} />
+
+                    <Route
+                      path="/admin-stats"
+                      element={<AdminStatsPage cityName="Philadelphia" />}
+                    />
                   </Route>
                   <Route
                     path="/invite/:token"
