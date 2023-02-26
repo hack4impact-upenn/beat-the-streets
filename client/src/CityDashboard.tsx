@@ -4,6 +4,8 @@ import { Masonry } from '@mui/lab';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { Typography, Grid, Toolbar } from '@mui/material';
+import Under18 from './components/indicatorComponents/Under18';
+import Poverty from './components/indicatorComponents/Poverty';
 
 const heights = [
   150, 80, 90, 70, 110, 150, 130, 200, 60, 90, 150, 80, 90, 200, 110, 150, 130,
@@ -40,6 +42,8 @@ function CityDashboard() {
                 <Typography>add graph here: #{ind + 1}</Typography>
               </Paper>
             ))}
+            <Under18 />
+            <Poverty />
           </Masonry>
         </Grid>
       </Grid>
