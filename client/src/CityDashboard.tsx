@@ -4,6 +4,7 @@ import { Masonry } from '@mui/lab';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { Typography, Grid, Toolbar } from '@mui/material';
+import CityNameWidget from './components/widgets/CityNameWidget';
 
 const heights = [
   150, 80, 90, 70, 110, 150, 130, 200, 60, 90, 150, 80, 90, 200, 110, 150, 130,
@@ -28,10 +29,7 @@ function CityDashboard() {
 
       <Grid container spacing={4}>
         <Grid item xs={4}>
-          <Paper elevation={1} sx={{ position: 'fixed', p: 3 }}>
-            <Typography variant="h4">Philadelphia</Typography>
-            <Typography>Accredited</Typography>
-          </Paper>
+          <CityNameWidget city="Philadelphia" />
         </Grid>
         <Grid item xs={8}>
           <Masonry columns={3} spacing={4}>
