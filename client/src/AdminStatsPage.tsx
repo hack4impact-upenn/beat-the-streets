@@ -31,15 +31,18 @@ function AdminStatsPage({ cityName }: AdminStatsPageProps) {
       return;
     }
     const cityResponse: ICity = {
-      _id: cityData.data._id,
+      _id: cityData.data._id, // eslint-disable-line no-underscore-dangle
       cityName: cityData.data.cityName,
       countiesCovered: cityData.data.countiesCovered,
       indicators: new Map<string, Map<string, number>>(),
       isAccredited: cityData.data.isAccredited,
     };
+
+    // eslint-disable-next-line guard-for-in, no-restricted-syntax
     for (const indicatorName in cityData.data.indicators) {
       const indicatorDict = cityData.data.indicators[indicatorName];
       const indicatorMap = new Map<string, number>();
+      // eslint-disable-next-line no-restricted-syntax, guard-for-in
       for (const year in indicatorDict) {
         indicatorMap.set(year, indicatorDict[year]);
       }
@@ -109,7 +112,12 @@ function AdminStatsPage({ cityName }: AdminStatsPageProps) {
             columns={columns}
           />
         </Grid>
-        <Button onClick={updateData} sx={{ marginTop: 8, marginBottom: 8, width: { sm: '100%' } }}>Save</Button>
+        <Button
+          onClick={updateData}
+          sx={{ marginTop: 8, marginBottom: 8, width: { sm: '100%' } }}
+        >
+          Save
+        </Button>
       </Grid>
     </Box>
   );
