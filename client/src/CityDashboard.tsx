@@ -5,6 +5,8 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { Typography, Grid, Toolbar } from '@mui/material';
 
+import ParticipantsWidget from './components/widgets/ParticipantsWidget';
+
 const heights = [
   150, 80, 90, 70, 110, 150, 130, 200, 60, 90, 150, 80, 90, 200, 110, 150, 130,
   80, 60, 90,
@@ -35,6 +37,7 @@ function CityDashboard() {
         </Grid>
         <Grid item xs={8}>
           <Masonry columns={3} spacing={4}>
+            <ParticipantsWidget city="Philadelphia" />
             {heights.map((height, ind) => (
               <Paper elevation={0} key={ind} sx={{ height, p: 3 }}>
                 <Typography>add graph here: #{ind + 1}</Typography>
