@@ -24,6 +24,7 @@ import AlertPopup from './components/AlertPopup';
 import InviteRegisterPage from './Authentication/InviteRegisterPage';
 
 import CityDashboard from './CityDashboard';
+import MainDashboard from './MainDashboard/MainDashboardPage';
 import Header from './components/Header';
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
                       element={<ResetPasswordPage />}
                     />
                     <Route path="/city-dashboard" element={<CityDashboard />} />
+                    <Route path="/main-dashboard" element={<MainDashboard />} />
                   </Route>
                   <Route
                     path="/invite/:token"
