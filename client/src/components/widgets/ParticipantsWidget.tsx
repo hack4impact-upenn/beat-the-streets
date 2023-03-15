@@ -43,7 +43,7 @@ export const options = (numCoaches: number) => ({
     x: {
       stacked: true,
       max: numCoaches,
-      display: false,
+      display: true,
     },
     y: {
       stacked: true,
@@ -147,15 +147,20 @@ function ParticipantsWidget({ city }: DefaultWidgetProps) {
         }}
       >
         <Box>
-          <Typography variant="subtitle2" sx={{ color: 'rgb(121, 174, 234)' }}>
+          <Typography
+            variant="subtitle1"
+            sx={{ color: 'rgb(121, 174, 234)' }}
+            fontWeight="bold"
+          >
             Female
           </Typography>
           <Typography variant="body2">{femalePart}</Typography>
         </Box>
         <Box>
           <Typography
-            variant="subtitle2"
+            variant="subtitle1"
             sx={{ paddingLeft: 5, color: COLORS.primaryBlue }}
+            fontWeight="bold"
           >
             Male
           </Typography>
