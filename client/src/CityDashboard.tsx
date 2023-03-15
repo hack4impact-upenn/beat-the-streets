@@ -4,6 +4,8 @@ import { Masonry } from '@mui/lab';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { Typography, Grid, Toolbar } from '@mui/material';
+import Under18 from './components/indicatorComponents/Under18';
+import Poverty from './components/indicatorComponents/Poverty';
 
 import RevenueWidget from './components/widgets/RevenueWidget';
 import CoachesWidget from './components/widgets/CoachesWidget';
@@ -47,6 +49,8 @@ function CityDashboard() {
                 <Typography>add graph here: #{ind + 1}</Typography>
               </Paper>
             ))}
+            <Under18 />
+            <Poverty />
           </Masonry>
         </Grid>
       </Grid>
