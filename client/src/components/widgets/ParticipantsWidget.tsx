@@ -33,7 +33,7 @@ export const options = (numCoaches: number) => ({
   responsive: true,
   plugins: {
     legend: {
-      display: true,
+      display: false,
     },
     title: {
       display: false,
@@ -147,11 +147,16 @@ function ParticipantsWidget({ city }: DefaultWidgetProps) {
         }}
       >
         <Box>
-          <Typography variant="subtitle2">Female</Typography>
+          <Typography variant="subtitle2" sx={{ color: 'rgb(121, 174, 234)' }}>
+            Female
+          </Typography>
           <Typography variant="body2">{femalePart}</Typography>
         </Box>
         <Box>
-          <Typography variant="subtitle2" sx={{ paddingLeft: 5 }}>
+          <Typography
+            variant="subtitle2"
+            sx={{ paddingLeft: 5, color: COLORS.primaryBlue }}
+          >
             Male
           </Typography>
           <Typography variant="body2" sx={{ paddingLeft: 5 }}>
