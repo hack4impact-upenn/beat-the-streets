@@ -25,6 +25,7 @@ import InviteRegisterPage from './Authentication/InviteRegisterPage';
 
 import CityDashboard from './CityDashboard';
 import Header from './components/Header';
+import NumberTile from './components/indicatorComponents/Under18';
 
 function App() {
   return (
