@@ -14,6 +14,6 @@ router.get('/:cityName', getCity);
 /**
  * A GET route to get city indicator data
  */
-router.get('/indicator/:indicatorName', getIndicator); //isAuthenticated, isAdmin, getIndicator);
+router.get('/indicator/:indicatorName', getIndicator); // isAuthenticated, isAdmin, getIndicator);
 
 export default router;
