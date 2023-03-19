@@ -10,6 +10,7 @@ const heights = [
   80, 60, 90,
 ];
 
+// eslint-disable-next-line
 function createCityCard(city: any) {
   const name = city.cityName;
   const status = city.isAccredited;
@@ -20,16 +21,16 @@ function createCityCard(city: any) {
         <Typography>Accredited</Typography>
       </Paper>
     );
-  } else {
-    return (
-      <Paper sx={{ p: 2 }}>
-        <Typography variant="h4">{name}</Typography>
-        <Typography>Not Accredited</Typography>
-      </Paper>
-    );
   }
+  return (
+    <Paper sx={{ p: 2 }}>
+      <Typography variant="h4">{name}</Typography>
+      <Typography>Not Accredited</Typography>
+    </Paper>
+  );
 }
 
+// eslint-disable-next-line
 function createData(cityData: any) {
   return cityData.map(createCityCard);
 }
@@ -43,15 +44,12 @@ function MainDashboard() {
     document.body.style.backgroundColor = 'lightgray';
   });
 
-  //get all of the city names
-  //put city name and accreditation in component
   const cities = useData(`cities/all`);
   let cityData = cities?.data;
   const statuses: string[] = [];
 
   if (cityData) {
-    for (let i = 0; i < cityData.length; i++) {
-      const name = cityData[i].cityName;
+    for (let i = 0; i < cityData.length; i += 1) {
       const status = cityData[i].isAccredited;
       if (status) {
         statuses.push('Accredited');
@@ -78,9 +76,9 @@ function MainDashboard() {
         </Grid>
         <Grid item xs={8}>
           <Masonry columns={3} spacing={4}>
-            {heights.map((height, ind) => (
-              <Paper elevation={0} key={ind} sx={{ height, p: 3 }}>
-                <Typography>add graph here: #{ind + 1}</Typography>
+            {heights.map((height) => (
+              <Paper elevation={0} sx={{ height, p: 3 }}>
+                <Typography>add graph here</Typography>
               </Paper>
             ))}
           </Masonry>
