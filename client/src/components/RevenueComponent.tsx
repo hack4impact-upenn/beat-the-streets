@@ -8,77 +8,32 @@ import ICity from '../util/types/city';
 
 export default function RevenueComponent() {
   // let maxKey: number | null = null;
-  const [cityList, setCityList] = useState<ICity[]>([]);
-  const [asian, setAsian] = useState(0);
-  const [hispanic, setHispanic] = useState(0);
-  const [black, setBlack] = useState(0);
-  const [total, setTotal] = useState(0);
-  const [others, setOthers] = useState(0);
+  const [cityList, setCityList] = useState(new Map());
 
-  const [asianList, setAsianList] = useState(new Map());
-  const [hispanicList, setHispanicList] = useState(new Map());
-  const [blackList, setBlackList] = useState(new Map());
-  const [totalList, setTotalList] = useState(new Map());
+  const [yearList, setYearList] = useState<string[]>([]);
+  const [dataList, setDataList] = useState<number[]>([]);
 
-  const city = useData('cities/Philadelphia');
+  // // const city = useData('cities/Philadelphia');
+  const revenue = useData('cities/indicatoryearly/revenue');
+
+  console.log('revenue');
+  console.log(revenue?.data);
 
   useEffect(() => {
-    setCityList(city?.data);
-    setAsianList(city?.data.indicators.asian);
-    setHispanicList(city?.data.indicators.hispanic_or_latino);
-    setBlackList(city?.data.indicators.black_or_african_american);
-    setTotalList(city?.data.indicators.population);
-    setOthers(total - asian - hispanic - black);
-    console.log(city);
-    let maxKey = '0';
-    if (asianList) {
-      Object.entries(asianList).forEach(function (key, value) {
-        const [key1, value1] = key;
-        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
-          maxKey = key1;
-          setAsian(value1);
-        }
+    setCityList(revenue?.data);
+    console.log(cityList);
+    if (cityList) {
+      Object.entries(cityList).forEach(function (arr) {
+        setYearList([...yearList, arr[0]]);
+        setDataList([...dataList, arr[1]]);
+        // console.log('wer');
+        // console.log(arr);
       });
     }
-    if (hispanicList) {
-      Object.entries(hispanicList).forEach(function (key, value) {
-        const [key1, value1] = key;
-        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
-          maxKey = key1;
-          setHispanic(value1);
-        }
-      });
-    }
-    if (blackList) {
-      Object.entries(blackList).forEach(function (key, value) {
-        const [key1, value1] = key;
-        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
-          maxKey = key1;
-          setBlack(value1);
-        }
-      });
-    }
-    if (totalList) {
-      Object.entries(totalList).forEach(function (key, value) {
-        const [key1, value1] = key;
-        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
-          maxKey = key1;
-          setTotal(value1);
-        }
-      });
-      console.log(parseInt(maxKey, 10));
-    }
-  }, [
-    city,
-    asian,
-    black,
-    hispanic,
-    total,
-    asianList,
-    hispanicList,
-    blackList,
-    totalList,
-  ]);
+  }, [cityList, revenue, yearList, dataList]);
+
+  console.log(yearList);
+  console.log(dataList);
 
   const options = {
     responsive: true,
@@ -93,7 +48,6 @@ export default function RevenueComponent() {
     },
   };
 
-  console.log(hispanicList);
   const data = {
     labels: [
       'Asian',
@@ -103,8 +57,8 @@ export default function RevenueComponent() {
     ],
     datasets: [
       {
-        label: total.toString(),
-        data: [asian, hispanic, black, others],
+        label: 'wer',
+        data: dataList,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
