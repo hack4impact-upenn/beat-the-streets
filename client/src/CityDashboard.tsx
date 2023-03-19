@@ -6,7 +6,7 @@ import Paper from '@mui/material/Paper';
 import { Typography, Grid, Toolbar } from '@mui/material';
 import Under18 from './components/indicatorComponents/Under18';
 import Poverty from './components/indicatorComponents/Poverty';
-
+import CityNameWidget from './components/widgets/CityNameWidget';
 import ParticipantsWidget from './components/widgets/ParticipantsWidget';
 import RevenueWidget from './components/widgets/RevenueWidget';
 import CoachesWidget from './components/widgets/CoachesWidget';
