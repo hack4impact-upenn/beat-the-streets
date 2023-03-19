@@ -39,7 +39,7 @@ function App() {
                 <AlertPopup />
                 <Routes>
                   <Route path="/header" element={<Header />} />
-                  <Route path="/indicator" element={<NumberTile />} />
+                  <Route path="/city-dashboard" element={<CityDashboard />} />
                   {/* Routes accessed only if user is not authenticated */}
                   <Route element={<UnauthenticatedRoutesWrapper />}>
                     <Route path="/login" element={<LoginPage />} />
@@ -56,7 +56,6 @@ function App() {
                       path="/reset-password/:token"
                       element={<ResetPasswordPage />}
                     />
-                    <Route path="/city-dashboard" element={<CityDashboard />} />
                   </Route>
                   <Route
                     path="/invite/:token"
