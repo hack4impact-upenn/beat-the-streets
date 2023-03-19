@@ -18,8 +18,9 @@ function AdminStatsPage({ cityName }: AdminStatsPageProps) {
   });
 
   const [city, setCity] = useState<ICity>();
-
   const cityData = useData(`cities/${cityName}`);
+
+  const [indicatorDicts, setIndicatorDicts] = useState<Map<string, number>[]>([]);
 
   const updateData = () => {
     // backend route here
@@ -58,7 +59,10 @@ function AdminStatsPage({ cityName }: AdminStatsPageProps) {
   }
 
   const indicators = Array.from(city.indicators.keys());
-  const indicatorDicts = Array.from(city.indicators.values());
+  useEffect(() => {
+    setIndicatorDicts(Array.from(city.indicators.values()));
+  }, []);
+  
 
   // set to find the union of all years in the indicator dictionaries (some indicators may not have data for all years)
   const years = new Set<string>();
@@ -95,12 +99,39 @@ function AdminStatsPage({ cityName }: AdminStatsPageProps) {
     return row;
   }
 
+
+  function addYearCol(
+    year: string,
+    // city: ICity,
+  ) {
+
+    years.add(year);
+    const indics = Array.from(city!.indicators.values());
+
+    Array.from(indics).forEach(function (indic) {
+      // indic is a Map<string, number>
+      indic.set(year, 0);
+    })
+
+    setIndicatorDicts(indics); // rerender?
+  }
+
+  console.log(indicatorDicts);
+
   return (
     <Box
       component="main"
       sx={{ flexGrow: 1, paddingTop: 4, paddingLeft: 4, width: { sm: '100%' } }}
     >
       <Toolbar />
+
+      <Button
+          onClick={() => addYearCol((Math.max(...Array.from(years).map(Number)) + 1).toString())} //, city)}
+          sx={{ marginTop: 8, marginBottom: 8, width: { sm: '100%' } }}
+        >
+          Add Column
+        </Button>
+
       <Grid container spacing={4}>
         <Typography variant="h4">{cityName}</Typography>
         <Typography>Accredited</Typography>
@@ -115,8 +146,7 @@ function AdminStatsPage({ cityName }: AdminStatsPageProps) {
         <Button
           onClick={updateData}
           sx={{ marginTop: 8, marginBottom: 8, width: { sm: '100%' } }}
-        >
-          Save
+        > Save
         </Button>
       </Grid>
     </Box>
