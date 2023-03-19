@@ -13,6 +13,10 @@ const CitySchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  established: {
+    type: Number,
+    required: true,
+  },
   countiesCovered: {
     type: [String],
     required: true,
@@ -30,6 +34,7 @@ const CitySchema = new mongoose.Schema({
 interface ICity extends mongoose.Document {
   _id: string;
   cityName: string;
+  established: number;
   isAccredited: boolean;
   countiesCovered: [string];
   indicators: Map<string, Map<string, number>>;
