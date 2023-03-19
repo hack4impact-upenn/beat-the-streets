@@ -6,10 +6,7 @@ import Paper from '@mui/material/Paper';
 import { Typography, Grid, Toolbar } from '@mui/material';
 import CityNameWidget from './components/widgets/CityNameWidget';
 
-const heights = [
-  150, 80, 90, 70, 110, 150, 130, 200, 60, 90, 150, 80, 90, 200, 110, 150, 130,
-  80, 60, 90,
-];
+const heights = [150, 80, 90, 70, 110, 150];
 
 /**
  * The Graph Page of the user dashboard.
