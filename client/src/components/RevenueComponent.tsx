@@ -1,12 +1,13 @@
 import { Toolbar } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { Pie } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import { Chart, ArcElement } from 'chart.js';
 import 'chart.js/auto';
 import { useData } from '../util/api';
 import ICity from '../util/types/city';
 
-export default function PieComponent() {
+export default function RevenueComponent() {
+  // let maxKey: number | null = null;
   const [cityList, setCityList] = useState<ICity[]>([]);
   const [asian, setAsian] = useState(0);
   const [hispanic, setHispanic] = useState(0);
@@ -28,7 +29,7 @@ export default function PieComponent() {
     setBlackList(city?.data.indicators.black_or_african_american);
     setTotalList(city?.data.indicators.population);
     setOthers(total - asian - hispanic - black);
-
+    console.log(city);
     let maxKey = '0';
     if (asianList) {
       Object.entries(asianList).forEach(function (key, value) {
@@ -65,6 +66,7 @@ export default function PieComponent() {
           setTotal(value1);
         }
       });
+      console.log(parseInt(maxKey, 10));
     }
   }, [
     city,
@@ -78,6 +80,19 @@ export default function PieComponent() {
     totalList,
   ]);
 
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top' as const,
+      },
+      title: {
+        display: true,
+        text: 'Chart.js Line Chart',
+      },
+    },
+  };
+
   console.log(hispanicList);
   const data = {
     labels: [
@@ -88,7 +103,7 @@ export default function PieComponent() {
     ],
     datasets: [
       {
-        label: '% of population',
+        label: total.toString(),
         data: [asian, hispanic, black, others],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -110,7 +125,7 @@ export default function PieComponent() {
   return (
     <>
       <Toolbar />
-      <Pie data={data} />
+      <Line options={options} data={data} />
     </>
   );
 }
