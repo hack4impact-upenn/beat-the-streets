@@ -10,15 +10,12 @@ import MainLogoWhite from '../assets/images/MainLogoWhite.png';
 
 import { useAppDispatch, useAppSelector } from '../util/redux/hooks';
 import { selectUser, logout as logoutAction } from '../util/redux/userSlice';
-// import { useData } from '../util/api';
 import { logout as logoutApi } from '../Home/api';
 
 export default function Header() {
   const dispatch = useAppDispatch();
   const navigator = useNavigate();
   const user = useAppSelector(selectUser);
-
-  // const adminData = useData('admin/adminstatus');
 
   const onNavigateAdminDashboard = () => {
     navigator('/users');
@@ -52,9 +49,9 @@ export default function Header() {
           height={44}
         />
         <Box>
-          {user.admin && (
+          {!user.admin && (
             <Button
-              sx={{ color: 'white', borderColor: 'white', marginRight: 1 }}
+              sx={{ color: 'white', borderColor: 'white', marginRight: 2 }}
               variant="outlined"
               color="primary"
               onClick={onNavigateAdminDashboard}
