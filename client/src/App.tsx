@@ -26,7 +26,7 @@ import InviteRegisterPage from './Authentication/InviteRegisterPage';
 import CityDashboard from './CityDashboard';
 import Header from './components/Header';
 import PieComponent from './components/PieComponent';
-import RevenueComponent from './components/RevenueComponent';
+import LineComponent from './components/LineComponent';
 import NumberTile from './components/indicatorComponents/Under18';
 
 function App() {
@@ -71,10 +71,18 @@ function App() {
                     <Route path="/users" element={<AdminDashboardPage />} />
                   </Route>
                   <Route element={<AdminRoutesWrapper />}>
-                    <Route path="/city-pie" element={<PieComponent />} />
+                    <Route
+                      path="/city-pie"
+                      element={
+                        <PieComponent cityProp="Phoenix city, Arizona" />
+                      }
+                    />
                   </Route>
                   <Route element={<AdminRoutesWrapper />}>
-                    <Route path="/revenue" element={<RevenueComponent />} />
+                    <Route
+                      path="/revenue"
+                      element={<LineComponent variant="revenue" />}
+                    />
                   </Route>
 
                   {/* Route which redirects to a different page depending on if the user is an authenticated or not by utilizing the DynamicRedirect component */}

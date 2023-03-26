@@ -1,12 +1,17 @@
-import { Toolbar } from '@mui/material';
+import { Box, Paper, Toolbar, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Pie } from 'react-chartjs-2';
 import { Chart, ArcElement } from 'chart.js';
 import 'chart.js/auto';
 import { useData } from '../util/api';
 import ICity from '../util/types/city';
+import COLORS from '../assets/colors';
 
-export default function PieComponent() {
+type PieComponentProps = {
+  cityProp: string;
+};
+
+export default function PieComponent({ cityProp }: PieComponentProps) {
   const [cityList, setCityList] = useState<ICity[]>([]);
   const [asian, setAsian] = useState(0);
   const [hispanic, setHispanic] = useState(0);
@@ -19,7 +24,8 @@ export default function PieComponent() {
   const [blackList, setBlackList] = useState(new Map());
   const [totalList, setTotalList] = useState(new Map());
 
-  const city = useData('cities/Philadelphia');
+  const cityName: string = cityProp;
+  const city = useData(`cities/${cityName}`);
 
   useEffect(() => {
     setCityList(city?.data);
@@ -27,36 +33,8 @@ export default function PieComponent() {
     setHispanicList(city?.data.indicators.hispanic_or_latino);
     setBlackList(city?.data.indicators.black_or_african_american);
     setTotalList(city?.data.indicators.population);
-    setOthers(total - asian - hispanic - black);
 
     let maxKey = '0';
-    if (asianList) {
-      Object.entries(asianList).forEach(function (key, value) {
-        const [key1, value1] = key;
-        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
-          maxKey = key1;
-          setAsian(value1);
-        }
-      });
-    }
-    if (hispanicList) {
-      Object.entries(hispanicList).forEach(function (key, value) {
-        const [key1, value1] = key;
-        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
-          maxKey = key1;
-          setHispanic(value1);
-        }
-      });
-    }
-    if (blackList) {
-      Object.entries(blackList).forEach(function (key, value) {
-        const [key1, value1] = key;
-        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
-          maxKey = key1;
-          setBlack(value1);
-        }
-      });
-    }
     if (totalList) {
       Object.entries(totalList).forEach(function (key, value) {
         const [key1, value1] = key;
@@ -65,6 +43,36 @@ export default function PieComponent() {
           setTotal(value1);
         }
       });
+    }
+    if (asianList && total) {
+      Object.entries(asianList).forEach(function (key, value) {
+        const [key1, value1] = key;
+        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
+          maxKey = key1;
+          setAsian((value1 * 100) / total);
+        }
+      });
+    }
+    if (hispanicList && total) {
+      Object.entries(hispanicList).forEach(function (key, value) {
+        const [key1, value1] = key;
+        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
+          maxKey = key1;
+          setHispanic((value1 * 100) / total);
+        }
+      });
+    }
+    if (blackList && total) {
+      Object.entries(blackList).forEach(function (key, value) {
+        const [key1, value1] = key;
+        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
+          maxKey = key1;
+          setBlack((value1 * 100) / total);
+        }
+      });
+    }
+    if (total) {
+      setOthers(((total - (asian + hispanic + black)) * 100) / total);
     }
   }, [
     city,
@@ -78,7 +86,24 @@ export default function PieComponent() {
     totalList,
   ]);
 
-  console.log(hispanicList);
+  console.log('hispanic');
+  console.log(hispanic);
+  console.log(asian);
+  console.log(black);
+  console.log('others');
+  console.log(others);
+  console.log(total);
+
+  const options = {
+    responsive: true,
+    legend: {
+      display: true,
+      labels: {
+        fontSize: 10,
+      },
+    },
+  };
+
   const data = {
     labels: [
       'Asian',
@@ -110,7 +135,20 @@ export default function PieComponent() {
   return (
     <>
       <Toolbar />
-      <Pie data={data} />
+      <Paper elevation={0} key={-1} sx={{ overflow: 'hidden' }}>
+        <Box sx={{ p: 3 }}>
+          <Typography variant="h6" sx={{ fontWeight: 700 }}>
+            Race and Hispanic Origin
+          </Typography>
+          <Typography variant="subtitle2" sx={{ color: COLORS.gray, mb: 1 }}>
+            Breakdown of population by race and hispanic origin
+          </Typography>
+        </Box>
+
+        <Box sx={{ p: 3 }}>
+          <Pie options={options} data={data} />
+        </Box>
+      </Paper>
     </>
   );
 }
