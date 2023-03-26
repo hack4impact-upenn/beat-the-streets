@@ -30,4 +30,16 @@ async function getCityObj(cityId: string) {
   return cityObj;
 }
 
-export { getAllCitiesFromDB, getCityObj, getCityFromDB };
+
+
+async function updateCityInDB(city : ICity) {
+  const response = await City.findByIdAndUpdate(city._id, 
+    city,
+  ).exec();
+  return response;
+};
+
+
+
+
+export { getAllCitiesFromDB, getCityObj, getCityFromDB, updateCityInDB };

@@ -3,6 +3,7 @@ import {
   getAllCities,
   getCity,
   getIndicator,
+  setCity
 } from '../controllers/city.controller';
 
 const router = express.Router();
@@ -10,6 +11,9 @@ const router = express.Router();
 router.get('/all', getAllCities);
 
 router.get('/:cityName', getCity);
+
+router.put('/:cityName', setCity);
+
 
 /**
  * A GET route to get city indicator data

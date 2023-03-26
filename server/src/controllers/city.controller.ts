@@ -9,6 +9,7 @@ import StatusCode from '../util/statusCode';
 import {
   getAllCitiesFromDB,
   getCityFromDB,
+  updateCityInDB,
   // getCityObj,
 } from '../services/city.service';
 
@@ -65,6 +66,25 @@ const getCity = async (
       })
   );
 };
+
+
+
+const setCity = async (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction,
+) => {
+
+  const { city } = req.body;
+  if (!city) {
+    next(ApiError.missingFields(['city']));
+    return;
+  }
+  updateCityInDB(city);
+}
+
+
+
 
 /**
  * Get all city indicator data from the database. Upon success, send the a list of all indicator data in the res body with 200 OK status code.
@@ -126,4 +146,4 @@ const getIndicator = async (
   }
 };
 
-export { getAllCities, getCity, getIndicator };
+export { getAllCities, getCity, getIndicator, setCity };

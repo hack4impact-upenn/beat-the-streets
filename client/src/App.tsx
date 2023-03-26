@@ -60,8 +60,8 @@ function App() {
                     <Route path="/city-dashboard" element={<CityDashboard />} />
 
                     <Route
-                      path="/admin-stats"
-                      element={<AdminStatsPage cityName="Philadelphia" />}
+                      path="/admin-stats/:cityName"
+                      element={<AdminStatsPage />}
                     />
                   </Route>
                   <Route

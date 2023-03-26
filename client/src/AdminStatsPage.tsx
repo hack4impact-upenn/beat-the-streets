@@ -4,28 +4,36 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import { Typography, Grid, Toolbar, Button } from '@mui/material';
-import { useData } from './util/api';
+import { useData, putData } from './util/api';
 import ICity from './util/types/city';
 import { PaginationTable, TColumn, TRow } from './components/PaginationTable';
+import { useParams } from 'react-router-dom';
+import toObject from './util/types/map';
 
-interface AdminStatsPageProps {
-  cityName: string;
-}
 
-function AdminStatsPage({ cityName }: AdminStatsPageProps) {
+function AdminStatsPage() {
+  const { cityName } = useParams();
+
   useLayoutEffect(() => {
     document.body.style.backgroundColor = 'lightgray';
   });
 
   const [city, setCity] = useState<ICity>();
-  const cityData = useData(`cities/${cityName}`);
+  const cityData = useData(`cities/${cityName}`); // type is City
+  const [indicatorDicts, setIndicatorDicts] = useState<Map<string, Map<string, number>>>(new Map()); // useState<Map<string, number>[]>([]);
 
-  const [indicatorDicts, setIndicatorDicts] = useState<Map<string, number>[]>([]);
-
+  // function handler for save button -- pushes updated data to backend
   const updateData = () => {
     // backend route here
+    if (city === undefined) return;
+    if (cityData === null) return;
+    let cityDataCopy : object = {...city, indicators: toObject(new Map(indicatorDicts))};
+    console.log("passing data should be new: ", cityDataCopy);
+    const response = putData(`cities/${cityName}`, {city: cityDataCopy});
+    console.log("response: ", response);
   };
 
+  // effect handler for city data (api response) -- updates the city object
   useEffect(() => {
     console.log(cityData?.data);
     if (cityData === undefined || cityData === null) {
@@ -52,21 +60,26 @@ function AdminStatsPage({ cityName }: AdminStatsPageProps) {
     setCity(cityResponse);
   }, [cityData]);
 
+  // effect handler for city object -- updates the indicatorDicts array
+  useEffect(() => {
+    if (city === undefined) return;
+    console.log(city.indicators);
+    setIndicatorDicts(city.indicators);//.values()));
+  }, [city]);
+
   if (city === undefined) {
-    console.log('error unable to find city');
+    // console.log('error unable to find city');
     return <br />;
     // TODO: ERROR HANDLE?
   }
 
   const indicators = Array.from(city.indicators.keys());
-  useEffect(() => {
-    setIndicatorDicts(Array.from(city.indicators.values()));
-  }, []);
-  
+  const indicatorValues = Array.from(city.indicators.values());
+
 
   // set to find the union of all years in the indicator dictionaries (some indicators may not have data for all years)
   const years = new Set<string>();
-  Array.from(indicatorDicts).forEach(function (v) {
+  Array.from(indicatorValues).forEach(function (v) {
     Array.from(v.keys()).forEach(function (year) {
       years.add(year);
     });
@@ -90,6 +103,12 @@ function AdminStatsPage({ cityName }: AdminStatsPageProps) {
           <TextField
             id="outlined-basic"
             defaultValue={indicatorDict.get(year)!}
+            onChange={(e : any) => {
+              const value : string = e.target.value;
+              const indicatorDictsCopy : Map<string, Map<string, number>>  = new Map(indicatorDicts);
+              indicatorDictsCopy.get(indicatorName)?.set(year,parseInt(value, 0));
+              setIndicatorDicts(indicatorDictsCopy);
+            }}
           />
         );
       } else {
@@ -104,19 +123,16 @@ function AdminStatsPage({ cityName }: AdminStatsPageProps) {
     year: string,
     // city: ICity,
   ) {
-
     years.add(year);
-    const indics = Array.from(city!.indicators.values());
 
-    Array.from(indics).forEach(function (indic) {
+    const indicatorDictsCopy : Map<string, Map<string, number>>  = new Map(indicatorDicts);
+    Array.from(indicatorDictsCopy).map(function ([k, v]) {
       // indic is a Map<string, number>
-      indic.set(year, 0);
-    })
+      v.set(year, 0);
+    });
 
-    setIndicatorDicts(indics); // rerender?
+    setIndicatorDicts(indicatorDictsCopy);
   }
-
-  console.log(indicatorDicts);
 
   return (
     <Box
@@ -137,8 +153,8 @@ function AdminStatsPage({ cityName }: AdminStatsPageProps) {
         <Typography>Accredited</Typography>
         <Grid container sx={{ paddingTop: 4 }}>
           <PaginationTable
-            rows={Array.from(indicatorDicts).map((indicatorMap, index) =>
-              createCityEditIndicatorRow(indicators[index], indicatorMap),
+            rows={Array.from(indicatorDicts).map(([key, val]) =>
+              createCityEditIndicatorRow(key, val),
             )}
             columns={columns}
           />
