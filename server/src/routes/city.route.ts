@@ -22,5 +22,6 @@ router.get('/indicatoryearly/:indicatorName', getIndicatorYearly);
 /*
 isAuthenticated, isAdmin, getIndicator); 
  */
+router.get('/indicator/:indicatorName', getIndicator); // isAuthenticated, isAdmin, getIndicator);
 
 export default router;

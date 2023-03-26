@@ -6,11 +6,14 @@ import Paper from '@mui/material/Paper';
 import { Typography, Grid, Toolbar } from '@mui/material';
 import Header from './components/Header';
 import PieComponent from './components/PieComponent';
+import Under18 from './components/indicatorComponents/Under18';
+import Poverty from './components/indicatorComponents/Poverty';
+import CityNameWidget from './components/widgets/CityNameWidget';
+import ParticipantsWidget from './components/widgets/ParticipantsWidget';
+import RevenueWidget from './components/widgets/RevenueWidget';
+import CoachesWidget from './components/widgets/CoachesWidget';
 
-const heights = [
-  150, 80, 90, 70, 110, 150, 130, 200, 60, 90, 150, 80, 90, 200, 110, 150, 130,
-  80, 60, 90,
-];
+const heights = [150, 80, 90, 70, 110, 150, 130, 200, 60, 90, 150, 80, 90, 200];
 
 /**
  * The Graph Page of the user dashboard.
@@ -30,14 +33,18 @@ function CityDashboard() {
       {/* <PieComponent /> */}
       <Grid container spacing={4}>
         <Grid item xs={4}>
-          <Paper elevation={1} sx={{ position: 'fixed', p: 3 }}>
-            <Typography variant="h4">Philadelphia</Typography>
-            <Typography>Accredited</Typography>
-          </Paper>
+          <CityNameWidget city="Philadelphia" />
         </Grid>
         <Grid item xs={8}>
           <Masonry columns={3} spacing={4}>
             {/* <PieComponent /> */}
+            <ParticipantsWidget city="Philadelphia" />
+            <RevenueWidget city="Philadelphia" variant="revenue" />
+            <RevenueWidget city="Philadelphia" variant="expenses" />
+            <RevenueWidget city="Philadelphia" variant="assets" />
+            <CoachesWidget city="Philadelphia" />
+            <Under18 city="Philadelphia" />
+            <Poverty city="Philadelphia" />
             {heights.map((height, ind) => (
               <Paper elevation={0} key={ind} sx={{ height, p: 3 }}>
                 <Typography>add graph here: #{ind + 1}</Typography>

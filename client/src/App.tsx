@@ -27,6 +27,7 @@ import CityDashboard from './CityDashboard';
 import Header from './components/Header';
 import PieComponent from './components/PieComponent';
 import RevenueComponent from './components/RevenueComponent';
+import NumberTile from './components/indicatorComponents/Under18';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
                 <AlertPopup />
                 <Routes>
                   <Route path="/header" element={<Header />} />
+                  <Route path="/city-dashboard" element={<CityDashboard />} />
                   {/* Routes accessed only if user is not authenticated */}
                   <Route element={<UnauthenticatedRoutesWrapper />}>
                     <Route path="/login" element={<LoginPage />} />
@@ -56,7 +58,6 @@ function App() {
                       path="/reset-password/:token"
                       element={<ResetPasswordPage />}
                     />
-                    <Route path="/city-dashboard" element={<CityDashboard />} />
                   </Route>
                   <Route
                     path="/invite/:token"

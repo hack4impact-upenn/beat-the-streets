@@ -15,25 +15,35 @@ export default function RevenueComponent() {
 
   // // const city = useData('cities/Philadelphia');
   const revenue = useData('cities/indicatoryearly/revenue');
+  const year: string[] = [];
+
+  const data2: unknown[] = [];
 
   console.log('revenue');
   console.log(revenue?.data);
 
-  useEffect(() => {
-    setCityList(revenue?.data);
-    console.log(cityList);
-    if (cityList) {
-      Object.entries(cityList).forEach(function (arr) {
-        setYearList([...yearList, arr[0]]);
-        setDataList([...dataList, arr[1]]);
-        // console.log('wer');
-        // console.log(arr);
-      });
-    }
-  }, [cityList, revenue, yearList, dataList]);
+  // useEffect(() => {
+  //   setCityList(revenue?.data);
+  //   if (cityList) {
+  //     Object.entries(cityList).forEach(function (arr) {
+  //       setYearList([...yearList, arr[0]]);
+  //       setDataList([...dataList, arr[1]]);
+  //     });
+  //   }
+  // }, [cityList, dataList, revenue?.data, yearList]);
 
-  console.log(yearList);
-  console.log(dataList);
+  // console.log(yearList);
+  // console.log(dataList);
+  // console.log(cityList);
+
+  if (revenue?.data) {
+    Object.entries(revenue?.data).forEach(function (arr) {
+      // setYearList([...yearList, arr[0]]);
+      // setDataList([...dataList, arr[1]]);
+      year.push(arr[0]);
+      data2.push(arr[1]);
+    });
+  }
 
   const options = {
     responsive: true,
@@ -49,16 +59,11 @@ export default function RevenueComponent() {
   };
 
   const data = {
-    labels: [
-      'Asian',
-      'Latino or Hispanic',
-      'Black or African American',
-      'Other',
-    ],
+    labels: year,
     datasets: [
       {
         label: 'wer',
-        data: dataList,
+        data: data2,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
