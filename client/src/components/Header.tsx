@@ -29,6 +29,11 @@ export default function Header() {
     }
   };
 
+  // Only display if user is logged in
+  if (!user.email) {
+    return null;
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
