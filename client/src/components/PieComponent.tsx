@@ -12,12 +12,14 @@ type PieComponentProps = {
 };
 
 export default function PieComponent({ cityProp }: PieComponentProps) {
-  const [cityList, setCityList] = useState<ICity[]>([]);
   const [asian, setAsian] = useState(0);
   const [hispanic, setHispanic] = useState(0);
   const [black, setBlack] = useState(0);
   const [total, setTotal] = useState(0);
-  const [others, setOthers] = useState(0);
+  const [othersPercent, setOthersPercent] = useState(0);
+  const [asianPercent, setAsianPercent] = useState(0);
+  const [hispanicPercent, setHispanicPercent] = useState(0);
+  const [blackPercent, setBlackPercent] = useState(0);
 
   const [asianList, setAsianList] = useState(new Map());
   const [hispanicList, setHispanicList] = useState(new Map());
@@ -28,7 +30,6 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
   const city = useData(`cities/${cityName}`);
 
   useEffect(() => {
-    setCityList(city?.data);
     setAsianList(city?.data.indicators.asian);
     setHispanicList(city?.data.indicators.hispanic_or_latino);
     setBlackList(city?.data.indicators.black_or_african_american);
@@ -49,7 +50,8 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
         const [key1, value1] = key;
         if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
           maxKey = key1;
-          setAsian((value1 * 100) / total);
+          setAsian(value1);
+          setAsianPercent((value1 * 100) / total);
         }
       });
     }
@@ -58,7 +60,8 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
         const [key1, value1] = key;
         if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
           maxKey = key1;
-          setHispanic((value1 * 100) / total);
+          setHispanic(value1);
+          setHispanicPercent((value1 * 100) / total);
         }
       });
     }
@@ -67,12 +70,13 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
         const [key1, value1] = key;
         if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
           maxKey = key1;
-          setBlack((value1 * 100) / total);
+          setBlack(value1);
+          setBlackPercent((value1 * 100) / total);
         }
       });
     }
     if (total) {
-      setOthers(((total - (asian + hispanic + black)) * 100) / total);
+      setOthersPercent(((total - (asian + hispanic + black)) * 100) / total);
     }
   }, [
     city,
@@ -87,11 +91,11 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
   ]);
 
   console.log('hispanic');
-  console.log(hispanic);
-  console.log(asian);
-  console.log(black);
+  console.log(hispanicPercent);
+  console.log(asianPercent);
+  console.log(blackPercent);
   console.log('others');
-  console.log(others);
+  console.log(othersPercent);
   console.log(total);
 
   const options = {
@@ -114,18 +118,18 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
     datasets: [
       {
         label: '% of population',
-        data: [asian, hispanic, black, others],
+        data: [asianPercent, hispanicPercent, blackPercent, othersPercent],
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
+          'rgba(38, 50, 56, 0.2)',
+          'rgba(1, 117, 192, 0.2)',
+          'rgba(1, 170, 255, 0.2)',
+          'rgba(175, 211, 235, 0.2)',
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
+          'rgba(38, 50, 56, 1)',
+          'rgba(1, 117, 192, 1)',
+          'rgba(1, 170, 255, 1)',
+          'rgba(175, 211, 235, 1)',
         ],
         borderWidth: 1,
       },
