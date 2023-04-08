@@ -13,6 +13,7 @@ import ParticipantsWidget from './components/widgets/ParticipantsWidget';
 import RevenueWidget from './components/widgets/RevenueWidget';
 import CoachesWidget from './components/widgets/CoachesWidget';
 import LineComponent from './components/LineComponent';
+import Bachelor from './components/indicatorComponents/Bachelor';
 
 const heights = [150, 80, 90, 70, 110, 150, 130, 200, 60, 90, 150, 80, 90, 200];
 
@@ -43,6 +44,7 @@ function CityDashboard() {
             <RevenueWidget city="Philadelphia" variant="revenue" />
             <RevenueWidget city="Philadelphia" variant="expenses" />
             <RevenueWidget city="Philadelphia" variant="assets" />
+            <Bachelor city="Chicago city, Illinois" />
             <CoachesWidget city="Philadelphia" />
             <Under18 city="Philadelphia" />
             <Poverty city="Philadelphia" />
