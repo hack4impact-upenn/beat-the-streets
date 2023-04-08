@@ -10,6 +10,7 @@ import CityNameWidget from './components/widgets/CityNameWidget';
 import ParticipantsWidget from './components/widgets/ParticipantsWidget';
 import RevenueWidget from './components/widgets/RevenueWidget';
 import CoachesWidget from './components/widgets/CoachesWidget';
+import TotalChapters from './components/indicatorComponents/TotalChapters';
 
 const heights = [150, 80, 90, 70, 110, 150, 130, 200, 60, 90, 150, 80, 90, 200];
 
@@ -42,6 +43,7 @@ function CityDashboard() {
             <CoachesWidget city="Philadelphia" />
             <Under18 city="Philadelphia" />
             <Poverty city="Philadelphia" />
+            <TotalChapters />
             {heights.map((height, ind) => (
               <Paper elevation={0} key={ind} sx={{ height, p: 3 }}>
                 <Typography>add graph here: #{ind + 1}</Typography>
