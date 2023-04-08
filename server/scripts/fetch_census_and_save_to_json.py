@@ -6,7 +6,7 @@ save_data = {}
 for year in range(2005, 2022):
     if year == 2020:
         continue
-    response = requests.get(f"https://api.census.gov/data/{year}/acs/acs1?get=NAME,B01001_001E,B01001_003E,B01001_004E,B01001_005E,B01001_006E,B01001_027E,B01001_028E,B01001_029E,B01001_030E,B01001B_001E,B01001I_001E,B15002_011E,B15002_028E&in=state:*&for=place:*")
+    response = requests.get(f"https://api.census.gov/data/{year}/acs/acs1?get=NAME,B01001_001E,B01001_003E,B01001_004E,B01001_005E,B01001_006E,B01001_027E,B01001_028E,B01001_029E,B01001_030E,B01001B_001E,B01001I_001E,B15002_011E,B15002_028E,B15002_015E,B15002_032E&in=state:*&for=place:*")
     try:
         data = response.json()
     except:
@@ -29,7 +29,8 @@ for year in range(2005, 2022):
             cur_attributes['population'] = int(row[labels.index('B01001_001E')])
             
             cur_attributes['under18s'] = sum([int(row[labels.index(indicator)]) for indicator in ['B01001_003E', 'B01001_004E', 'B01001_005E', 'B01001_006E', 'B01001_027E', 'B01001_028E', 'B01001_029E', 'B01001_030E']])
-            
+            cur_attributes['bachelor'] = sum([int(row[labels.index(indicator)]) for indicator in ['B15002_015E','B15002_032E']])
+	
             if row[labels.index('B01001B_001E')]:
                 cur_attributes['black_or_african_american'] = int(row[labels.index('B01001B_001E')])
             else:
