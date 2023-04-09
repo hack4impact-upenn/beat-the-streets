@@ -22,7 +22,7 @@ function Bachelor({ city }: BachelorProps) {
 
   useEffect(() => {
     setCityList(cityData?.data);
-    setBachelorList(cityData?.data.indicators.under18s);
+    setBachelorList(cityData?.data.indicators.bachelor);
     setTotalList(cityData?.data.indicators.population);
 
     let maxKey = '0';
