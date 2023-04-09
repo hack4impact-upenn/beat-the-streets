@@ -44,7 +44,7 @@ function CityDashboard() {
             <RevenueWidget city="Philadelphia" variant="revenue" />
             <RevenueWidget city="Philadelphia" variant="expenses" />
             <RevenueWidget city="Philadelphia" variant="assets" />
-            <Bachelor city="Chicago city, Illinois" />
+            <Bachelor city="Philadelphia city, Pennsylvania" />
             <CoachesWidget city="Philadelphia" />
             <Under18 city="Philadelphia" />
             <Poverty city="Philadelphia" />
