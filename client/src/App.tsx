@@ -39,7 +39,10 @@ function App() {
                 <AlertPopup />
                 <Routes>
                   <Route path="/header" element={<Header />} />
-                  <Route path="/city-dashboard" element={<CityDashboard />} />
+                  <Route
+                    path="/city-dashboard/:cityID"
+                    element={<CityDashboard />}
+                  />
                   {/* Routes accessed only if user is not authenticated */}
                   <Route element={<UnauthenticatedRoutesWrapper />}>
                     <Route path="/login" element={<LoginPage />} />
