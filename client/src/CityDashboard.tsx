@@ -26,7 +26,10 @@ function CityDashboard() {
   }
 
   const cityData = useData(`cities/cityName/${cityID}`);
-  const cityName = cityData?.data.cityName;
+  let cityName = 'Philadelphia';
+  if (cityData) {
+    cityName = cityData?.data.cityName;
+  }
 
   useLayoutEffect(() => {
     document.body.style.backgroundColor = 'lightgray';
