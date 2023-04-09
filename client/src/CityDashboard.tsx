@@ -35,36 +35,65 @@ function CityDashboard() {
     document.body.style.backgroundColor = 'lightgray';
   });
 
-  return (
-    <Box
-      component="main"
-      sx={{ flexGrow: 1, paddingTop: 4, paddingLeft: 4, width: { sm: '100%' } }}
-    >
-      <Toolbar />
+  const accredited = cityData?.data.isAccredited;
+  if (accredited != null && accredited != 0) {
+    return (
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          paddingTop: 4,
+          paddingLeft: 4,
+          width: { sm: '100%' },
+        }}
+      >
+        <Toolbar />
 
-      <Grid container spacing={4}>
-        <Grid item xs={4}>
-          <CityNameWidget city={cityName} />
+        <Grid container spacing={4}>
+          <Grid item xs={4}>
+            <CityNameWidget city={cityName} />
+          </Grid>
+          <Grid item xs={8}>
+            <Masonry columns={3} spacing={4}>
+              <ParticipantsWidget city={cityName} />
+              <RevenueWidget city={cityName} variant="revenue" />
+              <RevenueWidget city={cityName} variant="expenses" />
+              <RevenueWidget city={cityName} variant="assets" />
+              <CoachesWidget city={cityName} />
+              <Under18 city={cityName} />
+              <Poverty city={cityName} />
+            </Masonry>
+          </Grid>
         </Grid>
-        <Grid item xs={8}>
-          <Masonry columns={3} spacing={4}>
-            <ParticipantsWidget city={cityName} />
-            <RevenueWidget city={cityName} variant="revenue" />
-            <RevenueWidget city={cityName} variant="expenses" />
-            <RevenueWidget city={cityName} variant="assets" />
-            <CoachesWidget city={cityName} />
-            <Under18 city={cityName} />
-            <Poverty city={cityName} />
-            {heights.map((height, ind) => (
-              <Paper elevation={0} key={ind} sx={{ height, p: 3 }}>
-                <Typography>add graph here: #{ind + 1}</Typography>
-              </Paper>
-            ))}
-          </Masonry>
+      </Box>
+    );
+  } else {
+    return (
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          paddingTop: 4,
+          paddingLeft: 4,
+          width: { sm: '100%' },
+        }}
+      >
+        <Toolbar />
+
+        <Grid container spacing={4}>
+          <Grid item xs={4}>
+            <CityNameWidget city={cityName} />
+          </Grid>
+          <Grid item xs={8}>
+            <Masonry columns={3} spacing={4}>
+              <Under18 city={cityName} />
+              <Poverty city={cityName} />
+            </Masonry>
+          </Grid>
         </Grid>
-      </Grid>
-    </Box>
-  );
+      </Box>
+    );
+  }
 }
 
 export default CityDashboard;
