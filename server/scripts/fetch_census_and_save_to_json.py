@@ -6,7 +6,8 @@ save_data = {}
 for year in range(2005, 2022):
     if year == 2020:
         continue
-    response = requests.get(f"https://api.census.gov/data/{year}/acs/acs1?get=NAME,B01001_001E,B01001_003E,B01001_004E,B01001_005E,B01001_006E,B01001_027E,B01001_028E,B01001_029E,B01001_030E,B01001B_001E,B01001I_001E,B15002_011E,B15002_028E,B15002_015E,B15002_032E&in=state:*&for=place:*")
+
+    response = requests.get(f"https://api.census.gov/data/{year}/acs/acs1?get=NAME,B01001_001E,B01001_003E,B01001_004E,B01001_005E,B01001_006E,B01001_027E,B01001_028E,B01001_029E,B01001_030E,B01001B_001E,B01001I_001E,B15002_011E,B15002_028E,B15002_015E,B15002_032E,B01001A_001E,B01001C_001E,B01001D_001E,B01001E_001E,B01001G_001E&in=state:*&for=place:*") 
     try:
         data = response.json()
     except:
@@ -40,6 +41,34 @@ for year in range(2005, 2022):
                 cur_attributes['hispanic_or_latino'] = int(row[labels.index('B01001I_001E')])
             else:
                 cur_attributes['hispanic_or_latino'] = None
+
+
+            if row[labels.index('B01001A_001E')]:
+                cur_attributes['white'] = int(row[labels.index('B01001A_001E')])
+            else:   
+                cur_attributes['white'] = None
+            
+            if row[labels.index('B01001C_001E')]:
+                cur_attributes['american_indian_alaskan_native'] = int(row[labels.index('B01001C_001E')])
+            else:
+                cur_attributes['american_indian_alaskan_native'] = None
+            
+            if row[labels.index('B01001D_001E')]:
+                cur_attributes['asian'] = int(row[labels.index('B01001D_001E')])
+            else:
+                cur_attributes['asian'] = None
+            
+            if row[labels.index('B01001E_001E')]: 
+                cur_attributes['native_hawaiian_pacific_islander'] = int(row[labels.index('B01001E_001E')])
+            else:
+                cur_attributes['native_hawaiian_pacific_islander'] = None
+            
+            if row[labels.index('B01001G_001E')]:
+                cur_attributes['two_or_more'] = int(row[labels.index('B01001G_001E')])
+            else:
+                cur_attributes['two_or_more'] = None
+                
+
                 
             if row[labels.index('B15002_011E')] and row[labels.index('B15002_028E')]:
                 cur_attributes['high_school_graduates'] = (int(row[labels.index('B15002_011E')]) + int(row[labels.index('B15002_028E')]))
@@ -55,7 +84,7 @@ cities = save_data['2005'].keys()
 for city in cities:
     cur_city = {}
     cur_city['cityName'] = city
-    cur_attributes['isAccredited'] = any([cur_city in city for cur_city in verifiedCities])
+    cur_city['isAccredited'] = any([cur_city in city for cur_city in verifiedCities])
     indicators = {}
     for year in range(2005, 2022):
         if year == 2020:
