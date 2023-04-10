@@ -126,7 +126,7 @@ function AdminStatsPage() {
     years.add(year);
 
     const indicatorDictsCopy : Map<string, Map<string, number>>  = new Map(indicatorDicts);
-    Array.from(indicatorDictsCopy).map(function ([k, v]) {
+    Array.from(indicatorDictsCopy).forEach(function ([k, v]) {
       // indic is a Map<string, number>
       v.set(year, 0);
     });
