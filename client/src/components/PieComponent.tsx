@@ -16,15 +16,33 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
   const [hispanic, setHispanic] = useState(0);
   const [black, setBlack] = useState(0);
   const [total, setTotal] = useState(0);
+  
+  const [white, setWhite] = useState(0);
+  const [native, setNative] = useState(0);
+  const [hawaiian, setHawaiian] = useState(0);
+  const [twoOrMore, setTwoOrMore] = useState(0);
+  
+
   const [othersPercent, setOthersPercent] = useState(0);
   const [asianPercent, setAsianPercent] = useState(0);
   const [hispanicPercent, setHispanicPercent] = useState(0);
   const [blackPercent, setBlackPercent] = useState(0);
+  const [whitePercent, setWhitePercent] = useState(0);
+  const [nativePercent, setNativePercent] = useState(0);
+  const [hawaiianPercent, setHawaiianPercent] = useState(0);
+  const [twoOrMorePercent, setTwoOrMorePercent] = useState(0);
+
 
   const [asianList, setAsianList] = useState(new Map());
   const [hispanicList, setHispanicList] = useState(new Map());
   const [blackList, setBlackList] = useState(new Map());
   const [totalList, setTotalList] = useState(new Map());
+
+  const [whiteList, setWhiteList] = useState(new Map());
+  const [hawaiianList, setHawaiianList] = useState(new Map());
+  const [nativeList, setNativeList] = useState(new Map());
+  const [twoOrMoreList, setTwoOrMoreList] = useState(new Map());
+
 
   const cityName: string = cityProp;
   const city = useData(`cities/${cityName}`);
@@ -33,6 +51,11 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
     setAsianList(city?.data.indicators.asian);
     setHispanicList(city?.data.indicators.hispanic_or_latino);
     setBlackList(city?.data.indicators.black_or_african_american);
+    setWhiteList(city?.data.indicators.white);
+    setNativeList(city?.data.indicators.native);
+    setHawaiianList(city?.data.indicators.hawaiian);
+    setTwoOrMoreList(city?.data.indicators.two_or_more);
+
     setTotalList(city?.data.indicators.population);
 
     let maxKey = '0';
@@ -75,8 +98,54 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
         }
       });
     }
+    
+    if (whiteList && total) {
+      Object.entries(whiteList).forEach(function (key, value) {
+        const [key1, value1] = key;
+        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
+          maxKey = key1;
+          setWhite(value1);
+          setWhitePercent((value1 * 100) / total);
+        }
+      });
+    }    
+
+    if (nativeList && total) {
+      Object.entries(nativeList).forEach(function (key, value) {
+        const [key1, value1] = key;
+        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
+          maxKey = key1;
+          setNative(value1);
+          setNativePercent((value1 * 100) / total);
+        }
+      });
+    }    
+    
+    if (hawaiianList && total) {
+      Object.entries(hawaiianList).forEach(function (key, value) {
+        const [key1, value1] = key;
+        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
+          maxKey = key1;
+          setHawaiian(value1);
+          setHawaiianPercent((value1 * 100) / total);
+        }
+      });
+    }    
+
+    if (twoOrMoreList && total) {
+      Object.entries(twoOrMoreList).forEach(function (key, value) {
+        const [key1, value1] = key;
+        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
+          maxKey = key1;
+          setTwoOrMore(value1);
+          setTwoOrMorePercent((value1 * 100) / total);
+        }
+      });
+    }    
+    
+
     if (total) {
-      setOthersPercent(((total - (asian + hispanic + black)) * 100) / total);
+      setOthersPercent(((total - (asian + hispanic + black + white + native + hawaiian + twoOrMore)) * 100) / total);
     }
   }, [
     city,
@@ -84,10 +153,22 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
     black,
     hispanic,
     total,
+
+    white,
+    native,
+    hawaiian,
+    twoOrMore,
+
     asianList,
     hispanicList,
     blackList,
     totalList,
+
+    whiteList,
+    nativeList,
+    hawaiianList,
+    twoOrMoreList
+
   ]);
 
   console.log('hispanic');
@@ -113,23 +194,36 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
       'Asian',
       'Latino or Hispanic',
       'Black or African American',
+      'White',
+      'Native',
+      'Hawaiian',
+      'Two or more',
       'Other',
     ],
     datasets: [
       {
         label: '% of population',
-        data: [asianPercent, hispanicPercent, blackPercent, othersPercent],
+        data: [asianPercent, hispanicPercent, blackPercent, 
+          whitePercent, nativePercent, hawaiianPercent, twoOrMorePercent, othersPercent],
         backgroundColor: [
           'rgba(38, 50, 56, 0.2)',
           'rgba(1, 117, 192, 0.2)',
           'rgba(1, 170, 255, 0.2)',
           'rgba(175, 211, 235, 0.2)',
+          'rgba(138, 150, 56, 0.2)',
+          'rgba(62, 107, 192, 0.2)',
+          'rgba(62, 1, 255, 0.2)',
+          'rgba(62, 211, 1, 0.2)',
         ],
         borderColor: [
-          'rgba(38, 50, 56, 1)',
-          'rgba(1, 117, 192, 1)',
-          'rgba(1, 170, 255, 1)',
-          'rgba(175, 211, 235, 1)',
+          'rgba(38, 50, 56, 0.2)',
+          'rgba(1, 117, 192, 0.2)',
+          'rgba(1, 170, 255, 0.2)',
+          'rgba(175, 211, 235, 0.2)',
+          'rgba(138, 150, 56, 0.2)',
+          'rgba(62, 107, 192, 0.2)',
+          'rgba(62, 1, 255, 0.2)',
+          'rgba(62, 211, 1, 0.2)',
         ],
         borderWidth: 1,
       },
