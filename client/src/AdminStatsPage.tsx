@@ -86,9 +86,9 @@ function AdminStatsPage() {
   });
 
   // setup for pagination table
-  let columns: TColumn[] = [{ id: 'indicator', label: 'Indicator' }];
+  let columns: TColumn[] = [{ id: 'indicator', label: 'Indicator', minWidth: 170}];
   columns = columns.concat(
-    Array.from(years).map((year) => ({ id: year, label: year })),
+    Array.from(years).map((year) => ({ id: year, label: year, minWidth: 170 })),
   );
   function createCityEditIndicatorRow(
     indicatorName: string,
