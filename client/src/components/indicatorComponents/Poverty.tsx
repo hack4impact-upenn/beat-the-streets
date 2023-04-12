@@ -14,22 +14,37 @@ type RevenueWidgetProps = {
 function Poverty({ city }: RevenueWidgetProps) {
   const cityData = useData(`cities/${city}`);
 
-  if (cityData) {
-    const povertyList: { [key: number]: number } =
-      cityData?.data.indicators.persons_in_poverty;
+  let poverty: number | null = null;
 
-    const povertyValue =
-      Object.values(povertyList)[Object.values(povertyList).length - 1];
+  const povertList: { [key: number | string]: number } =
+    cityData?.data.indicators.persons_in_poverty;
 
-    return (
-      <Paper elevation={0} key={-1} sx={{ overflow: 'hidden' }}>
-        <Box sx={{ p: 3 }}>
-          <Typography variant="h6" sx={{ fontWeight: 700 }}>
-            Poverty
-          </Typography>
-          <Typography variant="subtitle2" sx={{ color: COLORS.gray, mb: 1 }}>
-            Number of persons in poverty
-          </Typography>
+  // Finds the most recent year in the data and uses that value
+  if (povertList) {
+    let maxKey = '0';
+
+    if (povertList) {
+      Object.entries(povertList).forEach(function (key, value) {
+        const [key1, value1] = key;
+        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
+          maxKey = key1;
+        }
+      });
+    }
+
+    poverty = povertList[maxKey];
+  }
+
+  return (
+    <Paper elevation={0} key={-1} sx={{ overflow: 'hidden' }}>
+      <Box sx={{ p: 3 }}>
+        <Typography variant="h6" sx={{ fontWeight: 700 }}>
+          Poverty
+        </Typography>
+        <Typography variant="subtitle2" sx={{ color: COLORS.gray, mb: 1 }}>
+          Number of persons in poverty
+        </Typography>
+        {poverty && (
           <Typography
             variant="h4"
             sx={{ color: COLORS.primaryBlue }}
@@ -38,14 +53,12 @@ function Poverty({ city }: RevenueWidgetProps) {
             {Intl.NumberFormat('en-US', {
               notation: 'compact',
               maximumFractionDigits: 1,
-            }).format(povertyValue)}
+            }).format(poverty)}
           </Typography>
-        </Box>
-      </Paper>
-    );
-  }
-
-  return <Paper elevation={0} key={-1} sx={{ overflow: 'hidden' }} />;
+        )}
+      </Box>
+    </Paper>
+  );
 }
 
 export default Poverty;

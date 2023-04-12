@@ -87,14 +87,31 @@ function CoachesWidget({ city }: DefaultWidgetProps) {
   let femaleCoaches: number | null = null;
 
   if (maleCoachesYearly && femaleCoachesYearly) {
-    maleCoaches =
-      Object.values(maleCoachesYearly)[
-        Object.values(maleCoachesYearly).length - 1
-      ];
-    femaleCoaches =
-      Object.values(femaleCoachesYearly)[
-        Object.values(femaleCoachesYearly).length - 1
-      ];
+    let maxKeyMale = '0';
+
+    if (maleCoachesYearly) {
+      Object.entries(maleCoachesYearly).forEach(function (key, value) {
+        const [key1, value1] = key;
+        if (parseInt(key1, 10) >= parseInt(maxKeyMale, 10)) {
+          maxKeyMale = key1;
+        }
+      });
+    }
+
+    maleCoaches = maleCoachesYearly[maxKeyMale];
+
+    let maxKeyFemale = '0';
+
+    if (maleCoachesYearly) {
+      Object.entries(maleCoachesYearly).forEach(function (key, value) {
+        const [key1, value1] = key;
+        if (parseInt(key1, 10) >= parseInt(maxKeyFemale, 10)) {
+          maxKeyFemale = key1;
+        }
+      });
+    }
+
+    femaleCoaches = femaleCoachesYearly[maxKeyFemale];
   }
 
   let chartData = null;
