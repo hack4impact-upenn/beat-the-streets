@@ -11,6 +11,7 @@ import CityNameWidget from './components/widgets/CityNameWidget';
 import ParticipantsWidget from './components/widgets/ParticipantsWidget';
 import RevenueWidget from './components/widgets/RevenueWidget';
 import CoachesWidget from './components/widgets/CoachesWidget';
+import TotalChapters from './components/indicatorComponents/TotalChapters';
 
 const heights = [150, 80, 90, 70, 110, 150, 130, 200, 60, 90, 150, 80, 90, 200];
 
@@ -51,6 +52,14 @@ function CityDashboard() {
         </Grid>
         <Grid item xs={8}>
           <Masonry columns={3} spacing={4}>
+            <ParticipantsWidget city="Philadelphia" />
+            <RevenueWidget city="Philadelphia" variant="revenue" />
+            <RevenueWidget city="Philadelphia" variant="expenses" />
+            <RevenueWidget city="Philadelphia" variant="assets" />
+            <CoachesWidget city="Philadelphia" />
+            <Under18 city="Philadelphia" />
+            <Poverty city="Philadelphia" />
+            <TotalChapters />
             <ParticipantsWidget city="Philadelphia city, Pennsylvania" />
             <RevenueWidget
               city="Philadelphia city, Pennsylvania"
@@ -67,6 +76,7 @@ function CityDashboard() {
             <CoachesWidget city="Philadelphia city, Pennsylvania" />
             <Under18 city="Philadelphia city, Pennsylvania" />
             <Poverty city="Philadelphia city, Pennsylvania" />
+            <TotalChapters />
             {heights.map((height, ind) => (
               <Paper elevation={0} key={ind} sx={{ height, p: 3 }}>
                 <Typography>add graph here: #{ind + 1}</Typography>
