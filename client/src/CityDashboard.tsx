@@ -31,17 +31,26 @@ function CityDashboard() {
 
       <Grid container spacing={4}>
         <Grid item xs={4}>
-          <CityNameWidget city="Philadelphia" />
+          <CityNameWidget city="Philadelphia city, Pennsylvania" />
         </Grid>
         <Grid item xs={8}>
           <Masonry columns={3} spacing={4}>
-            <ParticipantsWidget city="Philadelphia" />
-            <RevenueWidget city="Philadelphia" variant="revenue" />
-            <RevenueWidget city="Philadelphia" variant="expenses" />
-            <RevenueWidget city="Philadelphia" variant="assets" />
-            <CoachesWidget city="Philadelphia" />
-            <Under18 city="Philadelphia" />
-            <Poverty city="Philadelphia" />
+            <ParticipantsWidget city="Philadelphia city, Pennsylvania" />
+            <RevenueWidget
+              city="Philadelphia city, Pennsylvania"
+              variant="revenue"
+            />
+            <RevenueWidget
+              city="Philadelphia city, Pennsylvania"
+              variant="expenses"
+            />
+            <RevenueWidget
+              city="Philadelphia city, Pennsylvania"
+              variant="assets"
+            />
+            <CoachesWidget city="Philadelphia city, Pennsylvania" />
+            <Under18 city="Philadelphia city, Pennsylvania" />
+            <Poverty city="Philadelphia city, Pennsylvania" />
             {heights.map((height, ind) => (
               <Paper elevation={0} key={ind} sx={{ height, p: 3 }}>
                 <Typography>add graph here: #{ind + 1}</Typography>
