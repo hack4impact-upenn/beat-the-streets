@@ -16,12 +16,11 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
   const [hispanic, setHispanic] = useState(0);
   const [black, setBlack] = useState(0);
   const [total, setTotal] = useState(0);
-  
+
   const [white, setWhite] = useState(0);
   const [native, setNative] = useState(0);
   const [hawaiian, setHawaiian] = useState(0);
   const [twoOrMore, setTwoOrMore] = useState(0);
-  
 
   const [othersPercent, setOthersPercent] = useState(0);
   const [asianPercent, setAsianPercent] = useState(0);
@@ -32,7 +31,6 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
   const [hawaiianPercent, setHawaiianPercent] = useState(0);
   const [twoOrMorePercent, setTwoOrMorePercent] = useState(0);
 
-
   const [asianList, setAsianList] = useState(new Map());
   const [hispanicList, setHispanicList] = useState(new Map());
   const [blackList, setBlackList] = useState(new Map());
@@ -42,7 +40,6 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
   const [hawaiianList, setHawaiianList] = useState(new Map());
   const [nativeList, setNativeList] = useState(new Map());
   const [twoOrMoreList, setTwoOrMoreList] = useState(new Map());
-
 
   const cityName: string = cityProp;
   const city = useData(`cities/${cityName}`);
@@ -98,7 +95,7 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
         }
       });
     }
-    
+
     if (whiteList && total) {
       Object.entries(whiteList).forEach(function (key, value) {
         const [key1, value1] = key;
@@ -108,7 +105,7 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
           setWhitePercent((value1 * 100) / total);
         }
       });
-    }    
+    }
 
     if (nativeList && total) {
       Object.entries(nativeList).forEach(function (key, value) {
@@ -119,8 +116,8 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
           setNativePercent((value1 * 100) / total);
         }
       });
-    }    
-    
+    }
+
     if (hawaiianList && total) {
       Object.entries(hawaiianList).forEach(function (key, value) {
         const [key1, value1] = key;
@@ -130,7 +127,7 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
           setHawaiianPercent((value1 * 100) / total);
         }
       });
-    }    
+    }
 
     if (twoOrMoreList && total) {
       Object.entries(twoOrMoreList).forEach(function (key, value) {
@@ -141,11 +138,15 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
           setTwoOrMorePercent((value1 * 100) / total);
         }
       });
-    }    
-    
+    }
 
     if (total) {
-      setOthersPercent(((total - (asian + hispanic + black + white + native + hawaiian + twoOrMore)) * 100) / total);
+      setOthersPercent(
+        ((total -
+          (asian + hispanic + black + white + native + hawaiian + twoOrMore)) *
+          100) /
+          total,
+      );
     }
   }, [
     city,
@@ -167,24 +168,14 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
     whiteList,
     nativeList,
     hawaiianList,
-    twoOrMoreList
-
+    twoOrMoreList,
   ]);
-
-  console.log('hispanic');
-  console.log(hispanicPercent);
-  console.log(asianPercent);
-  console.log(blackPercent);
-  console.log('others');
-  console.log(othersPercent);
-  console.log(total);
 
   const options = {
     responsive: true,
-    legend: {
-      display: true,
-      labels: {
-        fontSize: 10,
+    plugins: {
+      legend: {
+        display: false,
       },
     },
   };
@@ -203,17 +194,25 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
     datasets: [
       {
         label: '% of population',
-        data: [asianPercent, hispanicPercent, blackPercent, 
-          whitePercent, nativePercent, hawaiianPercent, twoOrMorePercent, othersPercent],
+        data: [
+          asianPercent,
+          hispanicPercent,
+          blackPercent,
+          whitePercent,
+          nativePercent,
+          hawaiianPercent,
+          twoOrMorePercent,
+          othersPercent,
+        ],
         backgroundColor: [
-          'rgba(38, 50, 56, 0.2)',
-          'rgba(1, 117, 192, 0.2)',
-          'rgba(1, 170, 255, 0.2)',
-          'rgba(175, 211, 235, 0.2)',
-          'rgba(138, 150, 56, 0.2)',
-          'rgba(62, 107, 192, 0.2)',
-          'rgba(62, 1, 255, 0.2)',
-          'rgba(62, 211, 1, 0.2)',
+          'rgba(38, 50, 56, 1)',
+          'rgba(1, 117, 192, 1)',
+          'rgba(1, 170, 255, 1)',
+          'rgba(175, 211, 235, 1)',
+          'rgba(138, 150, 56, 1)',
+          'rgba(62, 107, 192, 1)',
+          'rgba(0, 89, 134, 1)',
+          'rgba(99, 143, 172, 1)',
         ],
         borderColor: [
           'rgba(38, 50, 56, 0.2)',
