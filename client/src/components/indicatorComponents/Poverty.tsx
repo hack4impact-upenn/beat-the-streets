@@ -12,42 +12,40 @@ type RevenueWidgetProps = {
 };
 
 function Poverty({ city }: RevenueWidgetProps) {
-  const [cityList, setCityList] = useState<ICity[]>([]);
-  const [poverty, setPoverty] = useState(new Map());
   const cityData = useData(`cities/${city}`);
 
-  useEffect(() => {
-    setCityList(cityData?.data);
-    setPoverty(cityData?.data.indicators.persons_in_poverty);
-  }, [cityData]);
+  if (cityData) {
+    const povertyList: { [key: number]: number } =
+      cityData?.data.indicators.persons_in_poverty;
 
-  return (
-    <Paper elevation={0} key={-1} sx={{ overflow: 'hidden' }}>
-      <Box sx={{ p: 3 }}>
-        <Typography variant="h6" sx={{ fontWeight: 700 }}>
-          Poverty
-        </Typography>
-        <Typography variant="subtitle2" sx={{ color: COLORS.gray, mb: 1 }}>
-          Persons in Poverty
-        </Typography>
-        {poverty !== undefined && (
+    const povertyValue =
+      Object.values(povertyList)[Object.values(povertyList).length - 1];
+
+    return (
+      <Paper elevation={0} key={-1} sx={{ overflow: 'hidden' }}>
+        <Box sx={{ p: 3 }}>
+          <Typography variant="h6" sx={{ fontWeight: 700 }}>
+            Poverty
+          </Typography>
+          <Typography variant="subtitle2" sx={{ color: COLORS.gray, mb: 1 }}>
+            Number of persons in poverty
+          </Typography>
           <Typography
             variant="h4"
             sx={{ color: COLORS.primaryBlue }}
             align="center"
           >
-            {Object.entries(poverty)
-              .filter(([year, value]) => year === '2022')
-              .map(([year, value]) => (
-                <h1 style={{ fontSize: '2.125rem', color: '#0175C0' }}>
-                  {value}
-                </h1>
-              ))}
+            {Intl.NumberFormat('en-US', {
+              notation: 'compact',
+              maximumFractionDigits: 1,
+            }).format(povertyValue)}
           </Typography>
-        )}
-      </Box>
-    </Paper>
-  );
+        </Box>
+      </Paper>
+    );
+  }
+
+  return <Paper elevation={0} key={-1} sx={{ overflow: 'hidden' }} />;
 }
 
 export default Poverty;

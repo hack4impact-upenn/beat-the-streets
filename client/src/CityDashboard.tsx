@@ -3,7 +3,8 @@ import React, { useLayoutEffect } from 'react';
 import { Masonry } from '@mui/lab';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import { Typography, Grid, Toolbar } from '@mui/material';
+import { Typography, Grid, Toolbar, Button, Icon } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import Under18 from './components/indicatorComponents/Under18';
 import Poverty from './components/indicatorComponents/Poverty';
 import CityNameWidget from './components/widgets/CityNameWidget';
@@ -23,6 +24,13 @@ function CityDashboard() {
     document.body.style.backgroundColor = 'lightgray';
   });
 
+  // TODO: this should navigate to the dashboard for all cities,
+  // not the home page (once the all cities page exists)
+  const navigator = useNavigate();
+  const onNavigateMainDashboard = () => {
+    navigator('/home');
+  };
+
   return (
     <Box
       component="main"
@@ -32,7 +40,15 @@ function CityDashboard() {
 
       <Grid container spacing={4}>
         <Grid item xs={4}>
-          <CityNameWidget city="Philadelphia" />
+          <CityNameWidget city="Philadelphia city, Pennsylvania" />
+          <Button
+            sx={{ mt: 2 }}
+            variant="text"
+            color="primary"
+            onClick={onNavigateMainDashboard}
+          >
+            Back to all cities
+          </Button>
         </Grid>
         <Grid item xs={8}>
           <Masonry columns={3} spacing={4}>
@@ -43,6 +59,23 @@ function CityDashboard() {
             <CoachesWidget city="Philadelphia" />
             <Under18 city="Philadelphia" />
             <Poverty city="Philadelphia" />
+            <TotalChapters />
+            <ParticipantsWidget city="Philadelphia city, Pennsylvania" />
+            <RevenueWidget
+              city="Philadelphia city, Pennsylvania"
+              variant="revenue"
+            />
+            <RevenueWidget
+              city="Philadelphia city, Pennsylvania"
+              variant="expenses"
+            />
+            <RevenueWidget
+              city="Philadelphia city, Pennsylvania"
+              variant="assets"
+            />
+            <CoachesWidget city="Philadelphia city, Pennsylvania" />
+            <Under18 city="Philadelphia city, Pennsylvania" />
+            <Poverty city="Philadelphia city, Pennsylvania" />
             <TotalChapters />
             {heights.map((height, ind) => (
               <Paper elevation={0} key={ind} sx={{ height, p: 3 }}>
