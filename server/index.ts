@@ -52,7 +52,8 @@ const main = async () => {
     console.log('  Press Control-C to stop\n');
   });
 
-  setInterval(executePythonScript, 60 * 60 * 1000);
+  // setInterval(executePythonScript, 60 * 60 * 1000);
+  executePythonScript();
 };
 
 // Run the server
