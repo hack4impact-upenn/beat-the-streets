@@ -1,5 +1,7 @@
 # Beat The Streets - Dashboard
 
+<img src="https://user-images.githubusercontent.com/28734546/232344772-312c55da-6a2a-4a36-a828-3203b54503c9.png" width=50% height=50% >
+
 This is a project for [Beat the Streets](https://beatthestreets.org/) that aggregates and displays statistics and data points related to both current locations and target expansion locations. The goal is to provide an all-in-one platform where administrators can view the performance of individual locations as well as nation-wide impact. Furthermore, the platform will also allow them to view the most pertinent data on potential future locations, allowed them to make more informed decisions as the organisation grows.
 
 This project was built using the MERN stack. Setup is outlined below.
