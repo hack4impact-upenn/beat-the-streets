@@ -59,7 +59,7 @@ function CityDashboard() {
             <Poverty city="Philadelphia city, Pennsylvania" />
             <LineComponent variant="revenue" />
             <LineComponent variant="expenses" />
-            <PieComponent cityProp="Phoenix city, Arizona" />
+            <PieComponent cityProp="Philadelphia city, Pennsylvania" />
             {heights.map((height, ind) => (
               <Paper elevation={0} key={ind} sx={{ height, p: 3 }}>
                 <Typography>add graph here: #{ind + 1}</Typography>

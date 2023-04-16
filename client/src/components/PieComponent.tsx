@@ -49,8 +49,8 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
     setHispanicList(city?.data.indicators.hispanic_or_latino);
     setBlackList(city?.data.indicators.black_or_african_american);
     setWhiteList(city?.data.indicators.white);
-    setNativeList(city?.data.indicators.native);
-    setHawaiianList(city?.data.indicators.hawaiian);
+    setNativeList(city?.data.indicators.american_indian_alaskan_native);
+    setHawaiianList(city?.data.indicators.native_hawaiian_pacific_islander);
     setTwoOrMoreList(city?.data.indicators.two_or_more);
 
     setTotalList(city?.data.indicators.population);
@@ -71,7 +71,6 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
         if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
           maxKey = key1;
           setAsian(value1);
-          setAsianPercent((value1 * 100) / total);
         }
       });
     }
@@ -81,7 +80,6 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
         if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
           maxKey = key1;
           setHispanic(value1);
-          setHispanicPercent((value1 * 100) / total);
         }
       });
     }
@@ -91,7 +89,6 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
         if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
           maxKey = key1;
           setBlack(value1);
-          setBlackPercent((value1 * 100) / total);
         }
       });
     }
@@ -102,7 +99,6 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
         if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
           maxKey = key1;
           setWhite(value1);
-          setWhitePercent((value1 * 100) / total);
         }
       });
     }
@@ -113,7 +109,6 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
         if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
           maxKey = key1;
           setNative(value1);
-          setNativePercent((value1 * 100) / total);
         }
       });
     }
@@ -124,7 +119,6 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
         if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
           maxKey = key1;
           setHawaiian(value1);
-          setHawaiianPercent((value1 * 100) / total);
         }
       });
     }
@@ -135,18 +129,20 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
         if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
           maxKey = key1;
           setTwoOrMore(value1);
-          setTwoOrMorePercent((value1 * 100) / total);
         }
       });
     }
 
-    if (total) {
-      setOthersPercent(
-        ((total -
-          (asian + hispanic + black + white + native + hawaiian + twoOrMore)) *
-          100) /
-          total,
-      );
+    if (true) {
+      const sum =
+        asian + hispanic + black + white + native + hawaiian + twoOrMore;
+      setAsianPercent((asian * 100) / sum);
+      setHispanicPercent((hispanic * 100) / sum);
+      setBlackPercent((black * 100) / sum);
+      setWhitePercent((white * 100) / sum);
+      setNativePercent((native * 100) / sum);
+      setHawaiianPercent((hawaiian * 100) / sum);
+      setTwoOrMorePercent((twoOrMore * 100) / sum);
     }
   }, [
     city,
@@ -189,7 +185,6 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
       'Native',
       'Hawaiian',
       'Two or more',
-      'Other',
     ],
     datasets: [
       {
@@ -202,27 +197,26 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
           nativePercent,
           hawaiianPercent,
           twoOrMorePercent,
-          othersPercent,
         ],
         backgroundColor: [
-          'rgba(38, 50, 56, 1)',
+          'rgba(219,243,255, 1)',
           'rgba(1, 117, 192, 1)',
           'rgba(1, 170, 255, 1)',
           'rgba(175, 211, 235, 1)',
-          'rgba(138, 150, 56, 1)',
-          'rgba(62, 107, 192, 1)',
-          'rgba(0, 89, 134, 1)',
+          'rgba(219,243,255, 1)',
+          'rgba(38, 50, 56, 1)',
           'rgba(99, 143, 172, 1)',
+          'rgba(0, 89, 134, 1)',
         ],
         borderColor: [
-          'rgba(38, 50, 56, 0.2)',
-          'rgba(1, 117, 192, 0.2)',
-          'rgba(1, 170, 255, 0.2)',
-          'rgba(175, 211, 235, 0.2)',
-          'rgba(138, 150, 56, 0.2)',
-          'rgba(62, 107, 192, 0.2)',
-          'rgba(62, 1, 255, 0.2)',
-          'rgba(62, 211, 1, 0.2)',
+          'rgba(219,243,255, 1)',
+          'rgba(1, 117, 192, 1)',
+          'rgba(1, 170, 255, 1)',
+          'rgba(175, 211, 235, 1)',
+          'rgba(219,243,255, 1)',
+          'rgba(38, 50, 56, 1)',
+          'rgba(99, 143, 172, 1)',
+          'rgba(0, 89, 134, 1)',
         ],
         borderWidth: 1,
       },
