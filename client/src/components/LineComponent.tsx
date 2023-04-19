@@ -66,37 +66,34 @@ export default function LineComponent({ variant }: LineComponentProps) {
   };
 
   return (
-    <>
-      <Toolbar />
-      <Paper elevation={0} key={-1} sx={{ overflow: 'hidden' }}>
-        <Box sx={{ p: 3 }}>
-          <Typography variant="h6" sx={{ fontWeight: 700 }}>
-            {variant[0].toUpperCase() + variant.slice(1)}
-          </Typography>
-          <Typography variant="subtitle2" sx={{ color: COLORS.gray, mb: 1 }}>
-            {descriptions[variant]}
-          </Typography>
-          {dataTotal && (
-            <>
-              <Typography
-                variant="subtitle2"
-                sx={{ color: COLORS.primaryBlue }}
-                align="center"
-              >
-                Cumulative:
-              </Typography>
-              <Typography
-                variant="h6"
-                sx={{ color: COLORS.primaryBlue }}
-                align="center"
-              >
-                ${dataTotal.toLocaleString()}
-              </Typography>
-            </>
-          )}
-          <Line options={options} data={data} />
-        </Box>
-      </Paper>
-    </>
+    <Paper elevation={0} key={-1} sx={{ overflow: 'hidden' }}>
+      <Box sx={{ p: 3 }}>
+        <Typography variant="h6" sx={{ fontWeight: 700 }}>
+          {variant[0].toUpperCase() + variant.slice(1)}
+        </Typography>
+        <Typography variant="subtitle2" sx={{ color: COLORS.gray, mb: 1 }}>
+          {descriptions[variant]}
+        </Typography>
+        {dataTotal && (
+          <>
+            <Typography
+              variant="subtitle2"
+              sx={{ color: COLORS.primaryBlue }}
+              align="center"
+            >
+              Cumulative:
+            </Typography>
+            <Typography
+              variant="h6"
+              sx={{ color: COLORS.primaryBlue }}
+              align="center"
+            >
+              ${dataTotal.toLocaleString()}
+            </Typography>
+          </>
+        )}
+        <Line options={options} data={data} />
+      </Box>
+    </Paper>
   );
 }

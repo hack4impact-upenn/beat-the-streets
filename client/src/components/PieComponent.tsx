@@ -224,22 +224,19 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
   };
 
   return (
-    <>
-      <Toolbar />
-      <Paper elevation={0} key={-1} sx={{ overflow: 'hidden' }}>
-        <Box sx={{ p: 3 }}>
-          <Typography variant="h6" sx={{ fontWeight: 700 }}>
-            Race and Hispanic Origin
-          </Typography>
-          <Typography variant="subtitle2" sx={{ color: COLORS.gray, mb: 1 }}>
-            Breakdown of population by race and hispanic origin
-          </Typography>
-        </Box>
+    <Paper elevation={0} key={-1} sx={{ overflow: 'hidden' }}>
+      <Box sx={{ p: 3 }}>
+        <Typography variant="h6" sx={{ fontWeight: 700 }}>
+          Race and Hispanic Origin
+        </Typography>
+        <Typography variant="subtitle2" sx={{ color: COLORS.gray, mb: 1 }}>
+          Breakdown of population by race and hispanic origin
+        </Typography>
+      </Box>
 
-        <Box sx={{ p: 3 }}>
-          <Pie options={options} data={data} />
-        </Box>
-      </Paper>
-    </>
+      <Box sx={{ p: 3 }}>
+        <Pie options={options} data={data} />
+      </Box>
+    </Paper>
   );
 }

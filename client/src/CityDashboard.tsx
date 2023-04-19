@@ -3,11 +3,10 @@ import React, { useLayoutEffect } from 'react';
 import { Masonry } from '@mui/lab';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import { Typography, Grid, Toolbar } from '@mui/material';
-import Header from './components/Header';
-import PieComponent from './components/PieComponent';
 import { Typography, Grid, Toolbar, Button, Icon } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import Header from './components/Header';
+import PieComponent from './components/PieComponent';
 import Under18 from './components/indicatorComponents/Under18';
 import Poverty from './components/indicatorComponents/Poverty';
 import CityNameWidget from './components/widgets/CityNameWidget';
@@ -58,6 +57,10 @@ function CityDashboard() {
         <Grid item xs={8}>
           <Masonry columns={3} spacing={4}>
             <ParticipantsWidget city="Philadelphia city, Pennsylvania" />
+            <PieComponent cityProp="Philadelphia city, Pennsylvania" />
+            <CoachesWidget city="Philadelphia city, Pennsylvania" />
+            <Under18 city="Philadelphia city, Pennsylvania" />
+            <Poverty city="Philadelphia city, Pennsylvania" />
             <RevenueWidget
               city="Philadelphia city, Pennsylvania"
               variant="revenue"
@@ -71,19 +74,11 @@ function CityDashboard() {
               variant="assets"
             />
             <Bachelor city="Philadelphia city, Pennsylvania" />
-            <CoachesWidget city="Philadelphia city, Pennsylvania" />
-            <Under18 city="Philadelphia city, Pennsylvania" />
-            <Poverty city="Philadelphia city, Pennsylvania" />
+            <HighSchoolGradsPercent city="Philadelphia city, Pennsylvania" />
+
             <LineComponent variant="revenue" />
             <LineComponent variant="expenses" />
-            <PieComponent cityProp="Philadelphia city, Pennsylvania" />
             <TotalChapters />
-            <HighSchoolGradsPercent city="Philadelphia city, Pennsylvania" />
-            {heights.map((height, ind) => (
-              <Paper elevation={0} key={ind} sx={{ height, p: 3 }}>
-                <Typography>add graph here: #{ind + 1}</Typography>
-              </Paper>
-            ))}
           </Masonry>
         </Grid>
       </Grid>
