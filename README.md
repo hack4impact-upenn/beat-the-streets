@@ -1,32 +1,25 @@
-# Boilerplate
+# Beat The Streets - Dashboard
 
-This is a simple boilerplate designed to serve as robust template for quickly starting development on a [Typescript](https://www.typescriptlang.org) based [MERN](https://www.mongodb.com/mern-stack) web application.
+<img src="https://user-images.githubusercontent.com/28734546/232344772-312c55da-6a2a-4a36-a828-3203b54503c9.png" width=50% height=50% >
 
-## Features
+This is a project for [Beat the Streets](https://beatthestreets.org/) that aggregates and displays statistics and data points related to both current locations and target expansion locations. The goal is to provide an all-in-one platform where administrators can view the performance of individual locations as well as nation-wide impact. Furthermore, the platform will also allow them to view the most pertinent data on potential future locations, allowed them to make more informed decisions as the organisation grows.
 
-- Session based authentication with [Passport](https://www.passportjs.org)
-- Emailing for account verification and resetting password with [SendGrid](https://sendgrid.com)
-- Admin functionality for viewing/deleting/promoting other users
-- Clean authentication pages built with [Material UI](https://mui.com)
-- In memory database testing with [Jest](https://jestjs.io) and [Supertest](https://www.npmjs.com/package/supertest)
-- [AirBnb Typescript styling](https://github.com/airbnb/javascript) with [Prettier](https://prettier.io) and [ESLint](https://eslint.org)
-- [Husky](https://typicode.github.io/husky/#/) and [lint-staged](https://github.com/okonet/lint-staged) for checking linting on commits
-- [GitHub Actions](https://docs.github.com/en/actions) for ensuring linting + tests pass on pushes
+This project was built using the MERN stack. Setup is outlined below.
 
-## Required tools
+## Setup
+
+### Required tools
 
 These are necessary to build and run the project at full functionality
 
 - Install [Yarn Package Manager](https://classic.yarnpkg.com/en/docs/install/#mac-stable)
 - Install [NodeJS](https://nodejs.org/en/download/)
 
-## Recommended tools
+### Recommended tools
 
 To take full advantage of the linting/formatting, recommend adding the [Prettier](https://prettier.io) and [ESLint](https://eslint.org) VSCode extensions and configuring them as shown [here](https://levelup.gitconnected.com/setting-up-eslint-with-prettier-typescript-and-visual-studio-code-d113bbec9857#:~:text=Install%20the%20following%20Visual%20Studio%20Code%20extensions) for code highlighting and formatting on save. Skip to the section labeled "Add the following to your VS Code settings.json". To access your settings.json, follow what is linked [here](https://stackoverflow.com/questions/65908987/how-can-i-open-visual-studio-codes-settings-json-file). See [here](https://blog.logrocket.com/using-prettier-eslint-automate-formatting-fixing-javascript/#differences-between-eslint-prettier) for the differences between the two tools and how they work together.
 
 Finally, we also recommend downloading the [Live Share](https://visualstudio.microsoft.com/services/live-share/) extension by Microsoft for improved Collaboration. This allows for easy peer programming on one shared repository instance.
-
-## Setup
 
 ### MongoDB
 
