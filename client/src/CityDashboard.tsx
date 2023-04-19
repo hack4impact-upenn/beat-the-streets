@@ -5,12 +5,16 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { Typography, Grid, Toolbar, Button, Icon } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import Header from './components/Header';
+import PieComponent from './components/PieComponent';
 import Under18 from './components/indicatorComponents/Under18';
 import Poverty from './components/indicatorComponents/Poverty';
 import CityNameWidget from './components/widgets/CityNameWidget';
 import ParticipantsWidget from './components/widgets/ParticipantsWidget';
 import RevenueWidget from './components/widgets/RevenueWidget';
 import CoachesWidget from './components/widgets/CoachesWidget';
+import LineComponent from './components/LineComponent';
+import Bachelor from './components/indicatorComponents/Bachelor';
 import TotalChapters from './components/indicatorComponents/TotalChapters';
 import HighSchoolGradsPercent from './components/indicatorComponents/HighSchoolGradsPercent';
 
@@ -38,7 +42,6 @@ function CityDashboard() {
       sx={{ flexGrow: 1, paddingTop: 4, paddingLeft: 4, width: { sm: '100%' } }}
     >
       <Toolbar />
-
       <Grid container spacing={4}>
         <Grid item xs={4}>
           <CityNameWidget city="Philadelphia city, Pennsylvania" />
@@ -54,6 +57,10 @@ function CityDashboard() {
         <Grid item xs={8}>
           <Masonry columns={3} spacing={4}>
             <ParticipantsWidget city="Philadelphia city, Pennsylvania" />
+            <PieComponent cityProp="Philadelphia city, Pennsylvania" />
+            <CoachesWidget city="Philadelphia city, Pennsylvania" />
+            <Under18 city="Philadelphia city, Pennsylvania" />
+            <Poverty city="Philadelphia city, Pennsylvania" />
             <RevenueWidget
               city="Philadelphia city, Pennsylvania"
               variant="revenue"
@@ -66,16 +73,12 @@ function CityDashboard() {
               city="Philadelphia city, Pennsylvania"
               variant="assets"
             />
-            <CoachesWidget city="Philadelphia city, Pennsylvania" />
-            <Under18 city="Philadelphia city, Pennsylvania" />
-            <Poverty city="Philadelphia city, Pennsylvania" />
-            <TotalChapters />
+            <Bachelor city="Philadelphia city, Pennsylvania" />
             <HighSchoolGradsPercent city="Philadelphia city, Pennsylvania" />
-            {heights.map((height, ind) => (
-              <Paper elevation={0} key={ind} sx={{ height, p: 3 }}>
-                <Typography>add graph here: #{ind + 1}</Typography>
-              </Paper>
-            ))}
+
+            <LineComponent variant="revenue" />
+            <LineComponent variant="expenses" />
+            <TotalChapters />
           </Masonry>
         </Grid>
       </Grid>

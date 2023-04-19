@@ -24,6 +24,9 @@ import InviteRegisterPage from './Authentication/InviteRegisterPage';
 
 import CityDashboard from './CityDashboard';
 import Header from './components/Header';
+import PieComponent from './components/PieComponent';
+import LineComponent from './components/LineComponent';
+import NumberTile from './components/indicatorComponents/Under18';
 import AdminDashboardPage from './AdminDashboard/AdminDashboardPage';
 
 function App() {
