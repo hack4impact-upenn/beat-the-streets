@@ -32,14 +32,12 @@ function CityDashboard() {
       sx={{ flexGrow: 1, paddingTop: 4, paddingLeft: 4, width: { sm: '100%' } }}
     >
       <Toolbar />
-      {/* <PieComponent /> */}
       <Grid container spacing={4}>
         <Grid item xs={4}>
           <CityNameWidget city="Philadelphia city, Pennsylvania" />
         </Grid>
         <Grid item xs={8}>
           <Masonry columns={3} spacing={4}>
-            {/* <PieComponent /> */}
             <ParticipantsWidget city="Philadelphia city, Pennsylvania" />
             <RevenueWidget
               city="Philadelphia city, Pennsylvania"
