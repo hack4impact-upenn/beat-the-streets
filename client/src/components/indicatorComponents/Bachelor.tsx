@@ -15,9 +15,9 @@ function Bachelor({ city }: BachelorProps) {
   const [cityList, setCityList] = useState<ICity[]>([]);
   const [bachelor, setBachelor] = useState(0);
   const [total, setTotal] = useState(0);
-  const [under25, setUnder25] = useState(0);
+  const [under18, setUnder18] = useState(0);
   const [totalList, setTotalList] = useState(new Map());
-  const [under25List, setUnder25List] = useState(new Map());
+  const [under18List, setUnder18List] = useState(new Map());
   const [bachelorList, setBachelorList] = useState(new Map());
 
   const cityData = useData(`cities/${city}`);
@@ -25,7 +25,7 @@ function Bachelor({ city }: BachelorProps) {
   useEffect(() => {
     setCityList(cityData?.data);
     setBachelorList(cityData?.data.indicators.bachelor);
-    setUnder25List(cityData?.data.indicators.under25s);
+    setUnder18List(cityData?.data.indicators.under18s);
     setTotalList(cityData?.data.indicators.population);
 
     let maxKey = '0';
@@ -47,18 +47,18 @@ function Bachelor({ city }: BachelorProps) {
         }
       });
     }
-    if (under25List) {
-      Object.entries(under25List).forEach(function (key, value) {
+    if (under18List) {
+      Object.entries(under18List).forEach(function (key, value) {
         const [key1, value1] = key;
         if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
           maxKey = key1;
-          setUnder25(value1);
+          setUnder18(value1);
         }
       });
     }
     console.log(bachelor);
     console.log(total);
-  }, [bachelor, bachelorList, cityData, total, totalList, under25List]);
+  }, [bachelor, bachelorList, cityData, total, totalList, under18List]);
 
   return (
     <Paper elevation={0} key={-1} sx={{ overflow: 'hidden' }}>
@@ -76,7 +76,7 @@ function Bachelor({ city }: BachelorProps) {
             align="center"
           >
             <h1 style={{ fontSize: '2.125rem', color: '#0175C0' }}>
-              {Math.round((bachelor * 100) / under25)}%
+              {Math.round((bachelor * 100) / (total - under18))}%
             </h1>
             {/* <h1 style={{ fontSize: '2.125rem', color: '#0175C0' }}>{total}</h1> */}
           </Typography>

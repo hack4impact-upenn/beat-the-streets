@@ -69,7 +69,7 @@ export default function LineComponent({ variant }: LineComponentProps) {
     <>
       <Toolbar />
       <Paper elevation={0} key={-1} sx={{ overflow: 'hidden' }}>
-        <Box sx={{ p: 1 }}>
+        <Box sx={{ p: 3 }}>
           <Typography variant="h6" sx={{ fontWeight: 700 }}>
             {variant[0].toUpperCase() + variant.slice(1)}
           </Typography>
@@ -94,8 +94,6 @@ export default function LineComponent({ variant }: LineComponentProps) {
               </Typography>
             </>
           )}
-        </Box>
-        <Box sx={{ p: 1 }}>
           <Line options={options} data={data} />
         </Box>
       </Paper>
