@@ -17,6 +17,7 @@ import LineComponent from './components/LineComponent';
 import Bachelor from './components/indicatorComponents/Bachelor';
 import TotalChapters from './components/indicatorComponents/TotalChapters';
 import HighSchoolGradsPercent from './components/indicatorComponents/HighSchoolGradsPercent';
+import COLORS from './assets/colors';
 
 const heights = [150, 80, 90, 70, 110, 150, 130, 200, 60, 90, 150, 80, 90, 200];
 
@@ -26,7 +27,7 @@ const heights = [150, 80, 90, 70, 110, 150, 130, 200, 60, 90, 150, 80, 90, 200];
  */
 function CityDashboard() {
   useLayoutEffect(() => {
-    document.body.style.backgroundColor = 'lightgray';
+    document.body.style.backgroundColor = COLORS.lightGray;
   });
 
   // TODO: this should navigate to the dashboard for all cities,
