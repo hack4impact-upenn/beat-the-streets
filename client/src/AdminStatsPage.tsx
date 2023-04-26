@@ -22,7 +22,7 @@ function AdminStatsPage() {
   const { cityName } = useParams();
 
   useLayoutEffect(() => {
-    document.body.style.backgroundColor = 'lightgray';
+    document.body.style.backgroundColor = COLORS.lightGray;
   });
 
   const [city, setCity] = useState<ICity>();
