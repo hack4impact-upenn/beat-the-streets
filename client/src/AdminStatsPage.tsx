@@ -259,6 +259,7 @@ function AdminStatsPage() {
             Add Column
           </Button>
           <Button
+            color="error"
             onClick={() =>
               deleteYearCol(
                 Math.max(...Array.from(years).map(Number)).toString(),
@@ -272,7 +273,7 @@ function AdminStatsPage() {
             }}
             variant="outlined"
           >
-            Delete Column
+            Remove Most Recent Year
           </Button>
           {/* </Grid>
           <Grid item xs={6} alignItems="center" justifyContent="center"> */}
