@@ -21,7 +21,6 @@ import EmailResetPasswordPage from './Authentication/EmailResetPasswordPage';
 import ResetPasswordPage from './Authentication/ResetPasswordPage';
 import AlertPopup from './components/AlertPopup';
 import InviteRegisterPage from './Authentication/InviteRegisterPage';
-
 import CityDashboard from './CityDashboard';
 import Header from './components/Header';
 import PieComponent from './components/PieComponent';
@@ -41,7 +40,10 @@ function App() {
                 <AlertPopup />
                 <Routes>
                   <Route path="/header" element={<Header />} />
-                  <Route path="/city-dashboard" element={<CityDashboard />} />
+                  <Route
+                    path="/city-dashboard/:cityName"
+                    element={<CityDashboard />}
+                  />
                   {/* Routes accessed only if user is not authenticated */}
                   <Route element={<UnauthenticatedRoutesWrapper />}>
                     <Route path="/login" element={<LoginPage />} />
