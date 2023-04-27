@@ -9,6 +9,7 @@ The prefix should be of the form '/api/ROUTERNAME'
 import { Router } from 'express';
 import adminRouter from './admin.route';
 import authRouter from './auth.route';
+// eslint-disable-next-line import/no-named-as-default
 import cityRouter from './city.route';
 
 const prefixToRouterMap: { prefix: string; router: Router }[] = [

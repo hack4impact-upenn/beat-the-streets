@@ -11,24 +11,24 @@ type RevenueWidgetProps = {
   city: string;
 };
 
-function Poverty({ city }: RevenueWidgetProps) {
+function HighSchoolGradsPercent({ city }: RevenueWidgetProps) {
   const cityData = useData(`cities/${city}`);
 
   if (cityData) {
-    const povertyList: { [key: number]: number } =
-      cityData?.data.indicators.persons_in_poverty;
+    const hsGraduateList: { [key: number]: number } =
+      cityData?.data.indicators.high_school_graduates;
 
-    const povertyValue =
-      Object.values(povertyList)[Object.values(povertyList).length - 1];
+    const HSGraduateValue =
+      Object.values(hsGraduateList)[Object.values(hsGraduateList).length - 1];
 
     return (
       <Paper elevation={0} key={-1} sx={{ overflow: 'hidden' }}>
         <Box sx={{ p: 3 }}>
           <Typography variant="h6" sx={{ fontWeight: 700 }}>
-            Poverty
+            High School Graduates
           </Typography>
           <Typography variant="subtitle2" sx={{ color: COLORS.gray, mb: 1 }}>
-            Number of persons in poverty
+            High school graduate or higher, percent of persons age 25+
           </Typography>
           <Typography
             variant="h4"
@@ -38,7 +38,7 @@ function Poverty({ city }: RevenueWidgetProps) {
             {Intl.NumberFormat('en-US', {
               notation: 'compact',
               maximumFractionDigits: 1,
-            }).format(povertyValue)}
+            }).format(HSGraduateValue)}
           </Typography>
         </Box>
       </Paper>
@@ -48,4 +48,4 @@ function Poverty({ city }: RevenueWidgetProps) {
   return <Paper elevation={0} key={-1} sx={{ overflow: 'hidden' }} />;
 }
 
-export default Poverty;
+export default HighSchoolGradsPercent;

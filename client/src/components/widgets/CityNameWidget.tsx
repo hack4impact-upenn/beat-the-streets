@@ -37,7 +37,7 @@ function CityNameWidget({ city }: DefaultWidgetProps) {
       ];
 
     return (
-      <Paper elevation={1} sx={{ position: 'fixed', p: 3 }}>
+      <Paper elevation={1} sx={{ p: 3, mr: 8 }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mr: 1 }}>
           <Box>
             <Typography variant="h4">{city}</Typography>
