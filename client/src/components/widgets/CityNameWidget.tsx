@@ -45,7 +45,7 @@ function CityNameWidget({ city }: DefaultWidgetProps) {
               variant="subtitle2"
               sx={{ color: COLORS.gray, fontWeight: 'bold' }}
             >
-              {accredited && 'Accredited'}
+              {accredited ? 'Accredited' : `Not Accredited`}
             </Typography>
             <Typography
               variant="subtitle2"

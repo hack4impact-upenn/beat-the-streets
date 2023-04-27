@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { Masonry } from '@mui/lab';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -24,6 +24,8 @@ function CityDashboard() {
   const { cityName } = useParams();
   const cityData = useData(`cities/${cityName}`);
 
+  const [isAccredited, setIsAccredited] = useState(false);
+
   let name = cityName;
   if (!name) {
     name = 'Philadelphia city, Pennsylvania';
@@ -33,8 +35,11 @@ function CityDashboard() {
     document.body.style.backgroundColor = COLORS.lightGray;
   });
 
-  const accredited = cityData?.data.isAccredited;
-  if (accredited) {
+  useEffect(() => {
+    setIsAccredited(cityData?.data.isAccredited);
+  }, [cityData]);
+
+  if (isAccredited) {
     console.log('true');
     return (
       <Box
