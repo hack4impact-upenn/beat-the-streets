@@ -92,19 +92,28 @@ function AdminStatsPage() {
   const indicatorValues = Array.from(city.indicators.values());
 
   // set to find the union of all years in the indicator dictionaries (some indicators may not have data for all years)
-  const years = new Set<string>();
+  const years = new Set<number>();
   Array.from(indicatorValues).forEach(function (v) {
     Array.from(v.keys()).forEach(function (year) {
-      years.add(year);
+      years.add(parseInt(year, 10));
+      // years.add(year);
+      // console.log(year);
     });
   });
+  // console.log(years);
 
   // setup for pagination table
   let columns: TColumn[] = [
     { id: 'indicator', label: 'Indicator', minWidth: 170 },
   ];
+  const yearsList = Array.from(years);
+  const yearsListSorted = yearsList.sort((a, b) => a - b);
   columns = columns.concat(
-    Array.from(years).map((year) => ({ id: year, label: year, minWidth: 170 })),
+    yearsListSorted.map((year) => ({
+      id: `${year}`,
+      label: `${year}`,
+      minWidth: 170,
+    })),
   );
   function createCityEditIndicatorRow(
     indicatorName: string,
@@ -112,17 +121,13 @@ function AdminStatsPage() {
   ) {
     const row: TRow = { key: `${indicatorName}` };
     row.indicator = indicatorName;
-    const yearsList = Array.from(years);
-    const yearsListSorted = yearsList.sort(
-      (a, b) => parseInt(a, 10) - parseInt(b, 10),
-    );
     yearsListSorted.forEach(function (year) {
       // create a field
-      if (indicatorDict.has(year)) {
+      if (indicatorDict.has(`${year}`)) {
         row[year] = (
           <TextField
             id="outlined-basic"
-            defaultValue={indicatorDict.get(year)!}
+            defaultValue={indicatorDict.get(`${year}`)!}
             onChange={(e: any) => {
               const { value } = e.target;
               const indicatorDictsCopy: Map<
@@ -131,7 +136,7 @@ function AdminStatsPage() {
               > = new Map(indicatorDicts);
               indicatorDictsCopy
                 .get(indicatorName)
-                ?.set(year, parseInt(value, 10));
+                ?.set(`${year}`, parseInt(value, 10));
               setIndicatorDicts(indicatorDictsCopy);
             }}
           />
@@ -147,7 +152,7 @@ function AdminStatsPage() {
     year: string,
     // city: ICity,
   ) {
-    years.add(year);
+    years.add(parseInt(year, 10));
 
     const indicatorDictsCopy: Map<string, Map<string, number>> = new Map(
       indicatorDicts,
@@ -155,6 +160,36 @@ function AdminStatsPage() {
     Array.from(indicatorDictsCopy).forEach(function ([k, v]) {
       // indic is a Map<string, number>
       v.set(year, 0);
+    });
+
+    setIndicatorDicts(indicatorDictsCopy);
+  }
+
+  // function deleteYearCol(
+  //   year: string,
+  //   // city: ICity,
+  // ) {
+  //   years.delete(parseInt(year, 10));
+
+  //   const indicatorDictsCopy: Map<string, Map<string, number>> = new Map(
+  //     indicatorDicts,
+  //   );
+  //   Array.from(indicatorDictsCopy).forEach(function ([k, v]) {
+  //     // indic is a Map<string, number>
+  //     v.set(year, 0);
+  //   });
+
+  //   setIndicatorDicts(indicatorDictsCopy);
+  // }
+
+  function deleteYearCol(year: string) {
+    years.delete(parseInt(year, 10));
+
+    const indicatorDictsCopy: Map<string, Map<string, number>> = new Map(
+      indicatorDicts,
+    );
+    Array.from(indicatorDictsCopy).forEach(function ([k, v]) {
+      v.delete(year);
     });
 
     setIndicatorDicts(indicatorDictsCopy);
@@ -185,12 +220,12 @@ function AdminStatsPage() {
             label="Accredited"
             onChange={switchHandler}
           />
-          <Typography
+          {/* <Typography
             variant="subtitle1"
             sx={{ color: COLORS.gray, fontWeight: 'bold' }}
           >
             {accredited && 'Accredited'}
-          </Typography>
+          </Typography> */}
         </Grid>
         <Grid container sx={{ paddingTop: 4 }}>
           <PaginationTable
@@ -222,6 +257,22 @@ function AdminStatsPage() {
             variant="outlined"
           >
             Add Column
+          </Button>
+          <Button
+            onClick={() =>
+              deleteYearCol(
+                Math.max(...Array.from(years).map(Number)).toString(),
+              )
+            } // , city)}
+            sx={{
+              marginTop: 8,
+              marginBottom: 8,
+              marginLeft: 2,
+              marginRight: 2,
+            }}
+            variant="outlined"
+          >
+            Delete Column
           </Button>
           {/* </Grid>
           <Grid item xs={6} alignItems="center" justifyContent="center"> */}
