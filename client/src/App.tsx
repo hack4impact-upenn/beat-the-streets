@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
-import { CssBaseline } from '@mui/material';
+import { AppBar, CssBaseline, Toolbar } from '@mui/material';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -25,9 +25,6 @@ import InviteRegisterPage from './Authentication/InviteRegisterPage';
 import CityDashboard from './CityDashboard';
 import Header from './components/Header';
 import AdminStatsPage from './AdminStatsPage';
-import PieComponent from './components/PieComponent';
-import LineComponent from './components/LineComponent';
-import NumberTile from './components/indicatorComponents/Under18';
 import AdminDashboardPage from './AdminDashboard/AdminDashboardPage';
 
 function App() {

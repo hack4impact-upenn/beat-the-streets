@@ -3,7 +3,7 @@ import {
   getAllCities,
   getCity,
   getIndicator,
-  setCity
+  setCity,
   getIndicatorYearly,
 } from '../controllers/city.controller';
 
@@ -14,7 +14,6 @@ router.get('/all', getAllCities);
 router.get('/:cityName', getCity);
 
 router.put('/:cityName', setCity);
-
 
 /**
  * A GET route to get city indicator data

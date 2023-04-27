@@ -29,10 +29,10 @@ export default function Header() {
     }
   };
 
-  // Only display if user is logged in
-  if (!user.email) {
-    return null;
-  }
+  // // Only display if user is logged in
+  // if (!user.email) {
+  //   return null;
+  // }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -54,24 +54,28 @@ export default function Header() {
           height={44}
         />
         <Box>
-          {!user.admin && (
-            <Button
-              sx={{ color: 'white', borderColor: 'white', marginRight: 2 }}
-              variant="outlined"
-              color="primary"
-              onClick={onNavigateAdminDashboard}
-            >
-              Admin Dashboard
-            </Button>
+          {user.email && (
+            <>
+              {!user.admin && (
+                <Button
+                  sx={{ color: 'white', borderColor: 'white', marginRight: 2 }}
+                  variant="outlined"
+                  color="primary"
+                  onClick={onNavigateAdminDashboard}
+                >
+                  Admin Dashboard
+                </Button>
+              )}
+              <Button
+                sx={{ color: 'white', borderColor: 'white' }}
+                variant="outlined"
+                color="primary"
+                onClick={handleLogout}
+              >
+                Logout
+              </Button>
+            </>
           )}
-          <Button
-            sx={{ color: 'white', borderColor: 'white' }}
-            variant="outlined"
-            color="primary"
-            onClick={handleLogout}
-          >
-            Logout
-          </Button>
         </Box>
       </AppBar>
     </Box>

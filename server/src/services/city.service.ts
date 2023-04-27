@@ -28,16 +28,9 @@ async function getCityObj(cityId: string) {
   return cityObj;
 }
 
-
-
-async function updateCityInDB(city : ICity) {
-  const response = await City.findByIdAndUpdate(city._id, 
-    city,
-  ).exec();
+async function updateCityInDB(city: ICity) {
+  const response = await City.findByIdAndUpdate(city._id, city).exec();
   return response;
-};
-
-
-
+}
 
 export { getAllCitiesFromDB, getCityObj, getCityFromDB, updateCityInDB };
