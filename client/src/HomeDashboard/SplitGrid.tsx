@@ -34,30 +34,6 @@ function createCityCard(city: any) {
   const name = city.cityName;
   const status = city.isAccredited;
   return <CityCard cityName={name} accredited={status} />;
-
-  // if (status) {
-  //   return (
-  //     <CityCard cityName={name} accredited={t} } />
-  //     // <Card sx={{ p: 2, bgcolor: '#EDEDED', mb: 2 }}>
-  //     //   <CardActionArea>
-  //     //     <CardContent>
-  //     //       <Typography variant="h5">{name}</Typography>
-  //     //       <Typography variant="subtitle1">Accredited</Typography>
-  //     //     </CardContent>
-  //     //   </CardActionArea>
-  //     // </Card>
-  //   );
-  // }
-  // return (
-  //   <Card sx={{ p: 2, bgcolor: '#EDEDED', mb: 2 }}>
-  //     <CardActionArea>
-  //       <CardContent onClick={() => console.log('Clicked!')}>
-  //         <Typography variant="h5">{name}</Typography>
-  //         <Typography variant="subtitle1">Not Accredited</Typography>
-  //       </CardContent>
-  //     </CardActionArea>
-  //   </Card>
-  // );
 }
 
 // eslint-disable-next-line
@@ -108,11 +84,6 @@ function SplitGrid() {
               <TotalParticipants />
               <LineComponent variant="revenue" />
               <LineComponent variant="expenses" />
-              {/* {heights.map((height) => (
-                <Paper elevation={0} sx={{ height, p: 3 }}>
-                  <Typography>add graph here</Typography>
-                </Paper>
-              ))} */}
             </Masonry>
           </Grid>
         </Paper>
