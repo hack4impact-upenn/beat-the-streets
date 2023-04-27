@@ -8,12 +8,31 @@ import { Box } from '@mui/system';
 import COLORS from '../assets/colors';
 import MainLogoWhite from '../assets/images/MainLogoWhite.png';
 
+import { useAppDispatch, useAppSelector } from '../util/redux/hooks';
+import { selectUser, logout as logoutAction } from '../util/redux/userSlice';
+import { logout as logoutApi } from '../Home/api';
+
 export default function Header() {
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const navigator = useNavigate();
+  const user = useAppSelector(selectUser);
 
   const onNavigateAdminDashboard = () => {
-    navigate('/users');
+    navigator('/users');
   };
+
+  const logoutDispatch = () => dispatch(logoutAction());
+  const handleLogout = async () => {
+    if (await logoutApi()) {
+      logoutDispatch();
+      navigator('/login', { replace: true });
+    }
+  };
+
+  // Only display if user is logged in
+  if (!user.email) {
+    return null;
+  }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -34,14 +53,26 @@ export default function Header() {
           width={95}
           height={44}
         />
-        <Button
-          sx={{ color: 'white', borderColor: 'white' }}
-          variant="outlined"
-          color="primary"
-          onClick={onNavigateAdminDashboard}
-        >
-          Admin Dashboard
-        </Button>
+        <Box>
+          {!user.admin && (
+            <Button
+              sx={{ color: 'white', borderColor: 'white', marginRight: 2 }}
+              variant="outlined"
+              color="primary"
+              onClick={onNavigateAdminDashboard}
+            >
+              Admin Dashboard
+            </Button>
+          )}
+          <Button
+            sx={{ color: 'white', borderColor: 'white' }}
+            variant="outlined"
+            color="primary"
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
+        </Box>
       </AppBar>
     </Box>
   );

@@ -8,7 +8,6 @@ import theme from './assets/theme';
 import { store, persistor } from './util/redux/store';
 import NotFoundPage from './NotFound/NotFoundPage';
 import HomePage from './Home/HomePage';
-import AdminDashboardPage from './AdminDashboard/AdminDashboardPage';
 import {
   UnauthenticatedRoutesWrapper,
   ProtectedRoutesWrapper,
@@ -26,8 +25,10 @@ import InviteRegisterPage from './Authentication/InviteRegisterPage';
 import CityDashboard from './CityDashboard';
 import Header from './components/Header';
 import AdminStatsPage from './AdminStatsPage';
-
-// const cityName : string = "Philadelphia";
+import PieComponent from './components/PieComponent';
+import LineComponent from './components/LineComponent';
+import NumberTile from './components/indicatorComponents/Under18';
+import AdminDashboardPage from './AdminDashboard/AdminDashboardPage';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
                 <AlertPopup />
                 <Routes>
                   <Route path="/header" element={<Header />} />
+                  <Route path="/city-dashboard" element={<CityDashboard />} />
                   {/* Routes accessed only if user is not authenticated */}
                   <Route element={<UnauthenticatedRoutesWrapper />}>
                     <Route path="/login" element={<LoginPage />} />
@@ -73,7 +75,10 @@ function App() {
                     <Route path="/home" element={<HomePage />} />
                   </Route>
                   <Route element={<AdminRoutesWrapper />}>
-                    <Route path="/users" element={<AdminDashboardPage />} />
+                    <Route
+                      path="/admin-dashboard"
+                      element={<AdminDashboardPage />}
+                    />
                   </Route>
                   {/* Route which redirects to a different page depending on if the user is an authenticated or not by utilizing the DynamicRedirect component */}
                   <Route

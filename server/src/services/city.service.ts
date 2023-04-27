@@ -1,4 +1,4 @@
-import {ICity, City } from '../models/city.model';
+import { ICity, City } from '../models/city.model';
 
 /**
  * @returns All the {@link City}s in the database
@@ -15,8 +15,6 @@ const getCityFromDB = async (name: string) => {
   const city = await City.find({ cityName: name }).exec();
   return city;
 };
-
-
 
 async function getCityObj(cityId: string) {
   const resultantCity = await City.findById(cityId);

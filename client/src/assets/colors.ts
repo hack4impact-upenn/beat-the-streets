@@ -14,7 +14,7 @@ const COLORS = {
   black: '#171717', // Black
   white: '#ffffff', // White
   neutral: '#8c8c8c', // Gray
-  lightGray: '#ebeff2', // Gray-subsection
+  lightGray: '#EDEDED', // Gray-subsection
   actionBlue: '#155da1', // Action button
 
   // Other colors:
