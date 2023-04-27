@@ -3,10 +3,9 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { Masonry } from '@mui/lab';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import { useParams } from 'react-router-dom';
-import { useData } from './util/api';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Typography, Grid, Toolbar, Button, Icon } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useData } from './util/api';
 import Header from './components/Header';
 import PieComponent from './components/PieComponent';
 import Under18 from './components/indicatorComponents/Under18';
@@ -42,10 +41,16 @@ function CityDashboard() {
     document.body.style.backgroundColor = COLORS.lightGray;
   });
 
-
   useEffect(() => {
     setIsAccredited(cityData?.data.isAccredited);
   }, [cityData]);
+
+  // TODO: this should navigate to the dashboard for all cities,
+  // not the home page (once the all cities page exists)
+  const navigator = useNavigate();
+  const onNavigateMainDashboard = () => {
+    navigator('/home');
+  };
 
   if (isAccredited) {
     console.log('true');
@@ -64,30 +69,37 @@ function CityDashboard() {
         <Grid container spacing={4}>
           <Grid item xs={4}>
             <CityNameWidget city={name} />
+            <Button
+              sx={{ mt: 2 }}
+              variant="text"
+              color="primary"
+              onClick={onNavigateMainDashboard}
+            >
+              Back to all cities
+            </Button>
           </Grid>
           <Grid item xs={8}>
             <Masonry columns={3} spacing={4}>
               <ParticipantsWidget city={name} />
-              <RevenueWidget city={name} variant="revenue" />
-              <RevenueWidget city={name} variant="expenses" />
-              <RevenueWidget city={name} variant="assets" />
+              <PieComponent cityProp={name} />
               <CoachesWidget city={name} />
               <Under18 city={name} />
               <Poverty city={name} />
+              <RevenueWidget city={name} variant="revenue" />
+              <RevenueWidget city={name} variant="expenses" />
+              <RevenueWidget city={name} variant="assets" />
+              <Bachelor city={name} />
+              <HighSchoolGradsPercent city={name} />
+
+              {/* <LineComponent variant="revenue" />
+              <LineComponent variant="expenses" />
+              <TotalChapters /> */}
             </Masonry>
           </Grid>
         </Grid>
       </Box>
     );
   }
-
-  // TODO: this should navigate to the dashboard for all cities,
-  // not the home page (once the all cities page exists)
-  const navigator = useNavigate();
-  const onNavigateMainDashboard = () => {
-    navigator('/home');
-  };
-
 
   return (
     <Box
@@ -103,12 +115,6 @@ function CityDashboard() {
       <Grid container spacing={4}>
         <Grid item xs={4}>
           <CityNameWidget city={name} />
-        </Grid>
-        <Grid item xs={8}>
-          <Masonry columns={3} spacing={4}>
-            <Under18 city={name} />
-            <Poverty city={name} />
-          <CityNameWidget city="Philadelphia city, Pennsylvania" />
           <Button
             sx={{ mt: 2 }}
             variant="text"
@@ -120,29 +126,11 @@ function CityDashboard() {
         </Grid>
         <Grid item xs={8}>
           <Masonry columns={3} spacing={4}>
-            <ParticipantsWidget city="Philadelphia city, Pennsylvania" />
-            <PieComponent cityProp="Philadelphia city, Pennsylvania" />
-            <CoachesWidget city="Philadelphia city, Pennsylvania" />
-            <Under18 city="Philadelphia city, Pennsylvania" />
-            <Poverty city="Philadelphia city, Pennsylvania" />
-            <RevenueWidget
-              city="Philadelphia city, Pennsylvania"
-              variant="revenue"
-            />
-            <RevenueWidget
-              city="Philadelphia city, Pennsylvania"
-              variant="expenses"
-            />
-            <RevenueWidget
-              city="Philadelphia city, Pennsylvania"
-              variant="assets"
-            />
-            <Bachelor city="Philadelphia city, Pennsylvania" />
-            <HighSchoolGradsPercent city="Philadelphia city, Pennsylvania" />
-
-            <LineComponent variant="revenue" />
-            <LineComponent variant="expenses" />
-            <TotalChapters />
+            <PieComponent cityProp={name} />
+            <Under18 city={name} />
+            <Poverty city={name} />
+            <Bachelor city={name} />
+            <HighSchoolGradsPercent city={name} />
           </Masonry>
         </Grid>
       </Grid>

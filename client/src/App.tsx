@@ -21,7 +21,6 @@ import EmailResetPasswordPage from './Authentication/EmailResetPasswordPage';
 import ResetPasswordPage from './Authentication/ResetPasswordPage';
 import AlertPopup from './components/AlertPopup';
 import InviteRegisterPage from './Authentication/InviteRegisterPage';
-
 import CityDashboard from './CityDashboard';
 import Header from './components/Header';
 import PieComponent from './components/PieComponent';

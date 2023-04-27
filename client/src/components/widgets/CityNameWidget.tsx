@@ -15,10 +15,9 @@ function CityNameWidget({ city }: DefaultWidgetProps) {
   const cityData = useData(`cities/${city}`);
 
   if (cityData) {
-    const accredited = cityData?.data.isAccredited;
+    const accredited = cityData?.data.isAccredited ?? false;
     const counties = cityData?.data.countiesCovered;
-    const established = 2012;
-    // const established = cityData?.data.established;
+    const established = cityData?.data.established ?? 0;
     const populationList: { [key: number]: number } =
       cityData?.data.indicators.population;
     const maleParticipantsList: { [key: number]: number } =
@@ -29,12 +28,14 @@ function CityNameWidget({ city }: DefaultWidgetProps) {
     const population =
       Object.values(populationList)[Object.values(populationList).length - 1];
     const participants =
-      Object.values(maleParticipantsList)[
-        Object.values(maleParticipantsList).length - 1
-      ] +
-      Object.values(femaleParticipantsList)[
-        Object.values(femaleParticipantsList).length - 1
-      ];
+      maleParticipantsList != null
+        ? Object.values(maleParticipantsList)[
+            Object.values(maleParticipantsList).length - 1
+          ] +
+          Object.values(femaleParticipantsList)[
+            Object.values(femaleParticipantsList).length - 1
+          ]
+        : 0;
 
     return (
       <Paper elevation={1} sx={{ p: 3, mr: 8 }}>

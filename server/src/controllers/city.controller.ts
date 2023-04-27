@@ -211,5 +211,10 @@ const getIndicatorYearly = async (
   }
 };
 
-export { getAllCities, getCity, getIndicator, getIndicatorYearly, getCityNameByID };
-
+export {
+  getAllCities,
+  getCity,
+  getIndicator,
+  getIndicatorYearly,
+  getCityNameByID,
+};
