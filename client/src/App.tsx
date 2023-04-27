@@ -40,7 +40,7 @@ function App() {
                 <Routes>
                   <Route path="/header" element={<Header />} />
                   <Route
-                    path="/city-dashboard/:cityID"
+                    path="/city-dashboard/:cityName"
                     element={<CityDashboard />}
                   />
                   {/* Routes accessed only if user is not authenticated */}

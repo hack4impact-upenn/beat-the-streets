@@ -12,6 +12,7 @@ import CityNameWidget from './components/widgets/CityNameWidget';
 import ParticipantsWidget from './components/widgets/ParticipantsWidget';
 import RevenueWidget from './components/widgets/RevenueWidget';
 import CoachesWidget from './components/widgets/CoachesWidget';
+import COLORS from './assets/colors';
 
 const heights = [150, 80, 90, 70, 110, 150, 130, 200, 60, 90, 150, 80, 90, 200];
 
@@ -20,23 +21,21 @@ const heights = [150, 80, 90, 70, 110, 150, 130, 200, 60, 90, 150, 80, 90, 200];
  * Displays all the graphs.
  */
 function CityDashboard() {
-  let { cityID } = useParams();
-  if (!cityID) {
-    cityID = '641fbbde2cc3b4a2a06b4d56';
-  }
+  const { cityName } = useParams();
+  const cityData = useData(`cities/${cityName}`);
 
-  const cityData = useData(`cities/cityName/${cityID}`);
-  let cityName = 'Philadelphia';
-  if (cityData) {
-    cityName = cityData?.data.cityName;
+  let name = cityName;
+  if (!name) {
+    name = 'Philadelphia city, Pennsylvania';
   }
 
   useLayoutEffect(() => {
-    document.body.style.backgroundColor = 'lightgray';
+    document.body.style.backgroundColor = COLORS.lightGray;
   });
 
   const accredited = cityData?.data.isAccredited;
-  if (accredited != null && accredited != 0) {
+  if (accredited) {
+    console.log('true');
     return (
       <Box
         component="main"
@@ -51,49 +50,48 @@ function CityDashboard() {
 
         <Grid container spacing={4}>
           <Grid item xs={4}>
-            <CityNameWidget city={cityName} />
+            <CityNameWidget city={name} />
           </Grid>
           <Grid item xs={8}>
             <Masonry columns={3} spacing={4}>
-              <ParticipantsWidget city={cityName} />
-              <RevenueWidget city={cityName} variant="revenue" />
-              <RevenueWidget city={cityName} variant="expenses" />
-              <RevenueWidget city={cityName} variant="assets" />
-              <CoachesWidget city={cityName} />
-              <Under18 city={cityName} />
-              <Poverty city={cityName} />
-            </Masonry>
-          </Grid>
-        </Grid>
-      </Box>
-    );
-  } else {
-    return (
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          paddingTop: 4,
-          paddingLeft: 4,
-          width: { sm: '100%' },
-        }}
-      >
-        <Toolbar />
-
-        <Grid container spacing={4}>
-          <Grid item xs={4}>
-            <CityNameWidget city={cityName} />
-          </Grid>
-          <Grid item xs={8}>
-            <Masonry columns={3} spacing={4}>
-              <Under18 city={cityName} />
-              <Poverty city={cityName} />
+              <ParticipantsWidget city={name} />
+              <RevenueWidget city={name} variant="revenue" />
+              <RevenueWidget city={name} variant="expenses" />
+              <RevenueWidget city={name} variant="assets" />
+              <CoachesWidget city={name} />
+              <Under18 city={name} />
+              <Poverty city={name} />
             </Masonry>
           </Grid>
         </Grid>
       </Box>
     );
   }
+  return (
+    <Box
+      component="main"
+      sx={{
+        flexGrow: 1,
+        paddingTop: 4,
+        paddingLeft: 4,
+        width: { sm: '100%' },
+      }}
+    >
+      <Toolbar />
+
+      <Grid container spacing={4}>
+        <Grid item xs={4}>
+          <CityNameWidget city={name} />
+        </Grid>
+        <Grid item xs={8}>
+          <Masonry columns={3} spacing={4}>
+            <Under18 city={name} />
+            <Poverty city={name} />
+          </Masonry>
+        </Grid>
+      </Grid>
+    </Box>
+  );
 }
 
 export default CityDashboard;
