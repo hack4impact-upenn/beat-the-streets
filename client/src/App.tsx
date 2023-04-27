@@ -28,6 +28,7 @@ import PieComponent from './components/PieComponent';
 import LineComponent from './components/LineComponent';
 import NumberTile from './components/indicatorComponents/Under18';
 import AdminDashboardPage from './AdminDashboard/AdminDashboardPage';
+import SplitGrid from './HomeDashboard/SplitGrid';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
                 <Routes>
                   <Route path="/header" element={<Header />} />
                   <Route path="/city-dashboard" element={<CityDashboard />} />
+                  <Route path="/home-dashboard" element={<SplitGrid />} />
                   {/* Routes accessed only if user is not authenticated */}
                   <Route element={<UnauthenticatedRoutesWrapper />}>
                     <Route path="/login" element={<LoginPage />} />
