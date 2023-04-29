@@ -50,20 +50,20 @@ export const options = (numCoaches: number) => ({
 });
 
 export const createChartData = (
-  maleCoaches: number,
-  femaleCoaches: number,
+  maleMainParticipants: number,
+  femaleMainParticipants: number,
 ) => ({
   labels: ['Count'],
   datasets: [
     {
       label: 'Female',
-      data: [femaleCoaches],
+      data: [femaleMainParticipants],
       backgroundColor: 'rgb(121, 174, 234)',
       // barThickness: 30,
     },
     {
       label: 'Male',
-      data: [maleCoaches],
+      data: [maleMainParticipants],
       backgroundColor: COLORS.primaryBlue,
       // barThickness: 30,
     },
