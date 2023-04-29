@@ -12,6 +12,7 @@ import Under18 from './components/indicatorComponents/Under18';
 import Poverty from './components/indicatorComponents/Poverty';
 import CityNameWidget from './components/widgets/CityNameWidget';
 import ParticipantsWidget from './components/widgets/ParticipantsWidget';
+import MainParticipantsWidget from './components/widgets/MainParticipantsWidget';
 import RevenueWidget from './components/widgets/RevenueWidget';
 import CoachesWidget from './components/widgets/CoachesWidget';
 import LineComponent from './components/LineComponent';
@@ -81,6 +82,7 @@ function CityDashboard() {
           <Grid item xs={8}>
             <Masonry columns={3} spacing={4}>
               <ParticipantsWidget city={name} />
+              <MainParticipantsWidget />
               <PieComponent cityProp={name} />
               <CoachesWidget city={name} />
               <Under18 city={name} />
