@@ -14,6 +14,7 @@ import CityNameWidget from './components/widgets/CityNameWidget';
 import ParticipantsWidget from './components/widgets/ParticipantsWidget';
 import RevenueWidget from './components/widgets/RevenueWidget';
 import CoachesWidget from './components/widgets/CoachesWidget';
+import MainCoachesWidget from './components/widgets/MainCoachesWidget';
 import LineComponent from './components/LineComponent';
 import Bachelor from './components/indicatorComponents/Bachelor';
 import TotalChapters from './components/indicatorComponents/TotalChapters';
@@ -83,6 +84,7 @@ function CityDashboard() {
               <ParticipantsWidget city={name} />
               <PieComponent cityProp={name} />
               <CoachesWidget city={name} />
+              <MainCoachesWidget />
               <Under18 city={name} />
               <Poverty city={name} />
               <RevenueWidget city={name} variant="revenue" />
