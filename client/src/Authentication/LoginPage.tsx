@@ -126,7 +126,7 @@ function LoginPage() {
             user.lastName!,
             user.admin!,
           );
-          navigate('/home');
+          navigate('/home-dashboard');
         })
         .catch((e) => {
           setShowError('alert', true);

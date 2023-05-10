@@ -121,10 +121,10 @@ function MainParticipantsWidget() {
   return (
     <Paper elevation={0} key={-1} sx={{ p: 3 }}>
       <Typography variant="h6" sx={{ fontWeight: 700 }}>
-        Coaches
+        Participants
       </Typography>
       <Typography variant="subtitle2" sx={{ color: COLORS.gray, mb: 1 }}>
-        Number of female and male coaches across accredited chapters
+        Number of female and male participants across accredited chapters
       </Typography>
       {chartData && maleParticipantsTotal && femaleParticipantsTotal && (
         <Bar

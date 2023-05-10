@@ -18,6 +18,10 @@ import TotalCoaches from '../components/indicatorComponents/TotalCoaches';
 import TotalParticipants from '../components/indicatorComponents/TotalParticipants';
 import LineComponent from '../components/LineComponent';
 import CityCard from '../components/buttons/CityCard';
+import MainPieComponent from '../components/MainPieComponent';
+import MainCoachesWidget from '../components/widgets/MainCoachesWidget';
+import ActiveCitiesWidget from '../components/widgets/ActiveCitiesWidget';
+import MainParticipantsWidget from '../components/widgets/MainParticipantsWidget';
 
 const ScrollableBox = styled(Box)({
   overflowY: 'auto',
@@ -84,6 +88,10 @@ function SplitGrid() {
               <TotalParticipants />
               <LineComponent variant="revenue" />
               <LineComponent variant="expenses" />
+              <MainPieComponent />
+              <MainCoachesWidget />
+              <ActiveCitiesWidget />
+              <MainParticipantsWidget />
             </Masonry>
           </Grid>
         </Paper>
