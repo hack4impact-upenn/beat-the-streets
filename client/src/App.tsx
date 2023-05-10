@@ -27,6 +27,7 @@ import PieComponent from './components/PieComponent';
 import LineComponent from './components/LineComponent';
 import NumberTile from './components/indicatorComponents/Under18';
 import AdminDashboardPage from './AdminDashboard/AdminDashboardPage';
+import SplitGrid from './HomeDashboard/SplitGrid';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
                 <AlertPopup />
                 <Routes>
                   <Route path="/header" element={<Header />} />
+                  <Route path="/home-dashboard" element={<SplitGrid />} />
                   <Route
                     path="/city-dashboard/:cityName"
                     element={<CityDashboard />}
