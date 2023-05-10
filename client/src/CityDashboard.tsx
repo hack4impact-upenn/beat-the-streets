@@ -8,6 +8,7 @@ import { Typography, Grid, Toolbar, Button, Icon } from '@mui/material';
 import { useData } from './util/api';
 import Header from './components/Header';
 import PieComponent from './components/PieComponent';
+import MainPieComponent from './components/MainPieComponent';
 import Under18 from './components/indicatorComponents/Under18';
 import Poverty from './components/indicatorComponents/Poverty';
 import CityNameWidget from './components/widgets/CityNameWidget';
@@ -86,6 +87,7 @@ function CityDashboard() {
               <ParticipantsWidget city={name} />
               <MainParticipantsWidget />
               <PieComponent cityProp={name} />
+              <MainPieComponent />
               <CoachesWidget city={name} />
               <MainCoachesWidget />
               <ActiveCitiesWidget />
@@ -133,6 +135,7 @@ function CityDashboard() {
         <Grid item xs={8}>
           <Masonry columns={3} spacing={4}>
             <PieComponent cityProp={name} />
+            <MainPieComponent />
             <Under18 city={name} />
             <Poverty city={name} />
             <Bachelor city={name} />
