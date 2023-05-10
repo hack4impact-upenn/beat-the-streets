@@ -34,6 +34,39 @@ const getAllCities = async (
 };
 
 /**
+ * Get a specific city's ID
+ */
+const getCityNameByID = async (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction,
+) => {
+  const { cityID } = req.params;
+  console.log('here at city route');
+  console.log(cityID);
+
+  if (!cityID) {
+    next(ApiError.internal('Request must include a valid cityID param'));
+  }
+
+  if (typeof cityID !== 'string') {
+    next(ApiError.internal('Invalid cityName param'));
+  }
+
+  return (
+    getCityObj(cityID)
+      .then((cityObj) => {
+        console.log(cityObj);
+        res.status(StatusCode.OK).send(cityObj);
+      })
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      .catch((e) => {
+        next(ApiError.internal('Unable to retrieve specified city'));
+      })
+  );
+};
+
+/**
  * Get a specific city
  */
 const getCity = async (

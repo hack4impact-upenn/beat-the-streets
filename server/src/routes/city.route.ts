@@ -27,4 +27,6 @@ isAuthenticated, isAdmin, getIndicator);
  */
 router.get('/indicator/:indicatorName', getIndicator); // isAuthenticated, isAdmin, getIndicator);
 
+router.get('/cityName/:cityID', getCityNameByID);
+
 export default router;

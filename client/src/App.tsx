@@ -21,11 +21,11 @@ import EmailResetPasswordPage from './Authentication/EmailResetPasswordPage';
 import ResetPasswordPage from './Authentication/ResetPasswordPage';
 import AlertPopup from './components/AlertPopup';
 import InviteRegisterPage from './Authentication/InviteRegisterPage';
-
 import CityDashboard from './CityDashboard';
 import Header from './components/Header';
 import AdminStatsPage from './AdminStatsPage';
 import AdminDashboardPage from './AdminDashboard/AdminDashboardPage';
+import SplitGrid from './HomeDashboard/SplitGrid';
 
 function App() {
   return (
@@ -39,7 +39,11 @@ function App() {
                 <AlertPopup />
                 <Routes>
                   <Route path="/header" element={<Header />} />
-                  <Route path="/city-dashboard" element={<CityDashboard />} />
+                  <Route path="/home-dashboard" element={<SplitGrid />} />
+                  <Route
+                    path="/city-dashboard/:cityName"
+                    element={<CityDashboard />}
+                  />
                   {/* Routes accessed only if user is not authenticated */}
                   <Route element={<UnauthenticatedRoutesWrapper />}>
                     <Route path="/login" element={<LoginPage />} />

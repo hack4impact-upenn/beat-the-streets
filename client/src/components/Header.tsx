@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
@@ -15,10 +15,20 @@ import { logout as logoutApi } from '../Home/api';
 export default function Header() {
   const dispatch = useAppDispatch();
   const navigator = useNavigate();
+  const location = useLocation();
   const user = useAppSelector(selectUser);
+  console.log(user);
 
   const onNavigateAdminDashboard = () => {
-    navigator('/users');
+    navigator('/admin-dashboard');
+  };
+
+  const onNavigateHomeDashboard = () => {
+    navigator('/home-dashboard');
+  };
+
+  const handleLogin = () => {
+    navigator('/login');
   };
 
   const logoutDispatch = () => dispatch(logoutAction());
@@ -28,12 +38,7 @@ export default function Header() {
       navigator('/login', { replace: true });
     }
   };
-
-  // // Only display if user is logged in
-  // if (!user.email) {
-  //   return null;
-  // }
-
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -54,27 +59,46 @@ export default function Header() {
           height={44}
         />
         <Box>
-          {user.email && (
-            <>
-              {!user.admin && (
-                <Button
-                  sx={{ color: 'white', borderColor: 'white', marginRight: 2 }}
-                  variant="outlined"
-                  color="primary"
-                  onClick={onNavigateAdminDashboard}
-                >
-                  Admin Dashboard
-                </Button>
-              )}
-              <Button
-                sx={{ color: 'white', borderColor: 'white' }}
-                variant="outlined"
-                color="primary"
-                onClick={handleLogout}
-              >
-                Logout
-              </Button>
-            </>
+          {user.admin && location.pathname !== '/admin-dashboard' && (
+            <Button
+              sx={{ color: 'white', borderColor: 'white', marginRight: 2 }}
+              variant="outlined"
+              color="primary"
+              onClick={onNavigateAdminDashboard}
+            >
+              Admin Dashboard
+            </Button>
+          )}
+          {(location.pathname === '/admin-dashboard' ||
+            location.pathname === '/login') && (
+            <Button
+              sx={{ color: 'white', borderColor: 'white', marginRight: 2 }}
+              variant="outlined"
+              color="primary"
+              onClick={onNavigateHomeDashboard}
+            >
+              Home Dashboard
+            </Button>
+          )}
+          {user.email !== null && (
+            <Button
+              sx={{ color: 'white', borderColor: 'white' }}
+              variant="outlined"
+              color="primary"
+              onClick={handleLogout}
+            >
+              Log Out
+            </Button>
+          )}
+          {user.email === null && (
+            <Button
+              sx={{ color: 'white', borderColor: 'white' }}
+              variant="outlined"
+              color="primary"
+              onClick={handleLogin}
+            >
+              Log In
+            </Button>
           )}
         </Box>
       </AppBar>
