@@ -22,6 +22,7 @@ import ResetPasswordPage from './Authentication/ResetPasswordPage';
 import AlertPopup from './components/AlertPopup';
 import InviteRegisterPage from './Authentication/InviteRegisterPage';
 import CityDashboard from './CityDashboard';
+import AdminStatsPage from './AdminStatsPage';
 import Header from './components/Header';
 import PieComponent from './components/PieComponent';
 import LineComponent from './components/LineComponent';
@@ -45,6 +46,10 @@ function App() {
                   <Route
                     path="/city-dashboard/:cityName"
                     element={<CityDashboard />}
+                  />
+                  <Route
+                    path="/admin-stats/:cityName"
+                    element={<AdminStatsPage />}
                   />
                   {/* Routes accessed only if user is not authenticated */}
                   <Route element={<UnauthenticatedRoutesWrapper />}>
