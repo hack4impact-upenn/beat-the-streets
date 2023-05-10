@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react';
-import { Typography, Grid } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { Grid, Button } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -11,14 +12,6 @@ import { useData } from '../util/api';
 import ICity from '../util/types/city';
 import Edit from '../images/editDashboard.png';
 
-/**
- * M
- */
-
-function createData(name: string) {
-  return { name };
-}
-
 function CityDashboardPage() {
   const [cityList, setCityList] = useState<ICity[]>([]);
   const [rows, setRows] = useState<string[]>([]);
@@ -26,22 +19,26 @@ function CityDashboardPage() {
   useLayoutEffect(() => {
     document.body.style.backgroundColor = 'white';
   });
+
   const cityData = useData(`cities/all`);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setCityList(cityData?.data);
+    if (cityData?.data) {
+      const newRows = cityData?.data.map((city: ICity) => {
+        if (city.isAccredited === true) {
+          return `${city.cityName} (Accredited)`;
+        }
+        return city.cityName;
+      });
+      setCityList(cityData?.data);
+      setRows(newRows);
+    }
   }, [cityData]);
 
-  // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < cityList?.length; i++) {
-    if (rows.length <= cityList?.length) {
-      if (cityList[i].isAccredited === true) {
-        rows.push(`${cityList[i].cityName} (Accredited)`);
-      } else {
-        rows.push(cityList[i].cityName);
-      }
-    }
-  }
+  const handleEdit = (city: string) => {
+    navigate(`/admin-stats/${city}`);
+  };
 
   return (
     <Grid
@@ -71,12 +68,14 @@ function CityDashboardPage() {
                       {row}
                     </TableCell>
                     <TableCell align="right">
-                      <img
-                        src={Edit}
-                        alt="edit button"
-                        width="25"
-                        height="25"
-                      />
+                      <Button variant="text" onClick={() => handleEdit(row)}>
+                        <img
+                          src={Edit}
+                          alt="edit button"
+                          width="25"
+                          height="25"
+                        />
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}
