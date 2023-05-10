@@ -5,14 +5,12 @@
 import express from 'express';
 import ApiError from '../util/apiError';
 import StatusCode from '../util/statusCode';
-
 import {
   getAllCitiesFromDB,
   getCityFromDB,
   updateCityInDB,
   // getCityObj,
 } from '../services/city.service';
-
 /**
  * Get all cities
  */
@@ -34,39 +32,6 @@ const getAllCities = async (
 };
 
 /**
- * Get a specific city's ID
- */
-const getCityNameByID = async (
-  req: express.Request,
-  res: express.Response,
-  next: express.NextFunction,
-) => {
-  const { cityID } = req.params;
-  console.log('here at city route');
-  console.log(cityID);
-
-  if (!cityID) {
-    next(ApiError.internal('Request must include a valid cityID param'));
-  }
-
-  if (typeof cityID !== 'string') {
-    next(ApiError.internal('Invalid cityName param'));
-  }
-
-  return (
-    getCityObj(cityID)
-      .then((cityObj) => {
-        console.log(cityObj);
-        res.status(StatusCode.OK).send(cityObj);
-      })
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      .catch((e) => {
-        next(ApiError.internal('Unable to retrieve specified city'));
-      })
-  );
-};
-
-/**
  * Get a specific city
  */
 const getCity = async (
@@ -75,15 +40,12 @@ const getCity = async (
   next: express.NextFunction,
 ) => {
   const { cityName } = req.params;
-
   if (!cityName) {
     next(ApiError.internal('Request must include a valid cityName param'));
   }
-
   if (typeof cityName !== 'string') {
     next(ApiError.internal('Invalid cityName param'));
   }
-
   return (
     getCityFromDB(cityName)
       .then((cityArray) => {
@@ -100,26 +62,18 @@ const getCity = async (
       })
   );
 };
-
-
-
 const setCity = async (
   req: express.Request,
   res: express.Response,
   next: express.NextFunction,
 ) => {
-
   const { city } = req.body;
   if (!city) {
     next(ApiError.missingFields(['city']));
     return;
   }
   updateCityInDB(city);
-}
-
-
-
-
+};
 /**
  * Get all city indicator data from the database. Upon success, send the a list of all indicator data in the res body with 200 OK status code.
  */
@@ -132,11 +86,8 @@ const getIndicator = async (
   if (!indicatorName) {
     next(ApiError.missingFields(['status']));
   }
-
   const cities = await getAllCitiesFromDB();
-
   const myindicators = new Map(); // indicator is a map of a map of numbers
-
   cities.forEach(function (city) {
     const allIndicators = city.indicators;
     // for (let k of allIndicators.keys()) {
@@ -149,14 +100,11 @@ const getIndicator = async (
       }
     });
   });
-
   const finalValues: number[] = [];
-
   // for (let k of myindicators.keys()) {
   Array.from(myindicators.keys()).forEach(function (j) {
     const allYearValues = myindicators.get(j);
     // const lastYearVal = Array.from(allYearValues.values()).pop();
-
     let maxYear = 0;
     // for (let yr of Array.from(allYearValues.keys())) {
     //   if ((yr as number) > maxYear) {
@@ -169,10 +117,8 @@ const getIndicator = async (
       }
     });
     const lastYearVal = allYearValues.get(maxYear) as number;
-
     finalValues.push(lastYearVal);
   });
-
   try {
     res.status(StatusCode.OK).send(finalValues);
   } catch (err) {
