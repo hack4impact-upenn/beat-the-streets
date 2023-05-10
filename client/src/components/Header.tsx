@@ -38,7 +38,7 @@ export default function Header() {
       navigator('/login', { replace: true });
     }
   };
-  
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -69,8 +69,7 @@ export default function Header() {
               Admin Dashboard
             </Button>
           )}
-          {(location.pathname === '/admin-dashboard' ||
-            location.pathname === '/login') && (
+          {location.pathname === '/admin-dashboard' && (
             <Button
               sx={{ color: 'white', borderColor: 'white', marginRight: 2 }}
               variant="outlined"
@@ -90,7 +89,7 @@ export default function Header() {
               Log Out
             </Button>
           )}
-          {user.email === null && (
+          {user.email === null && location.pathname !== '/login' && (
             <Button
               sx={{ color: 'white', borderColor: 'white' }}
               variant="outlined"
