@@ -24,7 +24,6 @@ import InviteRegisterPage from './Authentication/InviteRegisterPage';
 import CityDashboard from './CityDashboard';
 import AdminStatsPage from './AdminStatsPage';
 import Header from './components/Header';
-import AdminStatsPage from './AdminStatsPage';
 import AdminDashboardPage from './AdminDashboard/AdminDashboardPage';
 import SplitGrid from './HomeDashboard/SplitGrid';
 
