@@ -8,16 +8,12 @@ import { Typography, Grid, Toolbar, Button, Icon } from '@mui/material';
 import { useData } from './util/api';
 import Header from './components/Header';
 import PieComponent from './components/PieComponent';
-import MainPieComponent from './components/MainPieComponent';
 import Under18 from './components/indicatorComponents/Under18';
 import Poverty from './components/indicatorComponents/Poverty';
 import CityNameWidget from './components/widgets/CityNameWidget';
 import ParticipantsWidget from './components/widgets/ParticipantsWidget';
-import MainParticipantsWidget from './components/widgets/MainParticipantsWidget';
 import RevenueWidget from './components/widgets/RevenueWidget';
 import CoachesWidget from './components/widgets/CoachesWidget';
-import MainCoachesWidget from './components/widgets/MainCoachesWidget';
-import ActiveCitiesWidget from './components/widgets/ActiveCitiesWidget';
 import LineComponent from './components/LineComponent';
 import Bachelor from './components/indicatorComponents/Bachelor';
 import TotalChapters from './components/indicatorComponents/TotalChapters';
@@ -53,7 +49,7 @@ function CityDashboard() {
   // not the home page (once the all cities page exists)
   const navigator = useNavigate();
   const onNavigateMainDashboard = () => {
-    navigator('/home');
+    navigator('/home-dashboard');
   };
 
   if (isAccredited) {
@@ -85,12 +81,8 @@ function CityDashboard() {
           <Grid item xs={8}>
             <Masonry columns={3} spacing={4}>
               <ParticipantsWidget city={name} />
-              <MainParticipantsWidget />
               <PieComponent cityProp={name} />
-              <MainPieComponent />
               <CoachesWidget city={name} />
-              <MainCoachesWidget />
-              <ActiveCitiesWidget />
               <Under18 city={name} />
               <Poverty city={name} />
               <RevenueWidget city={name} variant="revenue" />
@@ -135,7 +127,6 @@ function CityDashboard() {
         <Grid item xs={8}>
           <Masonry columns={3} spacing={4}>
             <PieComponent cityProp={name} />
-            <MainPieComponent />
             <Under18 city={name} />
             <Poverty city={name} />
             <Bachelor city={name} />
