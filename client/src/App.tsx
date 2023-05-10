@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
-import { CssBaseline } from '@mui/material';
+import { AppBar, CssBaseline, Toolbar } from '@mui/material';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -23,9 +23,7 @@ import AlertPopup from './components/AlertPopup';
 import InviteRegisterPage from './Authentication/InviteRegisterPage';
 import CityDashboard from './CityDashboard';
 import Header from './components/Header';
-import PieComponent from './components/PieComponent';
-import LineComponent from './components/LineComponent';
-import NumberTile from './components/indicatorComponents/Under18';
+import AdminStatsPage from './AdminStatsPage';
 import AdminDashboardPage from './AdminDashboard/AdminDashboardPage';
 import SplitGrid from './HomeDashboard/SplitGrid';
 
@@ -62,6 +60,12 @@ function App() {
                       path="/reset-password/:token"
                       element={<ResetPasswordPage />}
                     />
+                    <Route path="/city-dashboard" element={<CityDashboard />} />
+
+                    <Route
+                      path="/admin-stats/:cityName"
+                      element={<AdminStatsPage />}
+                    />
                   </Route>
                   <Route
                     path="/invite/:token"
@@ -77,7 +81,6 @@ function App() {
                       element={<AdminDashboardPage />}
                     />
                   </Route>
-
                   {/* Route which redirects to a different page depending on if the user is an authenticated or not by utilizing the DynamicRedirect component */}
                   <Route
                     path="/"
@@ -85,7 +88,6 @@ function App() {
                       <DynamicRedirect unAuthPath="/login" authPath="/home" />
                     }
                   />
-
                   {/* Route which is accessed if no other route is matched */}
                   <Route path="*" element={<NotFoundPage />} />
                 </Routes>
@@ -97,5 +99,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

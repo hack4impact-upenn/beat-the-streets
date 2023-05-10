@@ -38,7 +38,7 @@ export default function Header() {
       navigator('/login', { replace: true });
     }
   };
-
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar

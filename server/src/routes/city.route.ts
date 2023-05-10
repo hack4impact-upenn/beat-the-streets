@@ -3,7 +3,7 @@ import {
   getAllCities,
   getCity,
   getIndicator,
-  getCityNameByID,
+  setCity,
   getIndicatorYearly,
 } from '../controllers/city.controller';
 
@@ -12,6 +12,8 @@ const router = express.Router();
 router.get('/all', getAllCities);
 
 router.get('/:cityName', getCity);
+
+router.put('/:cityName', setCity);
 
 /**
  * A GET route to get city indicator data
@@ -24,7 +26,5 @@ router.get('/indicatoryearly/:indicatorName', getIndicatorYearly);
 isAuthenticated, isAdmin, getIndicator); 
  */
 router.get('/indicator/:indicatorName', getIndicator); // isAuthenticated, isAdmin, getIndicator);
-
-router.get('/cityName/:cityID', getCityNameByID);
 
 export default router;
