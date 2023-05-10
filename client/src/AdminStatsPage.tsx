@@ -127,7 +127,7 @@ function AdminStatsPage() {
         row[year] = (
           <TextField
             id="outlined-basic"
-            defaultValue={indicatorDict.get(`${year}`)!}
+            defaultValue={indicatorDict.get(`${year}`)}
             onChange={(e: any) => {
               const { value } = e.target;
               const indicatorDictsCopy: Map<
@@ -142,7 +142,22 @@ function AdminStatsPage() {
           />
         );
       } else {
-        row[year] = <TextField id="outlined-basic" />;
+        row[year] = (
+          <TextField
+            id="outlined-basic"
+            onChange={(e: any) => {
+              const { value } = e.target;
+              const indicatorDictsCopy: Map<
+                string,
+                Map<string, number>
+              > = new Map(indicatorDicts);
+              indicatorDictsCopy
+                .get(indicatorName)
+                ?.set(`${year}`, parseInt(value, 10));
+              setIndicatorDicts(indicatorDictsCopy);
+            }}
+          />
+        );
       }
     });
     return row;
