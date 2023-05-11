@@ -102,6 +102,67 @@ function AdminStatsPage() {
   });
   // console.log(years);
 
+  function rowLabel(indicator: string) {
+    if (indicator === 'population') {
+      return 'City Population';
+    }
+    if (indicator === 'under18s') {
+      return 'Population Under 18 Years Old';
+    }
+    if (indicator === 'bachelor') {
+      return 'Population Under 25 with a Bachelors Degree';
+    }
+    if (indicator === 'persons_in_poverty') {
+      return 'Population Under the Poverty Line';
+    }
+    if (indicator === 'black_or_african_american') {
+      return 'Population Identifying of Black or African American Race/Ethnicity';
+    }
+    if (indicator === 'hispanic_or_latino') {
+      return 'Population Identifying of Hispanic or Latino Race/Ethnicity';
+    }
+    if (indicator === 'white') {
+      return 'Population Identifying of White or Caucasian Race/Ethnicity';
+    }
+    if (indicator === 'american_indian_alaskan_native') {
+      return 'Population Identifying of American or Alaskan Indian/Native Race/Ethnicity';
+    }
+    if (indicator === 'asian') {
+      return 'Population Identifying of Asian Race/Ethnicity';
+    }
+    if (indicator === 'native_hawaiian_pacific_islander') {
+      return 'Population Identifying of Native Hawaiian or Pacific Islander Race/Ethnicity';
+    }
+    if (indicator === 'two_or_more') {
+      return 'Population Identifying of Two or More Races/Ethnicities';
+    }
+    if (indicator === 'high_school_graduates') {
+      return 'Population that Graduated from High School';
+    }
+    if (indicator === 'assets') {
+      return 'BTS Chapter Assets';
+    }
+    if (indicator === 'expenses') {
+      return 'BTS Chapter Expenses';
+    }
+    if (indicator === 'revenue') {
+      return 'BTS Chapter Revenue';
+    }
+    if (indicator === 'female_coaches') {
+      return 'BTS Chapter Number of Female Coaches';
+    }
+    if (indicator === 'male_coaches') {
+      return 'BTS Chapter Number of Male Coaches';
+    }
+    if (indicator === 'female_participants') {
+      return 'BTS Chapter Number of Female Participants';
+    }
+    if (indicator === 'male_participants') {
+      return 'BTS Chapter Number of Male Participants';
+    }
+    return indicator;
+  }
+
   // setup for pagination table
   let columns: TColumn[] = [
     { id: 'indicator', label: 'Indicator', minWidth: 170 },
@@ -119,8 +180,8 @@ function AdminStatsPage() {
     indicatorName: string,
     indicatorDict: Map<string, number>,
   ) {
-    const row: TRow = { key: `${indicatorName}` };
-    row.indicator = indicatorName;
+    const row: TRow = { key: indicatorName };
+    row.indicator = rowLabel(indicatorName);
     yearsListSorted.forEach(function (year) {
       // create a field
       if (indicatorDict.has(`${year}`)) {
