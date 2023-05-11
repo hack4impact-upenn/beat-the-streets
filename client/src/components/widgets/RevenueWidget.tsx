@@ -17,7 +17,7 @@ import COLORS from '../../assets/colors';
 import { useData } from '../../util/api';
 
 type RevenueWidgetProps = {
-  city: string;
+  data1: any;
   variant: 'revenue' | 'expenses' | 'assets';
 };
 
@@ -76,8 +76,8 @@ export const createChartData = (
   ],
 });
 
-function RevenueWidget({ city, variant }: RevenueWidgetProps) {
-  const cityData = useData(`cities/${city}`);
+function RevenueWidget({ data1, variant }: RevenueWidgetProps) {
+  const cityData = data1;
   let apiData: {
     [key: number | string]: number;
   } | null = null;

@@ -8,10 +8,10 @@ import ICity from '../util/types/city';
 import COLORS from '../assets/colors';
 
 type PieComponentProps = {
-  cityProp: string;
+  data1: any;
 };
 
-export default function PieComponent({ cityProp }: PieComponentProps) {
+export default function PieComponent({ data1 }: PieComponentProps) {
   const [asian, setAsian] = useState(0);
   const [hispanic, setHispanic] = useState(0);
   const [black, setBlack] = useState(0);
@@ -41,8 +41,8 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
   const [nativeList, setNativeList] = useState(new Map());
   const [twoOrMoreList, setTwoOrMoreList] = useState(new Map());
 
-  const cityName: string = cityProp;
-  const city = useData(`cities/${cityName}`);
+  // const cityName: string = cityProp;
+  const city = data1;
 
   useEffect(() => {
     setAsianList(city?.data.indicators.asian);
@@ -53,19 +53,8 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
     setHawaiianList(city?.data.indicators.native_hawaiian_pacific_islander);
     setTwoOrMoreList(city?.data.indicators.two_or_more);
 
-    setTotalList(city?.data.indicators.population);
-
     let maxKey = '0';
-    if (totalList) {
-      Object.entries(totalList).forEach(function (key, value) {
-        const [key1, value1] = key;
-        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
-          maxKey = key1;
-          setTotal(value1);
-        }
-      });
-    }
-    if (asianList && total) {
+    if (asianList) {
       Object.entries(asianList).forEach(function (key, value) {
         const [key1, value1] = key;
         if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
@@ -74,7 +63,7 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
         }
       });
     }
-    if (hispanicList && total) {
+    if (hispanicList) {
       Object.entries(hispanicList).forEach(function (key, value) {
         const [key1, value1] = key;
         if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
@@ -83,7 +72,7 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
         }
       });
     }
-    if (blackList && total) {
+    if (blackList) {
       Object.entries(blackList).forEach(function (key, value) {
         const [key1, value1] = key;
         if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
@@ -93,7 +82,7 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
       });
     }
 
-    if (whiteList && total) {
+    if (whiteList) {
       Object.entries(whiteList).forEach(function (key, value) {
         const [key1, value1] = key;
         if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
@@ -103,7 +92,7 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
       });
     }
 
-    if (nativeList && total) {
+    if (nativeList) {
       Object.entries(nativeList).forEach(function (key, value) {
         const [key1, value1] = key;
         if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
@@ -113,7 +102,7 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
       });
     }
 
-    if (hawaiianList && total) {
+    if (hawaiianList) {
       Object.entries(hawaiianList).forEach(function (key, value) {
         const [key1, value1] = key;
         if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
@@ -123,7 +112,7 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
       });
     }
 
-    if (twoOrMoreList && total) {
+    if (twoOrMoreList) {
       Object.entries(twoOrMoreList).forEach(function (key, value) {
         const [key1, value1] = key;
         if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
@@ -133,17 +122,16 @@ export default function PieComponent({ cityProp }: PieComponentProps) {
       });
     }
 
-    if (true) {
-      const sum =
-        asian + hispanic + black + white + native + hawaiian + twoOrMore;
-      setAsianPercent((asian * 100) / sum);
-      setHispanicPercent((hispanic * 100) / sum);
-      setBlackPercent((black * 100) / sum);
-      setWhitePercent((white * 100) / sum);
-      setNativePercent((native * 100) / sum);
-      setHawaiianPercent((hawaiian * 100) / sum);
-      setTwoOrMorePercent((twoOrMore * 100) / sum);
-    }
+    const sum =
+      asian + hispanic + black + white + native + hawaiian + twoOrMore;
+    setAsianPercent((asian * 100) / sum);
+    setHispanicPercent((hispanic * 100) / sum);
+    setBlackPercent((black * 100) / sum);
+    setWhitePercent((white * 100) / sum);
+    setNativePercent((native * 100) / sum);
+    setHawaiianPercent((hawaiian * 100) / sum);
+    setTwoOrMorePercent((twoOrMore * 100) / sum);
+    console.log(asian);
   }, [
     city,
     asian,

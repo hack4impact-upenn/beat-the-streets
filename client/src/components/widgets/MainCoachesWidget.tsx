@@ -74,8 +74,13 @@ type yearlyType = {
   [key: number | string]: number;
 } | null;
 
-function MainCoachesWidget() {
-  const maleMainCoaches = useData('cities/indicator/male_coaches');
+type DefaultWidgetProps = {
+  maleData1: any;
+  femaleData1: any;
+};
+
+function MainCoachesWidget({ maleData1, femaleData1 }: DefaultWidgetProps) {
+  const maleMainCoaches = maleData1;
   let maleCoachesTotal = 0;
   if (maleMainCoaches) {
     maleCoachesTotal =
@@ -84,7 +89,7 @@ function MainCoachesWidget() {
         0,
       ) || 0;
   }
-  const femaleMainCoaches = useData('cities/indicator/female_coaches');
+  const femaleMainCoaches = femaleData1;
   let femaleCoachesTotal = 0;
   if (femaleMainCoaches) {
     femaleCoachesTotal =

@@ -8,11 +8,11 @@ import { useData } from '../../util/api';
 import PhiladelphiaLogo from '../../assets/images/logos/BTS.Philadelphia.jpg';
 
 type DefaultWidgetProps = {
-  city: string;
+  data1: any;
 };
 
-function CityNameWidget({ city }: DefaultWidgetProps) {
-  const cityData = useData(`cities/${city}`);
+function CityNameWidget({ data1 }: DefaultWidgetProps) {
+  const cityData = data1;
 
   if (cityData) {
     const accredited = cityData?.data.isAccredited ?? false;
@@ -41,7 +41,7 @@ function CityNameWidget({ city }: DefaultWidgetProps) {
       <Paper elevation={1} sx={{ p: 3, mr: 8 }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mr: 1 }}>
           <Box>
-            <Typography variant="h4">{city}</Typography>
+            <Typography variant="h4">{cityData?.data.cityName}</Typography>
             <Typography
               variant="subtitle2"
               sx={{ color: COLORS.gray, fontWeight: 'bold' }}

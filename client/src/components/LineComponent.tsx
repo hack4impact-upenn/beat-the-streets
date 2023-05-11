@@ -8,22 +8,23 @@ import ICity from '../util/types/city';
 import COLORS from '../assets/colors';
 
 type LineComponentProps = {
+  data1: any;
   variant: 'revenue' | 'expenses';
 };
 
-export default function LineComponent({ variant }: LineComponentProps) {
+export default function LineComponent({ data1, variant }: LineComponentProps) {
   const descriptions = {
     revenue: 'Yearly Network Revenue',
     expenses: 'Yearly Network Expenses',
   };
-  let api = '';
-  if (variant === 'revenue') {
-    api = 'cities/indicatoryearly/revenue';
-  } else {
-    api = 'cities/indicatoryearly/expenses';
-  }
+  // let api = '';
+  // if (variant === 'revenue') {
+  //   api = 'cities/indicatoryearly/revenue';
+  // } else {
+  //   api = 'cities/indicatoryearly/expenses';
+  // }
 
-  const apiData = useData(api);
+  const apiData = data1;
   const year: string[] = [];
   const dataValues: unknown[] = [];
   let dataTotal = 0;

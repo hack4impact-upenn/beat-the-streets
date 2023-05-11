@@ -20,7 +20,7 @@ import TotalChapters from './components/indicatorComponents/TotalChapters';
 import HighSchoolGradsPercent from './components/indicatorComponents/HighSchoolGradsPercent';
 import COLORS from './assets/colors';
 
-const heights = [150, 80, 90, 70, 110, 150, 130, 200, 60, 90, 150, 80, 90, 200];
+// const heights = [150, 80, 90, 70, 110, 150, 130, 200, 60, 90, 150, 80, 90, 200];
 
 /**
  * The Graph Page of the user dashboard.
@@ -68,7 +68,7 @@ function CityDashboard() {
 
         <Grid container spacing={4}>
           <Grid item xs={4}>
-            <CityNameWidget city={name} />
+            <CityNameWidget data1={cityData} />
             <Button
               sx={{ mt: 2 }}
               variant="text"
@@ -80,16 +80,16 @@ function CityDashboard() {
           </Grid>
           <Grid item xs={8}>
             <Masonry columns={3} spacing={4}>
-              <ParticipantsWidget city={name} />
-              <PieComponent cityProp={name} />
-              <CoachesWidget city={name} />
-              <Under18 city={name} />
-              <Poverty city={name} />
-              <RevenueWidget city={name} variant="revenue" />
-              <RevenueWidget city={name} variant="expenses" />
-              <RevenueWidget city={name} variant="assets" />
-              <Bachelor city={name} />
-              <HighSchoolGradsPercent city={name} />
+              <ParticipantsWidget data={cityData} />
+              <PieComponent data1={cityData} />
+              <CoachesWidget data={cityData} />
+              <Under18 data1={cityData} />
+              <Poverty data1={cityData} />
+              <RevenueWidget data1={cityData} variant="revenue" />
+              <RevenueWidget data1={cityData} variant="expenses" />
+              <RevenueWidget data1={cityData} variant="assets" />
+              <Bachelor data1={cityData} />
+              <HighSchoolGradsPercent data1={cityData} />
 
               {/* <LineComponent variant="revenue" />
               <LineComponent variant="expenses" />
@@ -114,7 +114,7 @@ function CityDashboard() {
       <Toolbar />
       <Grid container spacing={4}>
         <Grid item xs={4}>
-          <CityNameWidget city={name} />
+          <CityNameWidget data1={cityData} />
           <Button
             sx={{ mt: 2 }}
             variant="text"
@@ -126,11 +126,11 @@ function CityDashboard() {
         </Grid>
         <Grid item xs={8}>
           <Masonry columns={3} spacing={4}>
-            <PieComponent cityProp={name} />
-            <Under18 city={name} />
-            <Poverty city={name} />
-            <Bachelor city={name} />
-            <HighSchoolGradsPercent city={name} />
+            <PieComponent data1={cityData} />
+            <Under18 data1={cityData} />
+            <Poverty data1={cityData} />
+            <Bachelor data1={cityData} />
+            <HighSchoolGradsPercent data1={cityData} />
           </Masonry>
         </Grid>
       </Grid>

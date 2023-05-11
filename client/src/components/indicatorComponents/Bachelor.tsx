@@ -8,10 +8,10 @@ import ICity from '../../util/types/city';
 import COLORS from '../../assets/colors';
 
 type BachelorProps = {
-  city: string;
+  data1: any;
 };
 
-function Bachelor({ city }: BachelorProps) {
+function Bachelor({ data1 }: BachelorProps) {
   const [cityList, setCityList] = useState<ICity[]>([]);
   const [bachelor, setBachelor] = useState(0);
   const [total, setTotal] = useState(0);
@@ -20,7 +20,7 @@ function Bachelor({ city }: BachelorProps) {
   const [under18List, setUnder18List] = useState(new Map());
   const [bachelorList, setBachelorList] = useState(new Map());
 
-  const cityData = useData(`cities/${city}`);
+  const cityData = data1;
 
   useEffect(() => {
     setCityList(cityData?.data);

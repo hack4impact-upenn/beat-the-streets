@@ -7,9 +7,17 @@ import { useData } from '../../util/api';
 import ICity from '../../util/types/city';
 import COLORS from '../../assets/colors';
 
-function TotalParticipants() {
-  const maleData = useData(`cities/indicator/male_participants`);
-  const femaleData = useData(`cities/indicator/female_participants`);
+type DefaultWidgetProps = {
+  maleParticpants1: any;
+  femaleParticpants1: any;
+};
+
+function TotalParticipants({
+  maleParticpants1,
+  femaleParticpants1,
+}: DefaultWidgetProps) {
+  const maleData = maleParticpants1;
+  const femaleData = femaleParticpants1;
 
   const maleParticipants = maleData?.data.reduce(
     (acc: number, val: number) => acc + val,

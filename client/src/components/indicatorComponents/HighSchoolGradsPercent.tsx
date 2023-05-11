@@ -8,11 +8,11 @@ import ICity from '../../util/types/city';
 import COLORS from '../../assets/colors';
 
 type RevenueWidgetProps = {
-  city: string;
+  data1: any;
 };
 
-function HighSchoolGradsPercent({ city }: RevenueWidgetProps) {
-  const cityData = useData(`cities/${city}`);
+function HighSchoolGradsPercent({ data1 }: RevenueWidgetProps) {
+  const cityData = data1;
 
   if (cityData) {
     const hsGraduateList: { [key: number]: number } =

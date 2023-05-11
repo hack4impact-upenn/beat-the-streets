@@ -7,7 +7,25 @@ import { useData } from '../util/api';
 import ICity from '../util/types/city';
 import COLORS from '../assets/colors';
 
-export default function MainPieComponent() {
+type DefaultWidgetProps = {
+  asianMain1: any;
+  hispanicMain1: any;
+  blackMain1: any;
+  whiteMain1: any;
+  nativeMain1: any;
+  hawaiiamMain1: any;
+  twoMain1: any;
+};
+
+export default function MainPieComponent({
+  asianMain1,
+  hispanicMain1,
+  blackMain1,
+  whiteMain1,
+  nativeMain1,
+  hawaiiamMain1,
+  twoMain1,
+}: DefaultWidgetProps) {
   //   const [asian, setAsian] = useState(0);
   //   const [hispanic, setHispanic] = useState(0);
   //   const [black, setBlack] = useState(0);
@@ -88,7 +106,7 @@ export default function MainPieComponent() {
   //   ]);
 
   let asianTotal = 0;
-  const asianMain = useData('cities/indicator/asian');
+  const asianMain = asianMain1;
   if (asianMain) {
     asianTotal =
       asianMain?.data?.reduce(
@@ -99,7 +117,7 @@ export default function MainPieComponent() {
   //   console.log(`asian: ${asianTotal}`);
 
   let hispanicTotal = 0;
-  const hispanicMain = useData('cities/indicator/hispanic_or_latino');
+  const hispanicMain = hispanicMain1;
   if (hispanicMain) {
     hispanicTotal =
       hispanicMain?.data?.reduce(
@@ -108,7 +126,7 @@ export default function MainPieComponent() {
       ) || 0;
   }
   let blackTotal = 0;
-  const blackMain = useData('cities/indicator/black_or_african_american');
+  const blackMain = blackMain1;
   if (blackMain) {
     blackTotal =
       blackMain?.data?.reduce(
@@ -117,7 +135,7 @@ export default function MainPieComponent() {
       ) || 0;
   }
   let whiteTotal = 0;
-  const whiteMain = useData('cities/indicator/white');
+  const whiteMain = whiteMain1;
   if (whiteMain) {
     whiteTotal =
       whiteMain?.data?.reduce(
@@ -126,7 +144,7 @@ export default function MainPieComponent() {
       ) || 0;
   }
   let nativeTotal = 0;
-  const nativeMain = useData('cities/indicator/american_indian_alaskan_native');
+  const nativeMain = nativeMain1;
   if (nativeMain) {
     nativeTotal =
       nativeMain?.data?.reduce(
@@ -135,9 +153,7 @@ export default function MainPieComponent() {
       ) || 0;
   }
   let hawaiianTotal = 0;
-  const hawaiiamMain = useData(
-    'cities/indicator/native_hawaiian_pacific_islander',
-  );
+  const hawaiiamMain = hawaiiamMain1;
   if (hawaiiamMain) {
     hawaiianTotal =
       hawaiiamMain?.data?.reduce(
@@ -146,7 +162,7 @@ export default function MainPieComponent() {
       ) || 0;
   }
   let twoTotal = 0;
-  const twoMain = useData('cities/indicator/two_or_more');
+  const twoMain = twoMain1;
   if (twoMain) {
     twoTotal =
       twoMain?.data?.reduce(
