@@ -61,7 +61,11 @@ function Bachelor({ data1 }: BachelorProps) {
   }, [bachelor, bachelorList, cityData, total, totalList, under18List]);
 
   return (
-    <Paper elevation={0} key={-1} sx={{ overflow: 'hidden' }}>
+    <Paper
+      elevation={0}
+      key={-1}
+      sx={{ overflow: 'hidden', borderRadius: '16px' }}
+    >
       <Box sx={{ p: 3 }}>
         <Typography variant="h6" sx={{ fontWeight: 700 }}>
           Bachelor&apos;s degree

@@ -103,7 +103,7 @@ function CoachesWidget({ data }: DefaultWidgetProps) {
   }
 
   return (
-    <Paper elevation={0} key={-1} sx={{ p: 3 }}>
+    <Paper elevation={0} key={-1} sx={{ p: 3, borderRadius: '16px' }}>
       <Typography variant="h6" sx={{ fontWeight: 700 }}>
         Coaches
       </Typography>
