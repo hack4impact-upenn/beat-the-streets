@@ -27,7 +27,11 @@ function TotalChapters({ data1 }: DefaultWidgetProps) {
   }
 
   return (
-    <Paper elevation={0} key={-1} sx={{ overflow: 'hidden' }}>
+    <Paper
+      elevation={0}
+      key={-1}
+      sx={{ overflow: 'hidden', borderRadius: '16px' }}
+    >
       <Box sx={{ p: 3 }}>
         <Typography variant="h6" sx={{ fontWeight: 700 }}>
           Total Participants

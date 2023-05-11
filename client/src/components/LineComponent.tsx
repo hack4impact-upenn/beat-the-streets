@@ -67,7 +67,11 @@ export default function LineComponent({ data1, variant }: LineComponentProps) {
   };
 
   return (
-    <Paper elevation={0} key={-1} sx={{ overflow: 'hidden' }}>
+    <Paper
+      elevation={0}
+      key={-1}
+      sx={{ overflow: 'hidden', borderRadius: '16px' }}
+    >
       <Box sx={{ p: 3 }}>
         <Typography variant="h6" sx={{ fontWeight: 700 }}>
           {variant[0].toUpperCase() + variant.slice(1)}

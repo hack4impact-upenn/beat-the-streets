@@ -19,22 +19,26 @@ function CityCard({ cityName, accredited }: CityCardProps) {
 
   if (accredited) {
     return (
-      <Card sx={{ p: 2, bgcolor: '#EDEDED', mb: 2 }}>
+      <Card sx={{ p: 2, bgcolor: '#EDEDED', mb: 2, borderRadius: '8px' }}>
         <CardActionArea>
           <CardContent onClick={handleClick}>
             <Typography variant="h5">{label}</Typography>
-            <Typography variant="subtitle1">Accredited</Typography>
+            <Typography variant="subtitle1">
+              <i>Accredited</i>
+            </Typography>
           </CardContent>
         </CardActionArea>
       </Card>
     );
   }
   return (
-    <Card sx={{ p: 2, bgcolor: '#EDEDED', mb: 2 }}>
+    <Card sx={{ p: 2, bgcolor: '#EDEDED', mb: 2, borderRadius: '8px' }}>
       <CardActionArea>
         <CardContent onClick={handleClick}>
           <Typography variant="h5">{label}</Typography>
-          <Typography variant="subtitle1">Not Accredited</Typography>
+          <Typography variant="subtitle1">
+            <i>Not Accredited</i>
+          </Typography>
         </CardContent>
       </CardActionArea>
     </Card>
