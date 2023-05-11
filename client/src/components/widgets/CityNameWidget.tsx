@@ -41,7 +41,9 @@ function CityNameWidget({ data1 }: DefaultWidgetProps) {
       <Paper elevation={1} sx={{ p: 3, mr: 8 }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mr: 1 }}>
           <Box>
-            <Typography variant="h4">{cityData?.data.cityName}</Typography>
+            <Typography variant="h4">
+              {cityData?.data.cityName.split(' city')[0]}
+            </Typography>
             <Typography
               variant="subtitle2"
               sx={{ color: COLORS.gray, fontWeight: 'bold' }}
