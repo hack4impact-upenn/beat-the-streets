@@ -65,7 +65,7 @@ function CityDashboardPage() {
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                      {row}
+                      {row.split(' city')[0]}
                     </TableCell>
                     <TableCell align="right">
                       <Button variant="text" onClick={() => handleEdit(row)}>

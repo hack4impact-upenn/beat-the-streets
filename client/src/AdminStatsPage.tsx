@@ -228,7 +228,7 @@ function AdminStatsPage() {
       <Toolbar />
 
       <Grid container spacing={4} item xs={12}>
-        <Typography variant="h4">{cityName}</Typography>
+        <Typography variant="h4">{cityName?.split(' city')[0]}</Typography>
         <Grid item xs={12}>
           <FormControlLabel
             control={<Switch defaultChecked={accredited} />}

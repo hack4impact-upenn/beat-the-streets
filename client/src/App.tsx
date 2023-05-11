@@ -44,10 +44,6 @@ function App() {
                     path="/city-dashboard/:cityName"
                     element={<CityDashboard />}
                   />
-                  <Route
-                    path="/admin-stats/:cityName"
-                    element={<AdminStatsPage />}
-                  />
                   {/* Routes accessed only if user is not authenticated */}
                   <Route element={<UnauthenticatedRoutesWrapper />}>
                     <Route path="/login" element={<LoginPage />} />
@@ -65,11 +61,6 @@ function App() {
                       element={<ResetPasswordPage />}
                     />
                     <Route path="/city-dashboard" element={<CityDashboard />} />
-
-                    <Route
-                      path="/admin-stats/:cityName"
-                      element={<AdminStatsPage />}
-                    />
                   </Route>
                   <Route
                     path="/invite/:token"
@@ -83,6 +74,10 @@ function App() {
                     <Route
                       path="/admin-dashboard"
                       element={<AdminDashboardPage />}
+                    />
+                    <Route
+                      path="/admin-stats/:cityName"
+                      element={<AdminStatsPage />}
                     />
                   </Route>
                   {/* Route which redirects to a different page depending on if the user is an authenticated or not by utilizing the DynamicRedirect component */}

@@ -10,6 +10,7 @@ type CityCardProps = {
 
 function CityCard({ cityName, accredited }: CityCardProps) {
   const navigate = useNavigate();
+  const label = cityName.split(' city')[0];
 
   function handleClick() {
     const s = `/city-dashboard/${cityName}`;
@@ -21,7 +22,7 @@ function CityCard({ cityName, accredited }: CityCardProps) {
       <Card sx={{ p: 2, bgcolor: '#EDEDED', mb: 2 }}>
         <CardActionArea>
           <CardContent onClick={handleClick}>
-            <Typography variant="h5">{cityName}</Typography>
+            <Typography variant="h5">{label}</Typography>
             <Typography variant="subtitle1">Accredited</Typography>
           </CardContent>
         </CardActionArea>
@@ -32,7 +33,7 @@ function CityCard({ cityName, accredited }: CityCardProps) {
     <Card sx={{ p: 2, bgcolor: '#EDEDED', mb: 2 }}>
       <CardActionArea>
         <CardContent onClick={handleClick}>
-          <Typography variant="h5">{cityName}</Typography>
+          <Typography variant="h5">{label}</Typography>
           <Typography variant="subtitle1">Not Accredited</Typography>
         </CardContent>
       </CardActionArea>
