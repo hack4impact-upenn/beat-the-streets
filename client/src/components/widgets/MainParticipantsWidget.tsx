@@ -74,8 +74,16 @@ type yearlyType = {
   [key: number | string]: number;
 } | null;
 
-function MainParticipantsWidget() {
-  const maleMainParticipants = useData('cities/indicator/male_participants');
+type DefaultWidgetProps = {
+  maleParticpants1: any;
+  femaleParticpants1: any;
+};
+
+function MainParticipantsWidget({
+  maleParticpants1,
+  femaleParticpants1,
+}: DefaultWidgetProps) {
+  const maleMainParticipants = maleParticpants1;
   let maleParticipantsTotal = 0;
   if (maleMainParticipants) {
     maleParticipantsTotal =
@@ -84,9 +92,7 @@ function MainParticipantsWidget() {
         0,
       ) || 0;
   }
-  const femaleMainParticipants = useData(
-    'cities/indicator/female_participants',
-  );
+  const femaleMainParticipants = femaleParticpants1;
   let femaleParticipantsTotal = 0;
   if (femaleMainParticipants) {
     femaleParticipantsTotal =

@@ -6,8 +6,12 @@ import Typography from '@mui/material/Typography';
 import { useData } from '../../util/api';
 import COLORS from '../../assets/colors';
 
-function TotalChapters() {
-  const cityData = useData(`cities/all`);
+type DefaultWidgetProps = {
+  data1: any;
+};
+
+function TotalChapters({ data1 }: DefaultWidgetProps) {
+  const cityData = data1;
 
   console.log(cityData);
 

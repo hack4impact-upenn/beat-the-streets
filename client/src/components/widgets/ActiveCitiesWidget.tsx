@@ -74,8 +74,12 @@ type yearlyType = {
   [key: number | string]: number;
 } | null;
 
-function ActiveCitiesWidget() {
-  const cityData = useData('cities/all');
+type DefaultWidgetProps = {
+  cities1: any;
+};
+
+function ActiveCitiesWidget({ cities1 }: DefaultWidgetProps) {
+  const cityData = cities1;
   let totalAccreditedCities = 0;
   let totalCities = 0;
   // eslint-disable-next-line no-plusplus

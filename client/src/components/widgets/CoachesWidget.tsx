@@ -17,7 +17,7 @@ import COLORS from '../../assets/colors';
 import { useData } from '../../util/api';
 
 type DefaultWidgetProps = {
-  city: string;
+  data: any;
 };
 
 ChartJS.register(
@@ -78,8 +78,8 @@ type yearlyType = {
   [key: number | string]: number;
 } | null;
 
-function CoachesWidget({ city }: DefaultWidgetProps) {
-  const cityData = useData(`cities/${city}`);
+function CoachesWidget({ data }: DefaultWidgetProps) {
+  const cityData = data;
   const maleCoachesYearly: yearlyType = cityData?.data.indicators.male_coaches;
   const femaleCoachesYearly: yearlyType =
     cityData?.data.indicators.female_coaches;
