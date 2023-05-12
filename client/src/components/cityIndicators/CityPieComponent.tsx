@@ -213,7 +213,7 @@ export default function PieComponent({ data1 }: PieComponentProps) {
 
   return (
     <Paper
-      elevation={0}
+      elevation={1}
       key={-1}
       sx={{ overflow: 'hidden', borderRadius: '16px' }}
     >

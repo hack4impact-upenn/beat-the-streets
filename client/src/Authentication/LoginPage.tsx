@@ -185,14 +185,14 @@ function LoginPage() {
             >
               Login
             </PrimaryButton>
-            <Button
+            {/* <Button
               type="submit"
               variant="outlined"
               onClick={() => handleSignup()}
               style={{ marginLeft: '10%', padding: '0.7rem 2rem' }}
             >
               Sign Up
-            </Button>
+            </Button> */}
           </Grid>
         </FormCol>
       </FormGrid>

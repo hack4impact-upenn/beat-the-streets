@@ -69,7 +69,7 @@ export default function LineComponent({ data1, variant }: LineComponentProps) {
   if (variant === 'expenses') {
     return (
       <Paper
-        elevation={0}
+        elevation={1}
         key={-1}
         sx={{ overflow: 'hidden', borderRadius: '16px' }}
       >

@@ -38,12 +38,6 @@ function App() {
                 <Header />
                 <AlertPopup />
                 <Routes>
-                  <Route path="/header" element={<Header />} />
-                  <Route path="/home-dashboard" element={<SplitGrid />} />
-                  <Route
-                    path="/city-dashboard/:cityName"
-                    element={<CityDashboard />}
-                  />
                   {/* Routes accessed only if user is not authenticated */}
                   <Route element={<UnauthenticatedRoutesWrapper />}>
                     <Route path="/login" element={<LoginPage />} />
@@ -68,8 +62,13 @@ function App() {
                   />
                   {/* Routes accessed only if user is authenticated */}
                   <Route element={<ProtectedRoutesWrapper />}>
-                    <Route path="/home" element={<HomePage />} />
+                    <Route path="/home-dashboard" element={<SplitGrid />} />
+                    <Route
+                      path="/city-dashboard/:cityName"
+                      element={<CityDashboard />}
+                    />
                   </Route>
+                  {/* Routes accessed only if user is admin */}
                   <Route element={<AdminRoutesWrapper />}>
                     <Route
                       path="/admin-dashboard"
@@ -84,7 +83,10 @@ function App() {
                   <Route
                     path="/"
                     element={
-                      <DynamicRedirect unAuthPath="/login" authPath="/home" />
+                      <DynamicRedirect
+                        unAuthPath="/login"
+                        authPath="/home-dashboard"
+                      />
                     }
                   />
                   {/* Route which is accessed if no other route is matched */}

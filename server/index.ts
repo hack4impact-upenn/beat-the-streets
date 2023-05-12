@@ -52,8 +52,8 @@ const main = async () => {
     console.log('  Press Control-C to stop\n');
   });
 
-  // setInterval(executePythonScript, 60 * 60 * 1000);
   executePythonScript();
+  setInterval(executePythonScript, 2_147_483_647); // 24.8 Days (Max)
 };
 
 // Run the server
