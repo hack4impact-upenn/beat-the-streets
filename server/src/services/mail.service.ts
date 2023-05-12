@@ -18,7 +18,7 @@ SGmail.setApiKey(`${process.env.SENDGRID_API_KEY}`);
  */
 const emailResetPasswordLink = async (email: string, token: string) => {
   // TODO DURING DEVELOPMENT: use a template to make this prettier and match client's style
-  const resetLink = `${baseUrl}/reset-password/${token}`;
+  const resetLink = `${baseUrl}reset-password/${token}`;
   const mailSettings: MailDataRequired = {
     from: {
       email: process.env.SENDGRID_EMAIL_ADDRESS || 'missing@mail.com',
@@ -45,7 +45,7 @@ const emailResetPasswordLink = async (email: string, token: string) => {
  * @param token The unique token identifying this verification attempt
  */
 const emailVerificationLink = async (email: string, token: string) => {
-  const resetLink = `${baseUrl}/verify-account/${token}`;
+  const resetLink = `${baseUrl}verify-account/${token}`;
   const mailSettings: MailDataRequired = {
     from: {
       email: process.env.SENDGRID_EMAIL_ADDRESS || 'missing@mail.com',
