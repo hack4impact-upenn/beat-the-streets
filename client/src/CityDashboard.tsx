@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Typography, Grid, Toolbar, Button, Icon } from '@mui/material';
+import { ArrowBack } from '@mui/icons-material';
 import { useData } from './util/api';
 import Header from './components/Header';
 import PieComponent from './components/cityIndicators/CityPieComponent';
@@ -74,6 +75,7 @@ function CityDashboard() {
               variant="text"
               color="primary"
               onClick={onNavigateMainDashboard}
+              startIcon={<ArrowBack />}
             >
               Back to all cities
             </Button>
@@ -120,6 +122,7 @@ function CityDashboard() {
             variant="text"
             color="primary"
             onClick={onNavigateMainDashboard}
+            startIcon={<ArrowBack />}
           >
             Back to all cities
           </Button>

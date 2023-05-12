@@ -42,7 +42,27 @@ function createCityCard(city: any) {
 
 // eslint-disable-next-line
 function createData(cityData: any) {
-  return cityData.map(createCityCard);
+  const sortedCityData = cityData.slice().sort((a: any, b: any) => {
+    // Sort by isAccredited (true values first)
+    if (a.isAccredited && !b.isAccredited) {
+      return -1; // a comes first
+    }
+    if (!a.isAccredited && b.isAccredited) {
+      return 1; // b comes first
+    }
+
+    // Sort alphabetically by cityName
+    if (a.cityName < b.cityName) {
+      return -1; // a comes first
+    }
+    if (a.cityName > b.cityName) {
+      return 1; // b comes first
+    }
+
+    return 0; // same order
+  });
+
+  return sortedCityData.map(createCityCard);
 }
 
 function SplitGrid() {
@@ -91,13 +111,14 @@ function SplitGrid() {
             maxHeight: 'calc(100vh - 64px)', // Subtract the Toolbar height (default is 64px)
             bgcolor: '#EDEDED',
             p: 2,
+            paddingX: 4,
           }}
           elevation={0}
           square
         >
           <h2>National Statistics</h2>
           <Grid item xs={8}>
-            <Masonry columns={3} spacing={4}>
+            <Masonry columns={3} spacing={4} sx={{ width: 'auto' }}>
               <TotalChapters data1={cities} />
               <TotalCoaches maleData1={maleData} femaleData1={femaleData} />
               <TotalParticipants

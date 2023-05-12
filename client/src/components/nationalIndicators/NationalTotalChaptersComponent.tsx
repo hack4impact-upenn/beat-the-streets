@@ -28,7 +28,7 @@ function TotalChapters({ data1 }: DefaultWidgetProps) {
 
   return (
     <Paper
-      elevation={0}
+      elevation={1}
       key={-1}
       sx={{ overflow: 'hidden', borderRadius: '16px' }}
     >

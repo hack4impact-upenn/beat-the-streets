@@ -4,8 +4,8 @@
 import 'dotenv/config';
 import SGmail, { MailDataRequired } from '@sendgrid/mail';
 
-const appName = 'Boilerplate'; // Replace with a relevant project name
-const senderName = 'Hack4Impact UPenn'; // Replace with a relevant project sender
+const appName = 'BTS Dashboard'; // Replace with a relevant project name
+const senderName = 'Beat The Streets National'; // Replace with a relevant project sender
 const baseUrl = 'http://localhost:3000'; // TODO: figure out better place to put this
 
 // eslint-disable-next-line no-useless-concat
@@ -77,11 +77,11 @@ const emailInviteLink = async (email: string, token: string) => {
       name: senderName,
     },
     to: email,
-    subject: 'Verify account',
+    subject: `You've been invited to use ${appName}!`,
     html:
       `<p> Please visit the following ` +
       `<a href=${resetLink}>link</a> ` +
-      `to create your account for ${appName} and complete registration</p>` +
+      `to create your account for <b>${appName}</b> and complete registration!</p>` +
       `<p>If you did not attempt to register an account with this email address, ` +
       `please ignore this message.</p>`,
   };

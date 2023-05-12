@@ -23,7 +23,7 @@ function Under18({ data1 }: RevenueWidgetProps) {
 
     return (
       <Paper
-        elevation={0}
+        elevation={1}
         key={-1}
         sx={{ overflow: 'hidden', borderRadius: '16px' }}
       >
