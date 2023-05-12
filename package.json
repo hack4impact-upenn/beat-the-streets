@@ -8,6 +8,11 @@
     "client",
     "server"
   ],
+  "engines": {
+    "node": "18.x",
+    "npm": "8.x",
+    "yarn": "1.x"
+  },
   "scripts": {
     "start": "node server/dist/index.js",
     "setup": "yarn install",
