@@ -6,8 +6,9 @@
     "lib": ["es2021", "DOM"],
     "module": "commonjs",
     "moduleResolution": "Node",
-    "strict": true,
+    "strict": false,
     "noImplicitOverride": true,
+    "noImplicitAny": false ,
     // Needed for CommonJS modules: markdown-it, fs-extra
     "allowSyntheticDefaultImports": true,
     //

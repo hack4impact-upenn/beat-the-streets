@@ -6,7 +6,7 @@ import SGmail, { MailDataRequired } from '@sendgrid/mail';
 
 const appName = 'Boilerplate'; // Replace with a relevant project name
 const senderName = 'Hack4Impact UPenn'; // Replace with a relevant project sender
-const baseUrl = 'http://localhost:3000'; // TODO: figure out better place to put this
+const baseUrl = process.env.PUBLIC_URL ?? 'http://localhost:3000'; // TODO: figure out better place to put this
 
 // eslint-disable-next-line no-useless-concat
 SGmail.setApiKey(`${process.env.SENDGRID_API_KEY}`);
@@ -18,7 +18,7 @@ SGmail.setApiKey(`${process.env.SENDGRID_API_KEY}`);
  */
 const emailResetPasswordLink = async (email: string, token: string) => {
   // TODO DURING DEVELOPMENT: use a template to make this prettier and match client's style
-  const resetLink = `${baseUrl}/reset-password/${token}`;
+  const resetLink = `${baseUrl}reset-password/${token}`;
   const mailSettings: MailDataRequired = {
     from: {
       email: process.env.SENDGRID_EMAIL_ADDRESS || 'missing@mail.com',
@@ -45,7 +45,7 @@ const emailResetPasswordLink = async (email: string, token: string) => {
  * @param token The unique token identifying this verification attempt
  */
 const emailVerificationLink = async (email: string, token: string) => {
-  const resetLink = `${baseUrl}/verify-account/${token}`;
+  const resetLink = `${baseUrl}verify-account/${token}`;
   const mailSettings: MailDataRequired = {
     from: {
       email: process.env.SENDGRID_EMAIL_ADDRESS || 'missing@mail.com',
