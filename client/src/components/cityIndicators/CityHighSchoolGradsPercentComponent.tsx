@@ -17,9 +17,13 @@ function HighSchoolGradsPercent({ data1 }: RevenueWidgetProps) {
   if (cityData) {
     const hsGraduateList: { [key: number]: number } =
       cityData?.data.indicators.high_school_graduates;
+    const populationList: { [key: number]: number } =
+      cityData?.data.indicators.population;
 
     const HSGraduateValue =
       Object.values(hsGraduateList)[Object.values(hsGraduateList).length - 1];
+    const PopulationValue =
+      Object.values(populationList)[Object.values(populationList).length - 1];
 
     return (
       <Paper
@@ -42,7 +46,8 @@ function HighSchoolGradsPercent({ data1 }: RevenueWidgetProps) {
             {Intl.NumberFormat('en-US', {
               notation: 'compact',
               maximumFractionDigits: 1,
-            }).format(HSGraduateValue)}
+            }).format((HSGraduateValue / PopulationValue) * 100)}
+            %
           </Typography>
         </Box>
       </Paper>

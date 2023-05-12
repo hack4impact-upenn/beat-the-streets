@@ -12,11 +12,11 @@ import {
   Switch,
 } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import { useData, putData } from './util/api';
-import ICity from './util/types/city';
-import { PaginationTable, TColumn, TRow } from './components/PaginationTable';
-import toObject from './util/types/map';
-import COLORS from './assets/colors';
+import { useData, putData } from '../util/api';
+import ICity from '../util/types/city';
+import { PaginationTable, TColumn, TRow } from '../components/PaginationTable';
+import toObject from '../util/types/map';
+import COLORS from '../assets/colors';
 
 function AdminStatsPage() {
   const { cityName } = useParams();
@@ -332,7 +332,7 @@ function AdminStatsPage() {
             }}
             variant="outlined"
           >
-            Add Column
+            Add New Year
           </Button>
           <Button
             color="error"

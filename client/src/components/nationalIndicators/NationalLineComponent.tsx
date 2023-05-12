@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart, ArcElement } from 'chart.js';
 import 'chart.js/auto';
-import { useData } from '../util/api';
-import ICity from '../util/types/city';
-import COLORS from '../assets/colors';
+import { useData } from '../../util/api';
+import ICity from '../../util/types/city';
+import COLORS from '../../assets/colors';
 
 type LineComponentProps = {
   data1: any;
@@ -66,6 +66,44 @@ export default function LineComponent({ data1, variant }: LineComponentProps) {
     ],
   };
 
+  if (variant === 'expenses') {
+    return (
+      <Paper
+        elevation={0}
+        key={-1}
+        sx={{ overflow: 'hidden', borderRadius: '16px' }}
+      >
+        <Box sx={{ p: 3 }}>
+          <Typography variant="h6" sx={{ fontWeight: 700 }}>
+            Yearly Network Expenses
+          </Typography>
+          <Typography variant="subtitle2" sx={{ color: COLORS.gray, mb: 1 }}>
+            Expenses
+          </Typography>
+          {dataTotal && (
+            <>
+              <Typography
+                variant="subtitle2"
+                sx={{ color: COLORS.primaryBlue }}
+                align="center"
+              >
+                Cumulative:
+              </Typography>
+              <Typography
+                variant="h6"
+                sx={{ color: COLORS.primaryBlue }}
+                align="center"
+              >
+                ${dataTotal.toLocaleString()}
+              </Typography>
+            </>
+          )}
+          <Line options={options} data={data} />
+        </Box>
+      </Paper>
+    );
+  }
+
   return (
     <Paper
       elevation={0}
@@ -74,10 +112,10 @@ export default function LineComponent({ data1, variant }: LineComponentProps) {
     >
       <Box sx={{ p: 3 }}>
         <Typography variant="h6" sx={{ fontWeight: 700 }}>
-          {variant[0].toUpperCase() + variant.slice(1)}
+          Yearly Network Revenue
         </Typography>
         <Typography variant="subtitle2" sx={{ color: COLORS.gray, mb: 1 }}>
-          {descriptions[variant]}
+          Revenues
         </Typography>
         {dataTotal && (
           <>

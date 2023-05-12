@@ -34,10 +34,10 @@ function TotalChapters({ data1 }: DefaultWidgetProps) {
     >
       <Box sx={{ p: 3 }}>
         <Typography variant="h6" sx={{ fontWeight: 700 }}>
-          Total Participants
+          Total Chapters
         </Typography>
         <Typography variant="subtitle2" sx={{ color: COLORS.gray, mb: 1 }}>
-          Active Chapters
+          Total number of active chapters
         </Typography>
         {cityData !== undefined && (
           <Typography

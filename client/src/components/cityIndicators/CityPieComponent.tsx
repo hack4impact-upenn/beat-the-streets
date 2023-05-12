@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { Pie } from 'react-chartjs-2';
 import { Chart, ArcElement } from 'chart.js';
 import 'chart.js/auto';
-import { useData } from '../util/api';
-import ICity from '../util/types/city';
-import COLORS from '../assets/colors';
+import { useData } from '../../util/api';
+import ICity from '../../util/types/city';
+import COLORS from '../../assets/colors';
 
 type PieComponentProps = {
   data1: any;

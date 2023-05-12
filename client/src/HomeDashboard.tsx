@@ -12,16 +12,16 @@ import {
 } from '@mui/material';
 import { Masonry } from '@mui/lab';
 import { useNavigate } from 'react-router-dom';
-import { useData } from '../util/api';
-import TotalChapters from '../components/indicatorComponents/TotalChapters';
-import TotalCoaches from '../components/indicatorComponents/TotalCoaches';
-import TotalParticipants from '../components/indicatorComponents/TotalParticipants';
-import LineComponent from '../components/LineComponent';
-import CityCard from '../components/buttons/CityCard';
-import MainPieComponent from '../components/MainPieComponent';
-import MainCoachesWidget from '../components/widgets/MainCoachesWidget';
-import ActiveCitiesWidget from '../components/widgets/ActiveCitiesWidget';
-import MainParticipantsWidget from '../components/widgets/MainParticipantsWidget';
+import { useData } from './util/api';
+import TotalChapters from './components/nationalIndicators/NationalTotalChaptersComponent';
+import TotalCoaches from './components/nationalIndicators/NationalTotalCoachesComponent';
+import TotalParticipants from './components/nationalIndicators/NationalTotalParticipantsComponent';
+import LineComponent from './components/nationalIndicators/NationalLineComponent';
+import CityCard from './components/buttons/CityCard';
+import MainPieComponent from './components/nationalIndicators/NationalPieComponent';
+import MainCoachesWidget from './components/nationalIndicators/NationalCoachesComponent';
+import ActiveCitiesWidget from './components/nationalIndicators/NationalActiveCitiesComponent';
+import MainParticipantsWidget from './components/nationalIndicators/NationalParticipantsComponent';
 
 const ScrollableBox = styled(Box)({
   overflowY: 'auto',
@@ -105,7 +105,7 @@ function SplitGrid() {
                 femaleParticpants1={femaleParticpants}
               />
               <LineComponent variant="revenue" data1={revenueData} />
-              <LineComponent variant="revenue" data1={expensesData} />
+              <LineComponent variant="expenses" data1={expensesData} />
               <MainPieComponent
                 asianMain1={asianMain}
                 hispanicMain1={hispanicMain}

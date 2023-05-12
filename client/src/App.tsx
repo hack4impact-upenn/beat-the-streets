@@ -22,10 +22,10 @@ import ResetPasswordPage from './Authentication/ResetPasswordPage';
 import AlertPopup from './components/AlertPopup';
 import InviteRegisterPage from './Authentication/InviteRegisterPage';
 import CityDashboard from './CityDashboard';
-import AdminStatsPage from './AdminStatsPage';
+import AdminStatsPage from './AdminDashboard/AdminStatsPage';
 import Header from './components/Header';
 import AdminDashboardPage from './AdminDashboard/AdminDashboardPage';
-import SplitGrid from './HomeDashboard/SplitGrid';
+import SplitGrid from './HomeDashboard';
 
 function App() {
   return (

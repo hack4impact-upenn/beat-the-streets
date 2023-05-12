@@ -10,8 +10,8 @@ import {
 import ScreenGrid from '../components/ScreenGrid';
 import UserTable from './UserTable';
 import InviteUserButton from '../components/buttons/InviteUserButton';
-import CityDashboardPage from './CityDashboardPage';
-import UserDashboardPage from './UserDashboardPage';
+import CityDashboardPage from './AdminCityDashboardPage';
+import UserDashboardPage from './AdminUserDashboardPage';
 
 /**
  * This is the wrapper page that let's the admin swap between managing users and ciites
