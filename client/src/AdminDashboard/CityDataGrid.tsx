@@ -60,6 +60,8 @@ function CityDataGrid() {
         setAlert(`Error saving changes`, AlertType.ERROR);
       } else {
         setAlert(`Successfully saved changes`, AlertType.SUCCESS);
+        setOriginalIsAccredited(isAccredited);
+        setOriginalRows(rows);
       }
     });
   };
