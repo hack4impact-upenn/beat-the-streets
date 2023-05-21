@@ -77,7 +77,7 @@ function App() {
                     />
                     <Route
                       path="/admin-stats/:cityName"
-                      element={<AdminStatsPage />}
+                      element={<CityDataGrid />}
                     />
                   </Route>
                   {/* Route which redirects to a different page depending on if the user is an authenticated or not by utilizing the DynamicRedirect component */}

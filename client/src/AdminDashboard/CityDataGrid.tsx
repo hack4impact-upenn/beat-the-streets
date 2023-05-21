@@ -23,13 +23,14 @@ import useAlert from '../util/hooks/useAlert';
 import AlertType from '../util/types/alert';
 
 function CityDataGrid() {
+  const { cityName } = useParams();
   const [rows, setRows] = React.useState<any[]>([]); // Keep the rows in a state
   const [isAccredited, setIsAccredited] = React.useState<boolean>(false);
   const [originalIsAccredited, setOriginalIsAccredited] =
     React.useState<boolean>(false);
   const [originalRows, setOriginalRows] = React.useState<any[]>([]);
   const [selectedRows, setSelectedRows] = React.useState<any[]>([]);
-  const cityData = useData(`cities/Philadelphia%20city,%20Pennsylvania`);
+  const cityData = useData(`cities/${cityName}`);
 
   React.useEffect(() => {
     if (cityData) {
@@ -52,7 +53,7 @@ function CityDataGrid() {
     updatedCity.isAccredited = isAccredited;
     console.log('passing data should be new: ', updatedCity);
     console.log('Updating City');
-    await putData(`cities/Philadelphia%20city,%20Pennsylvania`, {
+    await putData(`cities/${cityName}`, {
       city: updatedCity,
     }).then((res) => {
       if (res.error) {
@@ -111,7 +112,7 @@ function CityDataGrid() {
       <Toolbar />
 
       <Box flexDirection="row" display="flex" width="100%" pb={2}>
-        <Typography variant="h3">Philadelphia City, Pennsylvania</Typography>
+        <Typography variant="h3">{cityData?.data.cityName}</Typography>
         <Button
           component="button"
           onClick={() => updateCityData(cityData?.data as unknown as ICity)}
