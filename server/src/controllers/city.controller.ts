@@ -50,7 +50,7 @@ const getCity = async (
     getCityFromDB(cityName)
       .then((cityArray) => {
         if (cityArray.length === 1) {
-          console.log(cityArray[0]);
+          // console.log(cityArray[0]);
           res.status(StatusCode.OK).send(cityArray[0]);
         } else {
           next(ApiError.internal('Unable to retrieve specified city'));
@@ -72,7 +72,14 @@ const setCity = async (
     next(ApiError.missingFields(['city']));
     return;
   }
-  updateCityInDB(city);
+  updateCityInDB(city)
+    .then(() => {
+      res.sendStatus(StatusCode.OK);
+    })
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    .catch((e) => {
+      next(ApiError.internal('Unable to update city.'));
+    });
 };
 /**
  * Get all city indicator data from the database. Upon success, send the a list of all indicator data in the res body with 200 OK status code.
