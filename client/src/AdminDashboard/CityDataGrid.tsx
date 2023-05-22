@@ -184,6 +184,9 @@ function CityDataGrid() {
                     pageSize: 10,
                   },
                 },
+                sorting: {
+                  sortModel: [{ field: 'year', sort: 'desc' }],
+                },
               }}
               pageSizeOptions={[5, 10, 20]}
               checkboxSelection
