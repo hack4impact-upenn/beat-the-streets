@@ -4,10 +4,10 @@ import { AppBar, CssBaseline, Toolbar } from '@mui/material';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import CityDataGrid from './AdminDashboard/CityDataGrid';
 import theme from './assets/theme';
 import { store, persistor } from './util/redux/store';
 import NotFoundPage from './NotFound/NotFoundPage';
-import HomePage from './Home/HomePage';
 import {
   UnauthenticatedRoutesWrapper,
   ProtectedRoutesWrapper,
@@ -38,6 +38,7 @@ function App() {
                 <Header />
                 <AlertPopup />
                 <Routes>
+                  <Route path="/grid" element={<CityDataGrid />} />
                   {/* Routes accessed only if user is not authenticated */}
                   <Route element={<UnauthenticatedRoutesWrapper />}>
                     <Route path="/login" element={<LoginPage />} />
@@ -76,7 +77,7 @@ function App() {
                     />
                     <Route
                       path="/admin-stats/:cityName"
-                      element={<AdminStatsPage />}
+                      element={<CityDataGrid />}
                     />
                   </Route>
                   {/* Route which redirects to a different page depending on if the user is an authenticated or not by utilizing the DynamicRedirect component */}

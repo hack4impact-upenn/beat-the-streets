@@ -10,7 +10,7 @@ const CitySchema = new mongoose.Schema({
     required: true,
   },
   isAccredited: {
-    type: Number,
+    type: Boolean,
     required: true,
   },
   countiesCovered: {

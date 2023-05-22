@@ -26,9 +26,6 @@ function CityDashboardPage() {
   useEffect(() => {
     if (cityData?.data) {
       const newRows = cityData?.data.map((city: ICity) => {
-        if (city.isAccredited === true) {
-          return `${city.cityName} (Accredited)`;
-        }
         return city.cityName;
       });
       setCityList(cityData?.data);
@@ -59,16 +56,20 @@ function CityDashboardPage() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
+                {cityList.map((city) => (
                   <TableRow
-                    key={row}
+                    key={city.cityName}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                      {row.split(' city')[0]}
+                      {city.cityName +
+                        (city.isAccredited ? ' (Accredited)' : '')}
                     </TableCell>
                     <TableCell align="right">
-                      <Button variant="text" onClick={() => handleEdit(row)}>
+                      <Button
+                        variant="text"
+                        onClick={() => handleEdit(city.cityName)}
+                      >
                         <img
                           src={Edit}
                           alt="edit button"
