@@ -19,7 +19,7 @@ function TotalChapters({ data1 }: DefaultWidgetProps) {
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < cityData?.data.length; i++) {
     if (
-      cityData?.data[i].isAccredited !== 0 &&
+      cityData?.data[i].isAccredited &&
       cityData?.data[i].isAccredited !== null
     ) {
       sum += 1;
