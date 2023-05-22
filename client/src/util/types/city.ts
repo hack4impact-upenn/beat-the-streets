@@ -7,6 +7,7 @@ interface ICity {
   isAccredited: boolean;
   countiesCovered: [string];
   indicators: Map<string, Map<string, number>>;
+  established: number;
 }
 
 export default ICity;

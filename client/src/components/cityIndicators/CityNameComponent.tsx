@@ -127,21 +127,25 @@ function CityNameWidget({ data1 }: DefaultWidgetProps) {
               }).format(population)}
             </Typography>
           </Box>
-          <Box>
-            <Typography variant="subtitle1">Participants</Typography>
-            <Typography variant="h5" sx={{ fontWeight: 700 }}>
-              {Intl.NumberFormat('en-US', {
-                notation: 'compact',
-                maximumFractionDigits: 1,
-              }).format(participants)}
-            </Typography>
-          </Box>
-          <Box>
-            <Typography variant="subtitle1">Established</Typography>
-            <Typography variant="h5" sx={{ fontWeight: 700 }}>
-              {established}
-            </Typography>
-          </Box>
+          {accredited && (
+            <>
+              <Box>
+                <Typography variant="subtitle1">Participants</Typography>
+                <Typography variant="h5" sx={{ fontWeight: 700 }}>
+                  {Intl.NumberFormat('en-US', {
+                    notation: 'compact',
+                    maximumFractionDigits: 1,
+                  }).format(participants)}
+                </Typography>
+              </Box>
+              <Box>
+                <Typography variant="subtitle1">Established</Typography>
+                <Typography variant="h5" sx={{ fontWeight: 700 }}>
+                  {established}
+                </Typography>
+              </Box>
+            </>
+          )}
         </Box>
       </Paper>
     );

@@ -25,6 +25,10 @@ const CitySchema = new mongoose.Schema({
     },
     required: true,
   },
+  established: {
+    type: Number,
+    required: true,
+  },
 });
 
 interface ICity extends mongoose.Document {

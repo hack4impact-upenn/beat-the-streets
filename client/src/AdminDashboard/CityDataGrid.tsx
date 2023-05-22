@@ -6,6 +6,7 @@ import {
   FormControlLabel,
   FormGroup,
   Switch,
+  TextField,
   Toolbar,
   Typography,
 } from '@mui/material';
@@ -29,6 +30,9 @@ function CityDataGrid() {
   const [originalIsAccredited, setOriginalIsAccredited] =
     React.useState<boolean>(false);
   const [originalRows, setOriginalRows] = React.useState<any[]>([]);
+  const [dateEstablished, setDateEstablished] = React.useState<number>(0);
+  const [originalDateEstablished, setOriginalDateEstablished] =
+    React.useState<number>(0);
   const [selectedRows, setSelectedRows] = React.useState<any[]>([]);
   const cityData = useData(`cities/${cityName}`);
 
@@ -40,9 +44,11 @@ function CityDataGrid() {
       setRows(dataGridRows);
       setOriginalRows(dataGridRows);
 
-      console.log(cityData.data.isAccredited);
       setIsAccredited(cityData.data.isAccredited);
       setOriginalIsAccredited(cityData.data.isAccredited);
+
+      setDateEstablished(cityData.data.established);
+      setOriginalDateEstablished(cityData.data.established);
     }
   }, [cityData]);
 
@@ -51,6 +57,7 @@ function CityDataGrid() {
   const updateCityData = async (city: ICity) => {
     const updatedCity = rowsToCity(city, rows) as ICity;
     updatedCity.isAccredited = isAccredited;
+    updatedCity.established = dateEstablished;
     console.log('passing data should be new: ', updatedCity);
     console.log('Updating City');
     await putData(`cities/${cityName}`, {
@@ -62,6 +69,7 @@ function CityDataGrid() {
         setAlert(`Successfully saved changes`, AlertType.SUCCESS);
         setOriginalIsAccredited(isAccredited);
         setOriginalRows(rows);
+        setOriginalDateEstablished(dateEstablished);
       }
     });
   };
@@ -100,7 +108,8 @@ function CityDataGrid() {
 
   const isSaveDisabled =
     JSON.stringify(rows) === JSON.stringify(originalRows) &&
-    isAccredited === originalIsAccredited;
+    isAccredited === originalIsAccredited &&
+    dateEstablished === originalDateEstablished;
 
   return (
     <Box
@@ -145,6 +154,18 @@ function CityDataGrid() {
             Modify the BTS data for this city by editing the cells in the table
             below
           </Typography>
+
+          <Box pt={2}>
+            <TextField
+              label="Established Date"
+              type="number"
+              value={dateEstablished}
+              onChange={(e: { target: { value: string } }) =>
+                setDateEstablished(parseInt(e.target.value, 10))
+              }
+              variant="outlined"
+            />
+          </Box>
 
           <Box flexDirection="row" display="flex" width="100%" py={4}>
             <Button

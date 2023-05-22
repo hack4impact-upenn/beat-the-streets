@@ -133,7 +133,7 @@ function ActiveCitiesWidget({ cities1 }: DefaultWidgetProps) {
             Goal
           </Typography>
           <Typography variant="body2" align="right">
-            {totalNonAccreditedCities}
+            {totalCities}
           </Typography>
         </Box>
       </Box>
