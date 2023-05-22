@@ -58,13 +58,13 @@ export const createChartData = (
     {
       label: 'Current',
       data: [totalAccreditedCities],
-      backgroundColor: 'rgb(121, 174, 234)',
+      backgroundColor: COLORS.primaryBlue,
       // barThickness: 30,
     },
     {
       label: 'Goal',
       data: [totalNonAccreditedCities],
-      backgroundColor: COLORS.primaryBlue,
+      backgroundColor: COLORS.lightGray,
       // barThickness: 30,
     },
   ],
@@ -86,7 +86,7 @@ function ActiveCitiesWidget({ cities1 }: DefaultWidgetProps) {
   for (let i = 0; i < cityData?.data.length; i++) {
     totalCities += 1;
     if (
-      cityData?.data[i].isAccredited !== 0 &&
+      cityData?.data[i].isAccredited &&
       cityData?.data[i].isAccredited !== null
     ) {
       totalAccreditedCities += 1;
