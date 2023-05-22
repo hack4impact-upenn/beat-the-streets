@@ -62,17 +62,38 @@ function CityNameWidget({ data1 }: DefaultWidgetProps) {
       Logo = NationalLogo;
     }
 
-    const population =
-      Object.values(populationList)[Object.values(populationList).length - 1];
-    const participants =
-      maleParticipantsList != null
-        ? Object.values(maleParticipantsList)[
-            Object.values(maleParticipantsList).length - 1
-          ] +
-          Object.values(femaleParticipantsList)[
-            Object.values(femaleParticipantsList).length - 1
-          ]
-        : 0;
+    let population = 0;
+    const populationValues = Object.values(populationList);
+    // eslint-disable-next-line no-plusplus
+    for (let i = populationValues.length - 1; i >= 0; i--) {
+      if (populationValues[i] !== 0) {
+        population = populationValues[i];
+        break;
+      }
+    }
+
+    // Find the most recent non-zero participants count
+    let maleParticipants = 0;
+    let femaleParticipants = 0;
+    if (maleParticipantsList != null && femaleParticipantsList != null) {
+      const maleParticipantsValues = Object.values(maleParticipantsList);
+      const femaleParticipantsValues = Object.values(femaleParticipantsList);
+      // eslint-disable-next-line no-plusplus
+      for (let i = maleParticipantsValues.length - 1; i >= 0; i--) {
+        if (maleParticipantsValues[i] !== 0) {
+          maleParticipants = maleParticipantsValues[i];
+          break;
+        }
+      }
+      // eslint-disable-next-line no-plusplus
+      for (let i = femaleParticipantsValues.length - 1; i >= 0; i--) {
+        if (femaleParticipantsValues[i] !== 0) {
+          femaleParticipants = femaleParticipantsValues[i];
+          break;
+        }
+      }
+    }
+    const participants = maleParticipants + femaleParticipants;
 
     return (
       <Paper elevation={4} sx={{ p: 3, mr: 8, borderRadius: '16px' }}>

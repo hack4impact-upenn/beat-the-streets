@@ -116,7 +116,7 @@ for city_data in final_data:
     update_data = {
         "$set": {
             "cityName": city_data["cityName"],
-            "isAccredited": city_data["isAccredited"]
+            # "isAccredited": city_data["isAccredited"]
         }
     }
     
