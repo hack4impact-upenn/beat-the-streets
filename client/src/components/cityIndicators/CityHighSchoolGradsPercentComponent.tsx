@@ -20,10 +20,25 @@ function HighSchoolGradsPercent({ data1 }: RevenueWidgetProps) {
     const populationList: { [key: number]: number } =
       cityData?.data.indicators.population;
 
-    const HSGraduateValue =
-      Object.values(hsGraduateList)[Object.values(hsGraduateList).length - 1];
-    const PopulationValue =
-      Object.values(populationList)[Object.values(populationList).length - 1];
+    let HSGraduateValue = 0;
+    const HSvalues = Object.values(hsGraduateList);
+    // eslint-disable-next-line no-plusplus
+    for (let i = HSvalues.length - 1; i >= 0; i--) {
+      if (HSvalues[i] !== 0) {
+        HSGraduateValue = HSvalues[i];
+        break;
+      }
+    }
+
+    let PopulationValue = 0;
+    const Popvalues = Object.values(populationList);
+    // eslint-disable-next-line no-plusplus
+    for (let i = Popvalues.length - 1; i >= 0; i--) {
+      if (Popvalues[i] !== 0) {
+        PopulationValue = Popvalues[i];
+        break;
+      }
+    }
 
     return (
       <Paper

@@ -26,85 +26,6 @@ export default function MainPieComponent({
   hawaiiamMain1,
   twoMain1,
 }: DefaultWidgetProps) {
-  //   const [asian, setAsian] = useState(0);
-  //   const [hispanic, setHispanic] = useState(0);
-  //   const [black, setBlack] = useState(0);
-  //   const [white, setWhite] = useState(0);
-  //   const [native, setNative] = useState(0);
-  //   const [hawaiian, setHawaiian] = useState(0);
-  //   const [twoOrMore, setTwoOrMore] = useState(0);
-
-  //   const [asianPercent, setAsianPercent] = useState(0);
-  //   const [hispanicPercent, setHispanicPercent] = useState(0);
-  //   const [blackPercent, setBlackPercent] = useState(0);
-  //   const [whitePercent, setWhitePercent] = useState(0);
-  //   const [nativePercent, setNativePercent] = useState(0);
-  //   const [hawaiianPercent, setHawaiianPercent] = useState(0);
-  //   const [twoOrMorePercent, setTwoOrMorePercent] = useState(0);
-
-  //   const asianGet = useData('cities/indicator/asian');
-  //   const hispanicGet = useData('cities/indicator/hispanic_or_latino');
-  //   const blackGet = useData('cities/indicator/black_or_african_american');
-  //   const whiteGet = useData('cities/indicator/white');
-  //   const nativeGet = useData('cities/indicator/american_indian_alaskan_native');
-  //   const hawaiianGet = useData(
-  //     'cities/indicator/native_hawaiian_pacific_islander',
-  //   );
-  //   const twoOrMoreGet = useData('cities/indicator/two_or_more');
-
-  //   useEffect(() => {
-  //     setAsian(
-  //       asianGet?.data?.reduce(
-  //         (accumulator: any, currentValue: any) => accumulator + currentValue,
-  //         0,
-  //       ) || 0,
-  //     );
-  //     setHispanic(
-  //       hispanicGet?.data?.reduce(
-  //         (accumulator: any, currentValue: any) => accumulator + currentValue,
-  //         0,
-  //       ) || 0,
-  //     );
-  //     setBlack(
-  //       blackGet?.data?.reduce(
-  //         (accumulator: any, currentValue: any) => accumulator + currentValue,
-  //         0,
-  //       ) || 0,
-  //     );
-  //     setWhite(
-  //       whiteGet?.data?.reduce(
-  //         (accumulator: any, currentValue: any) => accumulator + currentValue,
-  //         0,
-  //       ) || 0,
-  //     );
-  //     setNative(
-  //       nativeGet?.data?.reduce(
-  //         (accumulator: any, currentValue: any) => accumulator + currentValue,
-  //         0,
-  //       ) || 0,
-  //     );
-  //     setHawaiian(
-  //       hawaiianGet?.data?.reduce(
-  //         (accumulator: any, currentValue: any) => accumulator + currentValue,
-  //         0,
-  //       ) || 0,
-  //     );
-  //     setTwoOrMore(
-  //       twoOrMoreGet?.data?.reduce(
-  //         (accumulator: any, currentValue: any) => accumulator + currentValue,
-  //         0,
-  //       ) || 0,
-  //     );
-  //   }, [
-  //     twoOrMoreGet,
-  //     hawaiianGet,
-  //     nativeGet,
-  //     whiteGet,
-  //     blackGet,
-  //     hispanicGet,
-  //     asianGet,
-  //   ]);
-
   let asianTotal = 0;
   const asianMain = asianMain1;
   if (asianMain) {
@@ -171,7 +92,14 @@ export default function MainPieComponent({
       ) || 0;
   }
 
-  const sum = asianTotal + hispanicTotal + blackTotal;
+  const sum =
+    asianTotal +
+    hispanicTotal +
+    blackTotal +
+    whiteTotal +
+    nativeTotal +
+    hawaiianTotal +
+    twoTotal;
   const asianPercent = (asianTotal * 100) / sum;
   const hispanicPercent = (hispanicTotal * 100) / sum;
   const blackPercent = (blackTotal * 100) / sum;
@@ -179,26 +107,6 @@ export default function MainPieComponent({
   const nativePercent = (nativeTotal * 100) / sum;
   const hawaiianPercent = (hawaiianTotal * 100) / sum;
   const twoPercent = (twoTotal * 100) / sum;
-
-  //   console.log(`asian: ${asianTotal}`);
-
-  //   if (asianMain && asianMain.data) {
-  //     asianMain.data.forEach((element: any, index: any) => {
-  //       console.log(`Element at index ${index}:`, element);
-  //     });
-  //   } else {
-  //     console.log('Unable to retrieve asianMain data.');
-  //   }
-  //   const asianMain = useData('/indicatoryearly/asian');
-
-  //   const sum = asian + hispanic + black + white + native + hawaiian + twoOrMore;
-  //   setAsianPercent((asian * 100) / sum);
-  //   setHispanicPercent((hispanic * 100) / sum);
-  //   setBlackPercent((black * 100) / sum);
-  //   setWhitePercent((white * 100) / sum);
-  //   setNativePercent((native * 100) / sum);
-  //   setHawaiianPercent((hawaiian * 100) / sum);
-  //   setTwoOrMorePercent((twoOrMore * 100) / sum);
 
   const options = {
     responsive: true,
