@@ -1,9 +1,8 @@
+/* eslint-disable no-plusplus */
 import React, { useEffect, useState } from 'react';
-import { Toolbar } from '@mui/material';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import { useData } from '../../util/api';
 import ICity from '../../util/types/city';
 import COLORS from '../../assets/colors';
 
@@ -12,53 +11,39 @@ type BachelorProps = {
 };
 
 function Bachelor({ data1 }: BachelorProps) {
-  const [cityList, setCityList] = useState<ICity[]>([]);
   const [bachelor, setBachelor] = useState(0);
   const [total, setTotal] = useState(0);
-  const [under18, setUnder18] = useState(0);
-  const [totalList, setTotalList] = useState(new Map());
-  const [under18List, setUnder18List] = useState(new Map());
-  const [bachelorList, setBachelorList] = useState(new Map());
 
   const cityData = data1;
 
   useEffect(() => {
-    setCityList(cityData?.data);
-    setBachelorList(cityData?.data.indicators.bachelor);
-    setUnder18List(cityData?.data.indicators.under18s);
-    setTotalList(cityData?.data.indicators.population);
+    const bachelorList = cityData?.data.indicators.bachelor;
+    const totalList = cityData?.data.indicators.population;
 
-    let maxKey = '0';
     if (totalList) {
-      Object.entries(totalList).forEach(function (key, value) {
-        const [key1, value1] = key;
-        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
-          maxKey = key1;
-          setTotal(value1);
+      const totalKeys = Object.keys(totalList).sort().reverse();
+      for (let i = 0; i < totalKeys.length; i++) {
+        const key = totalKeys[i];
+        const totalValue = totalList[key];
+        if (totalValue && totalValue !== 0) {
+          setTotal(totalValue);
+          break;
         }
-      });
+      }
     }
+
     if (bachelorList) {
-      Object.entries(bachelorList).forEach(function (key, value) {
-        const [key1, value1] = key;
-        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
-          maxKey = key1;
-          setBachelor(value1);
+      const bachelorKeys = Object.keys(bachelorList).sort().reverse();
+      for (let i = 0; i < bachelorKeys.length; i++) {
+        const key = bachelorKeys[i];
+        const bachelorValue = bachelorList[key];
+        if (bachelorValue && bachelorValue !== 0) {
+          setBachelor(bachelorValue);
+          break;
         }
-      });
+      }
     }
-    if (under18List) {
-      Object.entries(under18List).forEach(function (key, value) {
-        const [key1, value1] = key;
-        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
-          maxKey = key1;
-          setUnder18(value1);
-        }
-      });
-    }
-    console.log(bachelor);
-    console.log(total);
-  }, [bachelor, bachelorList, cityData, total, totalList, under18List]);
+  }, [cityData]);
 
   return (
     <Paper
@@ -73,16 +58,15 @@ function Bachelor({ data1 }: BachelorProps) {
         <Typography variant="subtitle2" sx={{ color: COLORS.gray, mb: 1 }}>
           Percent of persons age 25+ with Bachelor&apos;s degree or higher
         </Typography>
-        {bachelor !== undefined && (
+        {bachelor !== undefined && total !== undefined && total !== 0 && (
           <Typography
             variant="h4"
             sx={{ color: COLORS.primaryBlue }}
             align="center"
           >
             <h1 style={{ fontSize: '2.125rem', color: '#0175C0' }}>
-              {Math.round((bachelor * 100) / (total - under18))}%
+              {Math.round((bachelor * 100) / total)}%
             </h1>
-            {/* <h1 style={{ fontSize: '2.125rem', color: '#0175C0' }}>{total}</h1> */}
           </Typography>
         )}
       </Box>

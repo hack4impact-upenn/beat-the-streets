@@ -16,10 +16,17 @@ function Under18({ data1 }: RevenueWidgetProps) {
 
   if (cityData) {
     const under18sList: { [key: number]: number } =
-      cityData?.data.indicators.under18s;
+      cityData?.data.indicators.persons_in_poverty;
 
-    const under18sValue =
-      Object.values(under18sList)[Object.values(under18sList).length - 1];
+    let under18sValue = 0;
+    const values = Object.values(under18sList);
+    // eslint-disable-next-line no-plusplus
+    for (let i = values.length - 1; i >= 0; i--) {
+      if (values[i] !== 0) {
+        under18sValue = values[i];
+        break;
+      }
+    }
 
     return (
       <Paper

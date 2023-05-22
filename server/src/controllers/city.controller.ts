@@ -81,46 +81,49 @@ const getIndicator = async (
   req: express.Request,
   res: express.Response,
   next: express.NextFunction,
+  // eslint-disable-next-line consistent-return
 ) => {
   const { indicatorName } = req.params;
+
   if (!indicatorName) {
-    next(ApiError.missingFields(['status']));
+    return next(ApiError.missingFields(['status']));
   }
-  const cities = await getAllCitiesFromDB();
-  const myindicators = new Map(); // indicator is a map of a map of numbers
-  cities.forEach(function (city) {
-    const allIndicators = city.indicators;
-    // for (let k of allIndicators.keys()) {
-    Array.from(allIndicators.keys()).forEach(function (k) {
-      // console.log(city.cityName, allIndicators.get(k), k);
-      if (k === indicatorName) {
-        if (!(allIndicators.get(k) === undefined)) {
-          myindicators.set(city.cityName, allIndicators.get(k));
+
+  try {
+    const cities = await getAllCitiesFromDB();
+    const myindicators = new Map();
+
+    cities.forEach((city) => {
+      const indicatorValue = city.indicators.get(indicatorName);
+
+      if (indicatorValue !== undefined) {
+        myindicators.set(city.cityName, indicatorValue);
+      }
+    });
+
+    const finalValues: number[] = [];
+
+    myindicators.forEach((allYearValues) => {
+      const sortedYears = Array.from(allYearValues.keys() as number[]).sort(
+        (a, b) => b - a,
+      );
+      let recentNonZeroYear: number | undefined;
+
+      // eslint-disable-next-line no-restricted-syntax
+      for (const year of sortedYears) {
+        if (allYearValues.get(year) !== 0) {
+          recentNonZeroYear = year;
+          break;
         }
       }
-    });
-  });
-  const finalValues: number[] = [];
-  // for (let k of myindicators.keys()) {
-  Array.from(myindicators.keys()).forEach(function (j) {
-    const allYearValues = myindicators.get(j);
-    // const lastYearVal = Array.from(allYearValues.values()).pop();
-    let maxYear = 0;
-    // for (let yr of Array.from(allYearValues.keys())) {
-    //   if ((yr as number) > maxYear) {
-    //     maxYear = yr as number;
-    //   }
-    // }
-    Array.from(allYearValues.keys()).forEach(function (yr) {
-      if ((yr as number) > maxYear) {
-        maxYear = yr as number;
+
+      if (recentNonZeroYear !== undefined) {
+        const lastYearVal = allYearValues.get(recentNonZeroYear) as number;
+        finalValues.push(lastYearVal);
       }
     });
-    const lastYearVal = allYearValues.get(maxYear) as number;
-    finalValues.push(lastYearVal);
-  });
-  try {
-    res.status(StatusCode.OK).send(finalValues);
+
+    return res.status(StatusCode.OK).send(finalValues);
   } catch (err) {
     next(ApiError.internal('Unable to fetch indicators.'));
   }

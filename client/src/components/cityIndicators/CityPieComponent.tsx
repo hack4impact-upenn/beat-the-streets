@@ -12,116 +12,83 @@ type PieComponentProps = {
 };
 
 export default function PieComponent({ data1 }: PieComponentProps) {
-  const [asian, setAsian] = useState(0);
-  const [hispanic, setHispanic] = useState(0);
-  const [black, setBlack] = useState(0);
-  const [total, setTotal] = useState(0);
+  const [asian, setAsian] = useState<number>(0);
+  const [hispanic, setHispanic] = useState<number>(0);
+  const [black, setBlack] = useState<number>(0);
+  const [total, setTotal] = useState<number>(0);
 
-  const [white, setWhite] = useState(0);
-  const [native, setNative] = useState(0);
-  const [hawaiian, setHawaiian] = useState(0);
-  const [twoOrMore, setTwoOrMore] = useState(0);
+  const [white, setWhite] = useState<number>(0);
+  const [native, setNative] = useState<number>(0);
+  const [hawaiian, setHawaiian] = useState<number>(0);
+  const [twoOrMore, setTwoOrMore] = useState<number>(0);
 
-  const [othersPercent, setOthersPercent] = useState(0);
-  const [asianPercent, setAsianPercent] = useState(0);
-  const [hispanicPercent, setHispanicPercent] = useState(0);
-  const [blackPercent, setBlackPercent] = useState(0);
-  const [whitePercent, setWhitePercent] = useState(0);
-  const [nativePercent, setNativePercent] = useState(0);
-  const [hawaiianPercent, setHawaiianPercent] = useState(0);
-  const [twoOrMorePercent, setTwoOrMorePercent] = useState(0);
+  const [asianPercent, setAsianPercent] = useState<number>(0);
+  const [hispanicPercent, setHispanicPercent] = useState<number>(0);
+  const [blackPercent, setBlackPercent] = useState<number>(0);
+  const [whitePercent, setWhitePercent] = useState<number>(0);
+  const [nativePercent, setNativePercent] = useState<number>(0);
+  const [hawaiianPercent, setHawaiianPercent] = useState<number>(0);
+  const [twoOrMorePercent, setTwoOrMorePercent] = useState<number>(0);
 
-  const [asianList, setAsianList] = useState(new Map());
-  const [hispanicList, setHispanicList] = useState(new Map());
-  const [blackList, setBlackList] = useState(new Map());
-  const [totalList, setTotalList] = useState(new Map());
+  const [asianList, setAsianList] = useState<Record<string, number>>({});
+  const [hispanicList, setHispanicList] = useState<Record<string, number>>({});
+  const [blackList, setBlackList] = useState<Record<string, number>>({});
+  const [totalList, setTotalList] = useState<Record<string, number>>({});
 
-  const [whiteList, setWhiteList] = useState(new Map());
-  const [hawaiianList, setHawaiianList] = useState(new Map());
-  const [nativeList, setNativeList] = useState(new Map());
-  const [twoOrMoreList, setTwoOrMoreList] = useState(new Map());
+  const [whiteList, setWhiteList] = useState<Record<string, number>>({});
+  const [hawaiianList, setHawaiianList] = useState<Record<string, number>>({});
+  const [nativeList, setNativeList] = useState<Record<string, number>>({});
+  const [twoOrMoreList, setTwoOrMoreList] = useState<Record<string, number>>(
+    {},
+  );
 
-  // const cityName: string = cityProp;
   const city = data1;
 
   useEffect(() => {
-    setAsianList(city?.data.indicators.asian);
-    setHispanicList(city?.data.indicators.hispanic_or_latino);
-    setBlackList(city?.data.indicators.black_or_african_american);
-    setWhiteList(city?.data.indicators.white);
-    setNativeList(city?.data.indicators.american_indian_alaskan_native);
-    setHawaiianList(city?.data.indicators.native_hawaiian_pacific_islander);
-    setTwoOrMoreList(city?.data.indicators.two_or_more);
+    setAsianList(city?.data.indicators.asian || {});
+    setHispanicList(city?.data.indicators.hispanic_or_latino || {});
+    setBlackList(city?.data.indicators.black_or_african_american || {});
+    setWhiteList(city?.data.indicators.white || {});
+    setNativeList(city?.data.indicators.american_indian_alaskan_native || {});
+    setHawaiianList(
+      city?.data.indicators.native_hawaiian_pacific_islander || {},
+    );
+    setTwoOrMoreList(city?.data.indicators.two_or_more || {});
 
-    let maxKey = '0';
-    if (asianList) {
-      Object.entries(asianList).forEach(function (key, value) {
-        const [key1, value1] = key;
-        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
-          maxKey = key1;
-          setAsian(value1);
-        }
-      });
-    }
-    if (hispanicList) {
-      Object.entries(hispanicList).forEach(function (key, value) {
-        const [key1, value1] = key;
-        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
-          maxKey = key1;
-          setHispanic(value1);
-        }
-      });
-    }
-    if (blackList) {
-      Object.entries(blackList).forEach(function (key, value) {
-        const [key1, value1] = key;
-        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
-          maxKey = key1;
-          setBlack(value1);
-        }
-      });
-    }
+    const getMostRecentNonZero = (list: Record<string, number>) => {
+      const years = Object.keys(list).sort((a, b) => Number(b) - Number(a));
 
-    if (whiteList) {
-      Object.entries(whiteList).forEach(function (key, value) {
-        const [key1, value1] = key;
-        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
-          maxKey = key1;
-          setWhite(value1);
-        }
-      });
-    }
+      // eslint-disable-next-line no-restricted-syntax
+      for (const year of years) {
+        const value = list[year];
 
-    if (nativeList) {
-      Object.entries(nativeList).forEach(function (key, value) {
-        const [key1, value1] = key;
-        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
-          maxKey = key1;
-          setNative(value1);
+        if (value !== 0) {
+          return value;
         }
-      });
-    }
+      }
 
-    if (hawaiianList) {
-      Object.entries(hawaiianList).forEach(function (key, value) {
-        const [key1, value1] = key;
-        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
-          maxKey = key1;
-          setHawaiian(value1);
-        }
-      });
-    }
+      return 0;
+    };
 
-    if (twoOrMoreList) {
-      Object.entries(twoOrMoreList).forEach(function (key, value) {
-        const [key1, value1] = key;
-        if (parseInt(key1, 10) >= parseInt(maxKey, 10)) {
-          maxKey = key1;
-          setTwoOrMore(value1);
-        }
-      });
-    }
+    if (asianList) setAsian(getMostRecentNonZero(asianList));
+    if (hispanicList) setHispanic(getMostRecentNonZero(hispanicList));
+    if (blackList) setBlack(getMostRecentNonZero(blackList));
+    if (whiteList) setWhite(getMostRecentNonZero(whiteList));
+    if (nativeList) setNative(getMostRecentNonZero(nativeList));
+    if (hawaiianList) setHawaiian(getMostRecentNonZero(hawaiianList));
+    if (twoOrMoreList) setTwoOrMore(getMostRecentNonZero(twoOrMoreList));
+  }, [
+    asianList,
+    blackList,
+    city,
+    hawaiianList,
+    hispanicList,
+    nativeList,
+    twoOrMoreList,
+    whiteList,
+  ]);
 
+  useEffect(() => {
     const sum =
       asian + hispanic + black + white + native + hawaiian + twoOrMore;
     setAsianPercent((asian * 100) / sum);
@@ -131,29 +98,7 @@ export default function PieComponent({ data1 }: PieComponentProps) {
     setNativePercent((native * 100) / sum);
     setHawaiianPercent((hawaiian * 100) / sum);
     setTwoOrMorePercent((twoOrMore * 100) / sum);
-    console.log(asian);
-  }, [
-    city,
-    asian,
-    black,
-    hispanic,
-    total,
-
-    white,
-    native,
-    hawaiian,
-    twoOrMore,
-
-    asianList,
-    hispanicList,
-    blackList,
-    totalList,
-
-    whiteList,
-    nativeList,
-    hawaiianList,
-    twoOrMoreList,
-  ]);
+  }, [asian, hispanic, black, white, native, hawaiian, twoOrMore]);
 
   const options = {
     responsive: true,

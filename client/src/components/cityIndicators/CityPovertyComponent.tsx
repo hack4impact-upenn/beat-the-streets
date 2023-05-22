@@ -18,8 +18,15 @@ function Poverty({ data1 }: RevenueWidgetProps) {
     const povertyList: { [key: number]: number } =
       cityData?.data.indicators.persons_in_poverty;
 
-    const povertyValue =
-      Object.values(povertyList)[Object.values(povertyList).length - 1];
+    let povertyValue = 0;
+    const values = Object.values(povertyList);
+    // eslint-disable-next-line no-plusplus
+    for (let i = values.length - 1; i >= 0; i--) {
+      if (values[i] !== 0) {
+        povertyValue = values[i];
+        break;
+      }
+    }
 
     return (
       <Paper
