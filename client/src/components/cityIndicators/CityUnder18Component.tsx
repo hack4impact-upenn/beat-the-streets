@@ -16,7 +16,7 @@ function Under18({ data1 }: RevenueWidgetProps) {
 
   if (cityData) {
     const under18sList: { [key: number]: number } =
-      cityData?.data.indicators.persons_in_poverty;
+      cityData?.data.indicators.under18s;
 
     let under18sValue = 0;
     const values = Object.values(under18sList);

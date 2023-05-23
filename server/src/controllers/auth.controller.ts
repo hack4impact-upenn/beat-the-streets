@@ -245,7 +245,8 @@ const sendResetPasswordEmail = async (
         message: `Reset link has been sent to ${lowercaseEmail}`,
       }),
     )
-    .catch(() => {
+    .catch((e) => {
+      console.error(e);
       next(ApiError.internal('Failed to email reset password link.'));
     });
 };
